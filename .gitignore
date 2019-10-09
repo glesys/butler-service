@@ -1,0 +1,5 @@
+/report
+/vendor
+.DS_STORE
+.phpunit.result.cache
+composer.lock
