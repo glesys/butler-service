@@ -32,8 +32,8 @@
     },
     "extra": {
         "laravel": {
-            "providers": [
-                "Butler\\Service\\ServiceProvider"
+            "dont-discover": [
+                "glesys/butler-service"
             ]
         }
     },
