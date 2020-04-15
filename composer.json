@@ -34,6 +34,11 @@
         "laravel": {
             "providers": [
                 "Butler\\Service\\ServiceProvider"
+            ],
+            "dont-discover": [
+                "glesys/butler-auth",
+                "glesys/butler-graphql",
+                "glesys/butler-guru"
             ]
         }
     },

@@ -164,6 +164,9 @@ return [
         /*
          * Package Service Providers...
          */
+        Butler\Auth\ServiceProvider::class,
+        Butler\Graphql\ServiceProvider::class,
+        Butler\Guru\ServiceProvider::class,
 
         /*
          * Application Service Providers...
