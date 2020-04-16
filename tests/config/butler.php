@@ -28,7 +28,7 @@ return [
 
         'namespace' => '\\App\\Http\\Graphql\\',
 
-        'schema' => base_path('app/Http/Graphql/schema.graphql'),
+        'schema' => app_path('Http/Graphql/schema.graphql'),
 
     ],
 

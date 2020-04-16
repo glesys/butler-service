@@ -2,26 +2,35 @@
 
 namespace Butler\Service\Tests;
 
-use GrahamCampbell\TestBench\AbstractPackageTestCase;
 use Butler\Service\ServiceProvider;
+use GrahamCampbell\TestBench\AbstractPackageTestCase;
 
 abstract class TestCase extends AbstractPackageTestCase
 {
-    protected function getEnvironmentSetUp($app)
+    protected function setUp(): void
     {
-        parent::getEnvironmentSetUp($app);
+        $this->setUpButlerService();
 
-        copy(__DIR__ . '/config/butler.php', config_path('butler.php'));
-        copy(__DIR__ . '/config/session.php', config_path('session.php'));
-
-        if (! file_exists(app_path('Http/Graphql'))) {
-            mkdir(app_path('Http/Graphql'), 0777, true);
-            touch(app_path('Http/Graphql/schema.graphql'));
-        }
+        parent::setUp();
     }
 
     protected function getServiceProviderClass($app)
     {
         return ServiceProvider::class;
+    }
+
+    private function setUpButlerService()
+    {
+        $reflection = new \ReflectionClass(\Orchestra\Testbench\TestCase::class);
+
+        $orchestraPath = dirname($reflection->getFileName(), 2) . '/laravel';
+
+        if (! is_dir($orchestraPath . '/app/Http/Graphql')) {
+            mkdir($orchestraPath . '/app/Http/Graphql', 0777, true);
+        }
+
+        copy(__DIR__ . '/schema.graphql', $orchestraPath . '/app/Http/Graphql/schema.graphql');
+        copy(__DIR__ . '/config/butler.php', $orchestraPath . '/config/butler.php');
+        copy(__DIR__ . '/config/session.php', $orchestraPath . '/config/session.php');
     }
 }
