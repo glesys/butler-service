@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Github action
 
+### Fixed
+- Use correct config path in routes.php
+
 ## [0.2.0] - 2020-04-15
 
 ### Changed

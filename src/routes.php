@@ -6,20 +6,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('web')->group(function () {
     Route::view(
-        config('service.routes.readme', '/'),
+        config('butler.service.routes.readme', '/'),
         'service::readme'
     )->name('readme');
 
     Route::view(
-        config('service.routes.schema', '/schema'),
+        config('butler.service.routes.schema', '/schema'),
         'service::schema',
-        ['schema' => File::get(app_path('Http/Graphql/schema.graphql'))]
+        ['schema' => File::get(config('butler.graphql.schema'))]
     )->name('schema');
 });
 
 Route::middleware(['api', 'auth'])->group(function () {
     Route::post(
-        config('service.routes.graphql', '/graphql'),
+        config('butler.service.routes.graphql', '/graphql'),
         GraphqlController::class
     )->name('graphql');
 });
