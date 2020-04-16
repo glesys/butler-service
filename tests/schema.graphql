@@ -1,3 +1,3 @@
 type Query {
-    foo(bars: [String!]): [Baz!]!
+    foo(bars: [String!]): [String!]!
 }

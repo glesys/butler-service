@@ -43,7 +43,7 @@ class ServiceProviderTest extends TestCase
 
     public function test_application_config_merges_butler_service_config()
     {
-        $this->assertEquals('foobar', config('session.path'));
+        $this->assertEquals('foobar', config('session.table'));
     }
 
     /**
@@ -61,7 +61,7 @@ class ServiceProviderTest extends TestCase
             ['butler.service.routes.schema', '/schema'],
             ['butler.service.routes.graphql', '/graphql'],
             ['butler.service.routes.health', '/health'],
-            ['butler.service.health.checks', []],
+            ['butler.service.health.checks', [TestCheck::class]],
             ['butler.service.extra.config', ['foo' => 'bar']],
             ['butler.service.extra.aliases', ['Foobar' => Cache::class]],
             ['butler.service.extra.providers', [FoobarServiceProvider::class]],
