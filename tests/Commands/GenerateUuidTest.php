@@ -1,6 +1,6 @@
 <?php
 
-namespace Butler\Service\Tests\Middleware;
+namespace Butler\Service\Tests\Commands;
 
 use Butler\Service\Tests\TestCase;
 use Illuminate\Contracts\Console\Kernel;

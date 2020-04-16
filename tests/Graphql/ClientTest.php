@@ -1,6 +1,6 @@
 <?php
 
-namespace Butler\Service\Tests\Grahpql;
+namespace Butler\Service\Tests\Graphql;
 
 use Butler\Service\Graphql\Client;
 use Butler\Service\Tests\TestCase;
