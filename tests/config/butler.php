@@ -42,7 +42,9 @@ return [
         ],
 
         'health' => [
-            'checks' => [],
+            'checks' => [
+                Butler\Service\Tests\TestCheck::class
+            ],
         ],
 
         'extra' => [
