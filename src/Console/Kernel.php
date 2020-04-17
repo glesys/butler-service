@@ -17,6 +17,8 @@ abstract class Kernel extends ConsoleKernel
 
         $this->load(dirname($childKernelName) . '/Commands');
 
-        require base_path('routes/console.php');
+        if (is_file($routes = base_path('routes/console.php'))) {
+            require $routes;
+        }
     }
 }
