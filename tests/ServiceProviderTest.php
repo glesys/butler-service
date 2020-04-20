@@ -56,7 +56,6 @@ class ServiceProviderTest extends TestCase
     public function butlerServiceConfigProvider()
     {
         return [
-            ['butler.service.graylog', false],
             ['butler.service.horizon', false],
             ['butler.service.routes.readme', '/'],
             ['butler.service.routes.schema', '/schema'],
