@@ -14,7 +14,7 @@ Route::middleware('web')->group(function () {
     Route::view(
         config('butler.service.routes.schema', '/schema'),
         'service::schema',
-        ['schema' => File::get(config('butler.graphql.schema'))]
+        ['schema' => fn() => File::get(config('butler.graphql.schema'))]
     )->name('schema');
 
     Route::get(
