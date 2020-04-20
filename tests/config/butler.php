@@ -34,8 +34,6 @@ return [
 
     'service' => [
 
-        'horizon' => false,
-
         'routes' => [
             'readme' => '/',
             'schema' => '/schema',

@@ -38,8 +38,6 @@ return [
 
     'service' => [
 
-        'horizon' => env('BUTLER_SERVICE_HORIZON', false),
-
         'routes' => [
             'readme' => '/',
             'schema' => '/schema',
