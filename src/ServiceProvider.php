@@ -8,6 +8,8 @@ class ServiceProvider extends BaseServiceProvider
 {
     public function register()
     {
+        $this->mergeApplicationConfig();
+
         $this->registerBaseProviders();
 
         $this->configureExtraConfig();
