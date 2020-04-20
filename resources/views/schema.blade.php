@@ -15,7 +15,7 @@
         <h1 class="mb-2">
           Service Schema
         </h1>
-        <pre><code class="graphql rounded">{{ $schema }}</code></pre>
+        <pre><code class="graphql rounded">{{ $schema() }}</code></pre>
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
