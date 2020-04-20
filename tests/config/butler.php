@@ -34,7 +34,6 @@ return [
 
     'service' => [
 
-        'graylog' => false,
         'horizon' => false,
 
         'routes' => [

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - `routes/console.php` is no longer required.
 - Use `BUGSNAG_API_KEY` instead of `BUTLER_SERVICE_BUGSNAG` when determining to register bugsnag or not.
+- Use `GRAYLOG_HOST` instead of `BUTLER_SERVICE_GRAYLOG`.
 
 ## [0.2.2] - 2020-04-17
 

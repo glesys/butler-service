@@ -40,7 +40,7 @@ return [
             'channels' => array_filter([
                 'daily',
                 env('BUGSNAG_API_KEY') ? 'bugsnag' : null,
-                env('BUTLER_SERVICE_GRAYLOG') ? 'graylog' : null,
+                env('GRAYLOG_HOST') ? 'graylog' : null,
             ]),
             'ignore_exceptions' => false,
         ],

@@ -38,7 +38,6 @@ return [
 
     'service' => [
 
-        'graylog' => env('BUTLER_SERVICE_GRAYLOG', false),
         'horizon' => env('BUTLER_SERVICE_HORIZON', false),
 
         'routes' => [
