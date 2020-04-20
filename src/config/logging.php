@@ -39,7 +39,7 @@ return [
             'driver' => 'stack',
             'channels' => array_filter([
                 'daily',
-                env('BUTLER_SERVICE_BUGSNAG') ? 'bugsnag' : null,
+                env('BUGSNAG_API_KEY') ? 'bugsnag' : null,
                 env('BUTLER_SERVICE_GRAYLOG') ? 'graylog' : null,
             ]),
             'ignore_exceptions' => false,

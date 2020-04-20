@@ -8,11 +8,7 @@ class ServiceProvider extends BaseServiceProvider
 {
     public function register()
     {
-        $this->mergeApplicationConfig();
-
-        if (config('butler.service.bugsnag', false)) {
-            $this->app->register(\Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class);
-        }
+        $this->registerBaseProviders();
 
         $this->configureExtraConfig();
 
@@ -50,6 +46,13 @@ class ServiceProvider extends BaseServiceProvider
                 config($key, []),
                 require $file->getRealPath()
             ));
+        }
+    }
+
+    protected function registerBaseProviders()
+    {
+        if (config('bugsnag.api_key', false)) {
+            $this->app->register(\Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class);
         }
     }
 

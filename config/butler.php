@@ -38,7 +38,6 @@ return [
 
     'service' => [
 
-        'bugsnag' => env('BUTLER_SERVICE_BUGSNAG', false),
         'graylog' => env('BUTLER_SERVICE_GRAYLOG', false),
         'horizon' => env('BUTLER_SERVICE_HORIZON', false),
 
