@@ -34,7 +34,6 @@ return [
 
     'service' => [
 
-        'bugsnag' => false,
         'graylog' => false,
         'horizon' => false,
 
