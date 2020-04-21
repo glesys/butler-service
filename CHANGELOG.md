@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Health checks.
 
+### Changed
+- `routes/web.php` and `routes/api.php` is no longer required.
+
 ## [0.2.3] - 2020-04-20
 
 ### Changed
