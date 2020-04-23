@@ -2,6 +2,7 @@
 
 namespace Butler\Service\Tests;
 
+use Butler\Service\Tests\Health\TestChecker;
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
 use Illuminate\Support\Facades\Cache;
 
@@ -59,6 +60,8 @@ class ServiceProviderTest extends TestCase
             ['butler.service.routes.readme', '/'],
             ['butler.service.routes.schema', '/schema'],
             ['butler.service.routes.graphql', '/graphql'],
+            ['butler.service.routes.health', '/health'],
+            ['butler.service.health.checks', []],
             ['butler.service.extra.config', ['foo' => 'bar']],
             ['butler.service.extra.aliases', ['Foobar' => Cache::class]],
             ['butler.service.extra.providers', [FoobarServiceProvider::class]],

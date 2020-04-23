@@ -1,6 +1,7 @@
 <?php
 
 use Butler\Service\Http\Controllers\GraphqlController;
+use Butler\Service\Http\Controllers\HealthController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,11 @@ Route::middleware('web')->group(function () {
         'service::schema',
         ['schema' => File::get(config('butler.graphql.schema'))]
     )->name('schema');
+
+    Route::get(
+        config('butler.service.routes.health', '/health'),
+        HealthController::class
+    )->name('health');
 });
 
 Route::middleware(['api', 'auth'])->group(function () {
