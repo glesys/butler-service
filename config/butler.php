@@ -42,6 +42,11 @@ return [
             'readme' => '/',
             'schema' => '/schema',
             'graphql' => '/graphql',
+            'health' => '/health',
+        ],
+
+        'health' => [
+            'checks' => [],
         ],
 
         'extra' => [
