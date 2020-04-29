@@ -39,7 +39,8 @@ class HealthController extends Controller
         return collect($this->coreChecks())
             ->merge(config('butler.service.health.checks', []))
             ->map(fn($class) => $this->checkToArray(app($class)))
-            ->sortByDesc(fn($check) => $check['result']->order());
+            ->sortByDesc(fn($check) => $check['result']->order())
+            ->values();
     }
 
     private function coreChecks(): array
