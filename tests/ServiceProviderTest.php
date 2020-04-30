@@ -4,6 +4,7 @@ namespace Butler\Service\Tests;
 
 use Butler\Service\Tests\Health\TestChecker;
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 
 class ServiceProviderTest extends TestCase
@@ -46,6 +47,12 @@ class ServiceProviderTest extends TestCase
         $this->assertEquals('foobar', config('session.table'));
     }
 
+    public function test_can_override_timezone()
+    {
+        $this->assertEquals('Europe/Stockholm', config('app.timezone'));
+        $this->assertEquals('Europe/Stockholm', Carbon::now()->getTimezone());
+    }
+
     /**
      * @dataProvider butlerServiceConfigProvider
      */
@@ -62,7 +69,10 @@ class ServiceProviderTest extends TestCase
             ['butler.service.routes.graphql', '/graphql'],
             ['butler.service.routes.health', '/health'],
             ['butler.service.health.checks', [TestCheck::class]],
-            ['butler.service.extra.config', ['foo' => 'bar']],
+            ['butler.service.extra.config', [
+                'app.timezone' => 'Europe/Stockholm',
+                'foo' => 'bar'
+            ]],
             ['butler.service.extra.aliases', ['Foobar' => Cache::class]],
             ['butler.service.extra.providers', [FoobarServiceProvider::class]],
         ];
