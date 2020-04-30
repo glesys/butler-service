@@ -57,10 +57,8 @@ If you dont want a `config/app.php` you can use `butler.service.extra` in `confi
         'Backend' => App\Facades\Backend::class,
     ],
     'config' => [
-        'trustedproxy' => [
-            'proxies' => [
-                '10.0.0.0/8',
-            ],
+        'trustedproxy.proxies' => [
+            '10.0.0.0/8',
         ],
     ],
 ```
@@ -75,7 +73,7 @@ the `butler.service.health.checks` configuration.
 
 ```php
     'health_checks' => [
-        \App\Health\MyCheck::class
+        App\Health\MyCheck::class,
     ],
 ```
 
