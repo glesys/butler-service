@@ -49,6 +49,7 @@ return [
 
         'extra' => [
             'config' => [
+                'app.timezone' => 'Europe/Stockholm',
                 'foo' => 'bar',
             ],
             'aliases' => [

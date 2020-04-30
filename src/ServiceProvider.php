@@ -10,9 +10,11 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->mergeApplicationConfig();
 
-        $this->registerBaseProviders();
-
         $this->configureExtraConfig();
+
+        $this->configureTimezone();
+
+        $this->registerBaseProviders();
 
         $this->registerExtraAliases();
 
@@ -51,13 +53,6 @@ class ServiceProvider extends BaseServiceProvider
         }
     }
 
-    protected function registerBaseProviders()
-    {
-        if (config('bugsnag.api_key', false)) {
-            $this->app->register(\Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class);
-        }
-    }
-
     protected function configureExtraConfig()
     {
         if ($this->app->configurationIsCached()) {
@@ -66,6 +61,22 @@ class ServiceProvider extends BaseServiceProvider
 
         foreach (config('butler.service.extra.config', []) as $key => $value) {
             config()->set($key, $value);
+        }
+    }
+
+    protected function configureTimezone()
+    {
+        // NOTE: To be able to override the timezone config we need to call
+        // `date_default_timezone_set()`. Laravel already does this in the
+        // LoadConfiguration bootstrapper but at that time we haven't yet merged
+        // the config overrides.
+        date_default_timezone_set(config('app.timezone'));
+    }
+
+    protected function registerBaseProviders()
+    {
+        if (config('bugsnag.api_key', false)) {
+            $this->app->register(\Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class);
         }
     }
 
