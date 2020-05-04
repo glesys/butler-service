@@ -1,6 +1,6 @@
 <?php
 
-use App\Logging\GraylogLoggerFactory;
+use Butler\Service\Logging\GraylogLoggerFactory;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 

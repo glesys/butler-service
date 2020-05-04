@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Logging;
+namespace Butler\Service\Logging;
 
 use Gelf\Publisher;
 use Gelf\Transport\IgnoreErrorTransportWrapper;
