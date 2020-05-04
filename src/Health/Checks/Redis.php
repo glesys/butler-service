@@ -19,18 +19,20 @@ class Redis extends Check
         }
 
         try {
+            $host = config('database.redis.default.host');
+
             RedisClient::set(
                 $key = 'butler-service-health-check',
                 $string = Str::random()
             );
 
             if (RedisClient::get($key) === $string) {
-                return Result::ok('Connected to redis on <host>.');
+                return Result::ok("Connected to redis on {$host}.");
             }
         } catch (\Exception $_) {
             //
         }
 
-        return Result::critical('Could not connect to redis on <host>.');
+        return Result::critical("Could not connect to redis on {$host}.");
     }
 }
