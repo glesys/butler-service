@@ -7,13 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.2.7] - 2020-05-05
+
 ## Fixed
 - Use correct namespace for GraylogLoggerFactory
 
 ## [0.2.6] - 2020-04-30
 
 ## Fixed
-
 - Support overriding timezone.
 
 ## [0.2.5] - 2020-04-29
