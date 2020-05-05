@@ -9,9 +9,13 @@ trait MigratesDatabases
 {
     public function migrateDatabase(string $database = 'default'): void
     {
+        if ($database === 'default' && ! is_dir(database_path('migrations/default'))) {
+            $path = 'database/migrations';
+        }
+
         $this->artisan('migrate:fresh', [
             '--database' => $database,
-            '--path' => "database/migrations/{$database}",
+            '--path' => $path ?? "database/migrations/{$database}",
             '--seeder' => Str::studly("{$database}DatabaseSeeder"),
         ]);
 
