@@ -9,16 +9,30 @@ trait MigratesDatabases
 {
     public function migrateDatabase(string $database = 'default'): void
     {
-        if ($database === 'default' && ! is_dir(database_path('migrations/default'))) {
-            $path = 'database/migrations';
-        }
-
         $this->artisan('migrate:fresh', [
             '--database' => $database,
-            '--path' => $path ?? "database/migrations/{$database}",
-            '--seeder' => Str::studly("{$database}DatabaseSeeder"),
+            '--path' => $this->migrationsPath($database),
+            '--seeder' => $this->seederName($database),
         ]);
 
         $this->app[Kernel::class]->setArtisan(null);
+    }
+
+    private function migrationsPath(string $database): string
+    {
+        if ($database === 'default' && ! is_dir(database_path('migrations/default'))) {
+            return 'database/migrations';
+        }
+
+        return "database/migrations/{$database}";
+    }
+
+    private function seederName(string $database): string
+    {
+        if ($database === 'default' && ! is_file(database_path('seeds/DefaultDatabaseSeeder'))) {
+            return 'DatabaseSeeder';
+        }
+
+        return Str::studly("{$database}DatabaseSeeder");
     }
 }
