@@ -39,7 +39,7 @@
     If headers are unavailable you can also provide your access token in the query,
     example:
     <span class="bg-yellow-200 p-1 font-mono text-sm">
-      {{ config('service.routes.graphql', '/graphql') }}?token=TOKEN
+      {{ route('graphql', [], false) }}?token=TOKEN
     </span>.
   </div>
 </div>
