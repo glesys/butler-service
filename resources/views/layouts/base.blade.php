@@ -8,17 +8,17 @@
     <title>{{ config('app.name') }}</title>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <style>
-      body { background-color: #1b2d3c; }
-      .title { color: #1b2d3c; }
+      .bg-primary { background-color: #1b2d3c; }
+      .bg-secondary { background-color: #7db9d8; }
+      .bg-check-ok { background-color: #68d391; }
+      .bg-check-warning { background-color: #f6ad55; }
+      .bg-check-critical { background-color: #fc8181; }
+      .bg-check-unknown { background-color: #ddd; }
     </style>
     @stack('head')
   </head>
-  <body class="font-sans">
-    <div class="max-w-xl mx-auto px-4 py-8">
-      <div class="bg-white rounded p-8">
-        <h1 class="title mb-2 text-2xl">{{ config('app.name') }}</h1>
-        @yield('content')
-      </div>
-    </div>
+  <body class="bg-primary font-sans">
+    @yield('content')
+    @stack('scripts')
   </body>
 </html>

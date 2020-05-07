@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Butler Service version in "health" route.
+
+### Changed
+- Renamed "readme" route to "front" where health checks and graphql schema is shown.
+- "health" route only returns JSON.
+
+### Removed
+- "health" view.
+- "schema" view and route.
 
 ## [0.3.5] - 2020-12-10
 
@@ -15,30 +25,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.4] - 2020-11-20
 
-## Changed
+### Changed
 - Require [butler-audit](https://github.com/glesys/butler-audit/blob/master/CHANGELOG.md) 0.1.2.
 
 ## [0.3.3] - 2020-11-13
 
-## Changed
+### Changed
 - Audit initiator resolver now supports anonymous users and when running in console.
 
 ## [0.3.2] - 2020-11-12
 
-## Changed
+### Changed
 - Add correlation id for all requests sent with the graphql client.
 
 ## [0.3.1] - 2020-11-09
 
-## Added
+### Added
 - Include [butler-audit](https://github.com/glesys/butler-audit)
 
 ## [0.3.0] - 2020-10-08
 
-## Changed
+### Changed
 - Require Laravel 8.
 
-## Added
+### Added
 - AMQP config file
 
 ## [0.2.13] - 2020-08-03

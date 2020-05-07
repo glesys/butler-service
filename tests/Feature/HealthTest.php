@@ -6,21 +6,10 @@ use Butler\Service\Tests\TestCase;
 
 class HealthTest extends TestCase
 {
-    public function test_returns_html()
-    {
-        $this->get(route('health'))
-            ->assertOk()
-            ->assertSee(config('app.name'))
-            ->assertSee('Test Check')
-            ->assertSee('Looking good.');
-    }
-
-    public function test_returns_json()
+    public function test_it_returns_json()
     {
         $this->getJson(route('health'))
             ->assertOk()
-            ->assertJsonPath('service.name', config('app.name'))
-            ->assertJsonCount(4, 'checks')
             ->assertJsonStructure([
                 'service' => [
                     'name',
@@ -41,6 +30,8 @@ class HealthTest extends TestCase
                         ],
                     ],
                 ],
-            ]);
+            ])
+            ->assertJsonPath('service.name', config('app.name'))
+            ->assertJsonCount(4, 'checks');
     }
 }

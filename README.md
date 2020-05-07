@@ -37,7 +37,7 @@ You can use your configuration files as usual. See `./src/config/` for our defau
 
 ### Default routes
 
-There are 4 default routes; "readme", "schema", "graphql" and "health".
+There are 3 default routes; "front", "graphql" and "health".
 They can be updated at `butler.service.routes` in `config/butler.php`.
 
 For example you might want to listen for graphql on `/api` instead of `/graphql`.
@@ -70,7 +70,7 @@ If you dont want a `config/app.php` you can use `butler.service.extra` in `confi
 ### Health Checks
 
 Butler Service comes with some [default health checks](src/Health/Checks) enabled.
-Check results can be accessed via the "/health" endpoint and can return both HTML and JSON.
+Check results is listed on the "front" route but can also be accessed via the "health" route as JSON.
 
 Add your own health checks by extending `Butler\Service\Health\Check` and add it to
 the `butler.service.health.checks` configuration.

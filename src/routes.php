@@ -2,18 +2,14 @@
 
 use Butler\Service\Http\Controllers\GraphqlController;
 use Butler\Service\Http\Controllers\HealthController;
+use Butler\Service\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('web')->group(function () {
-    Route::view(
-        config('butler.service.routes.readme', '/'),
-        'service::readme'
-    )->name('readme');
-
-    Route::view(
-        config('butler.service.routes.schema', '/schema'),
-        'service::schema'
-    )->name('schema');
+    Route::get(
+        config('butler.service.routes.front', '/'),
+        FrontController::class
+    )->name('front');
 
     Route::get(
         config('butler.service.routes.health', '/health'),
