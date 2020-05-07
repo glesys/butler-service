@@ -10,18 +10,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.8] - 2020-05-07
 
-## Changed
+### Changed
 - `MigratesDatabases` trait now supports default database migrations directly in `database/migrations`.
 - `MigratesDatabases` trait now supports default database seeder (`DatabaseSeeder.php`) for the default database connection.
 
 ## [0.2.7] - 2020-05-05
 
-## Fixed
+### Fixed
 - Use correct namespace for GraylogLoggerFactory
 
 ## [0.2.6] - 2020-04-30
 
-## Fixed
+### Fixed
 - Support overriding timezone.
 
 ## [0.2.5] - 2020-04-29
