@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.2.8] - 2020-05-07
+
 ## Changed
 - `MigratesDatabases` trait now supports default database migrations directly in `database/migrations`.
 - `MigratesDatabases` trait now supports default database seeder (`DatabaseSeeder.php`) for the default database connection.
