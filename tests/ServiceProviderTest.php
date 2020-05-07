@@ -14,15 +14,14 @@ class ServiceProviderTest extends TestCase
 
     public function test_routes_are_loaded()
     {
-        $this->assertEquals('http://localhost', route('readme'));
-        $this->assertEquals('http://localhost/schema', route('schema'));
+        $this->assertEquals('http://localhost', route('front'));
         $this->assertEquals('http://localhost/graphql', route('graphql'));
+        $this->assertEquals('http://localhost/health', route('health'));
     }
 
     public function test_views_are_loaded()
     {
-        $this->assertNotEmpty(view('service::readme'));
-        $this->assertNotEmpty(view('service::schema'));
+        $this->assertNotEmpty(view('service::front'));
     }
 
     public function test_extra_config_is_configured()
@@ -116,8 +115,7 @@ class ServiceProviderTest extends TestCase
     public function butlerServiceConfigProvider()
     {
         return [
-            ['butler.service.routes.readme', '/'],
-            ['butler.service.routes.schema', '/schema'],
+            ['butler.service.routes.front', '/'],
             ['butler.service.routes.graphql', '/graphql'],
             ['butler.service.routes.health', '/health'],
             ['butler.service.health.checks', [TestCheck::class]],

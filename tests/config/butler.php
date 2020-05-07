@@ -45,8 +45,7 @@ return [
     'service' => [
 
         'routes' => [
-            'readme' => '/',
-            'schema' => '/schema',
+            'front' => '/',
             'graphql' => '/graphql',
             'health' => '/health',
         ],
