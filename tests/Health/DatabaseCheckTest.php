@@ -15,7 +15,7 @@ class DatabaseCheckTest extends TestCase
         $result = (new Database())->run();
 
         $this->assertEquals('No database connections found.', $result->message);
-        $this->assertEquals(Result::UNKNOWN, $result->status);
+        $this->assertEquals(Result::UNKNOWN, $result->state);
         $this->assertNull($result->value());
     }
 
@@ -31,7 +31,7 @@ class DatabaseCheckTest extends TestCase
         $result = (new Database())->run();
 
         $this->assertEquals('Connected to all databases.', $result->message);
-        $this->assertEquals(Result::OK, $result->status);
+        $this->assertEquals(Result::OK, $result->state);
         $this->assertEquals(1, $result->value());
     }
 
@@ -42,7 +42,7 @@ class DatabaseCheckTest extends TestCase
         $result = (new Database())->run();
 
         $this->assertEquals('Connected to 0 of 1 databases.', $result->message);
-        $this->assertEquals(Result::CRITICAL, $result->status);
+        $this->assertEquals(Result::CRITICAL, $result->state);
         $this->assertEquals(0, $result->value());
     }
 }

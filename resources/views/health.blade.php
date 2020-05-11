@@ -31,7 +31,7 @@
   @forelse($checks->groupBy('group')->sortKeys() as $group => $checks)
     <div class="font-bold my-3 text-xs tracking-wide uppercase">{{ Str::title($group) }}</div>
     @foreach($checks as $check)
-      <div class="bg-{{ $check['result']->status }} m-1 px-3 py-2 text-xs text-white rounded">
+      <div class="bg-{{ $check['result']->state }} m-1 px-3 py-2 text-xs text-white rounded">
         <abbr title="{{ $check['description'] }}">{{ $check['name'] }}</abbr>
         &ndash; {{ $check['result']->message }}
       </div>

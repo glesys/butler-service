@@ -24,7 +24,7 @@ class FailedJobsCheckTest extends TestCase
         $result = (new FailedJobs())->run();
 
         $this->assertEquals('No failed jobs.', $result->message);
-        $this->assertEquals(Result::OK, $result->status);
+        $this->assertEquals(Result::OK, $result->state);
         $this->assertEquals(0, $result->value());
     }
 
@@ -35,7 +35,7 @@ class FailedJobsCheckTest extends TestCase
         $result = (new FailedJobs())->run();
 
         $this->assertEquals('1 failed jobs.', $result->message);
-        $this->assertEquals(Result::CRITICAL, $result->status);
+        $this->assertEquals(Result::CRITICAL, $result->state);
         $this->assertEquals(1, $result->value());
     }
 
@@ -46,7 +46,7 @@ class FailedJobsCheckTest extends TestCase
         $result = (new FailedJobs())->run();
 
         $this->assertEquals('Table foobar not found.', $result->message);
-        $this->assertEquals(Result::UNKNOWN, $result->status);
+        $this->assertEquals(Result::UNKNOWN, $result->state);
         $this->assertNull($result->value());
     }
 }
