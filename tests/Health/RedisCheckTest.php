@@ -17,7 +17,7 @@ class RedisCheckTest extends TestCase
         $result = (new Redis())->run();
 
         $this->assertEquals('Redis extension not enabled.', $result->message);
-        $this->assertEquals(Result::UNKNOWN, $result->status);
+        $this->assertEquals(Result::UNKNOWN, $result->state);
         $this->assertNull($result->value());
     }
 }

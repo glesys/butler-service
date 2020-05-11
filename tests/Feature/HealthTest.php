@@ -36,7 +36,7 @@ class HealthTest extends TestCase
                         'description',
                         'result' => [
                             'message',
-                            'status',
+                            'state',
                             'value',
                         ],
                     ],

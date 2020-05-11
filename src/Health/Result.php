@@ -10,13 +10,13 @@ class Result
     public const UNKNOWN = 'unknown';
 
     public string $message;
-    public string $status;
+    public string $state;
     public $value = null;
 
-    private function __construct(string $message, string $status)
+    private function __construct(string $message, string $state)
     {
         $this->message = $message;
-        $this->status = $status;
+        $this->state = $state;
     }
 
     public static function ok(string $message): self
@@ -50,7 +50,7 @@ class Result
 
     public function order(): int
     {
-        switch ($this->status) {
+        switch ($this->state) {
             case static::CRITICAL:
                 return 3;
             case static::WARNING:
