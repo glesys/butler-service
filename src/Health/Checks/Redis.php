@@ -18,9 +18,11 @@ class Redis extends Check
             return Result::unknown('Redis extension not enabled.');
         }
 
-        try {
-            $host = config('database.redis.default.host');
+        if (! $host = config('database.redis.default.host')) {
+            return Result::unknown('Redis host undefined.');
+        }
 
+        try {
             RedisClient::set(
                 $key = 'butler-service-health-check',
                 $string = Str::random()
