@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.2.11] - 2020-06-03
+
+### Changed
+- Return unknown state for Redis health check when redis host is undefined.
+
 ## [0.2.9] - 2020-05-13
 
 ### Changed
