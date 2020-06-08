@@ -5,14 +5,17 @@ namespace Butler\Service\Tests;
 use Butler\Graphql\ServiceProvider as GraphqlServiceProvider;
 use Butler\Service\ServiceProvider;
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
+use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class TestCase extends AbstractPackageTestCase
 {
-    protected function setUp(): void
+    public static function setUpBeforeClass(): void
     {
-        $this->setUpButlerService();
+        $reflection = new \ReflectionClass(OrchestraTestCase::class);
+        $appPath = dirname($reflection->getFileName(), 2) . '/laravel/';
 
-        parent::setUp();
+        static::createRequiredTestDirectories($appPath);
+        static::createRequiredTestFiles($appPath);
     }
 
     protected function getServiceProviderClass($app)
@@ -27,18 +30,29 @@ abstract class TestCase extends AbstractPackageTestCase
         ];
     }
 
-    private function setUpButlerService()
+    private static function createRequiredTestDirectories(string $appPath): void
     {
-        $reflection = new \ReflectionClass(\Orchestra\Testbench\TestCase::class);
+        $directories = [
+            'app/Http/Graphql',
+        ];
 
-        $orchestraPath = dirname($reflection->getFileName(), 2) . '/laravel';
-
-        if (! is_dir($orchestraPath . '/app/Http/Graphql')) {
-            mkdir($orchestraPath . '/app/Http/Graphql', 0777, true);
+        foreach ($directories as $directory) {
+            if (! is_dir($appPath . $directory)) {
+                mkdir($appPath . $directory, 0777, true);
+            }
         }
+    }
 
-        copy(__DIR__ . '/schema.graphql', $orchestraPath . '/app/Http/Graphql/schema.graphql');
-        copy(__DIR__ . '/config/butler.php', $orchestraPath . '/config/butler.php');
-        copy(__DIR__ . '/config/session.php', $orchestraPath . '/config/session.php');
+    private static function createRequiredTestFiles(string $appPath): void
+    {
+        $files = [
+            'config/butler.php' => 'config/butler.php',
+            'config/session.php' => 'config/session.php',
+            'schema.graphql' => 'app/Http/Graphql/schema.graphql',
+        ];
+
+        foreach ($files as $name => $path) {
+            copy(__DIR__ . '/' . $name, $appPath . $path);
+        }
     }
 }
