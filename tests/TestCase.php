@@ -34,6 +34,7 @@ abstract class TestCase extends AbstractPackageTestCase
     {
         $directories = [
             'app/Http/Graphql',
+            'app/Providers',
         ];
 
         foreach ($directories as $directory) {
@@ -49,6 +50,7 @@ abstract class TestCase extends AbstractPackageTestCase
             'config/butler.php' => 'config/butler.php',
             'config/session.php' => 'config/session.php',
             'schema.graphql' => 'app/Http/Graphql/schema.graphql',
+            'AppServiceProvider.txt' => 'app/Providers/AppServiceProvider.php',
         ];
 
         foreach ($files as $name => $path) {

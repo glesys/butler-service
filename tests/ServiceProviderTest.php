@@ -2,7 +2,6 @@
 
 namespace Butler\Service\Tests;
 
-use Butler\Service\Tests\Health\TestChecker;
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -29,11 +28,19 @@ class ServiceProviderTest extends TestCase
         $this->assertEquals('bar', config('foo'));
     }
 
+    public function test_application_providers_are_registered()
+    {
+        $this->assertInstanceOf(
+            \App\Providers\AppServiceProvider::class,
+            app()->getProvider(\App\Providers\AppServiceProvider::class)
+        );
+    }
+
     public function test_extra_providers_are_registered()
     {
         $this->assertInstanceOf(
-            FoobarServiceProvider::class,
-            app()->getProvider(FoobarServiceProvider::class)
+            ExtraServiceProvider::class,
+            app()->getProvider(ExtraServiceProvider::class)
         );
     }
 
@@ -74,7 +81,7 @@ class ServiceProviderTest extends TestCase
                 'foo' => 'bar'
             ]],
             ['butler.service.extra.aliases', ['Foobar' => Cache::class]],
-            ['butler.service.extra.providers', [FoobarServiceProvider::class]],
+            ['butler.service.extra.providers', [ExtraServiceProvider::class]],
         ];
     }
 }

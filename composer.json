@@ -48,7 +48,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Butler\\Service\\Tests\\": "tests/"
+            "Butler\\Service\\Tests\\": "tests/",
+            "App\\": "vendor/orchestra/testbench-core/laravel/app"
         }
     },
     "minimum-stability": "dev",

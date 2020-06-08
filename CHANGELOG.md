@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Service providers in `app\Providers` will be registered automatically.
 
 ## [0.2.11] - 2020-06-03
 

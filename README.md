@@ -27,6 +27,10 @@ abstract class TestCase extends BaseTestCase
 }
 ```
 
+## Service Providers
+
+All service providers in your `app/Providers` directory will be registered automatically.
+
 ## Config
 
 You can use your configuration files as usual. See `./src/config/` for our defaults.
@@ -51,7 +55,7 @@ If you dont want a `config/app.php` you can use `butler.service.extra` in `confi
 ```php
     // example
     'providers' => [
-        App\Providers\TelescopeServiceProvider::class,
+        Foo\BarServiceProvider::class,
     ],
     'aliases' => [
         'Backend' => App\Facades\Backend::class,
