@@ -4,7 +4,7 @@ namespace Butler\Service\Tests;
 
 use Illuminate\Support\ServiceProvider;
 
-class FoobarServiceProvider extends ServiceProvider
+class ExtraServiceProvider extends ServiceProvider
 {
     public function register()
     {

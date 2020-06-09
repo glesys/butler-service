@@ -56,7 +56,7 @@ return [
                 'Foobar' => Illuminate\Support\Facades\Cache::class,
             ],
             'providers' => [
-                Butler\Service\Tests\FoobarServiceProvider::class,
+                Butler\Service\Tests\ExtraServiceProvider::class,
             ],
         ],
 

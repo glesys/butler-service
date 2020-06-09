@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * NOTE: This is a template of an empty service provider used to test automatic
+ * service provider registration.
+ *
+ * @see \Butler\Service\Tests\ServiceProviderTest
+ */
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    public function register()
+    {
+        //
+    }
+
+    public function boot()
+    {
+        //
+    }
+}

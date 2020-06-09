@@ -3,6 +3,7 @@
 namespace Butler\Service;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Symfony\Component\Finder\Finder;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -16,9 +17,11 @@ class ServiceProvider extends BaseServiceProvider
 
         $this->registerBaseProviders();
 
-        $this->registerExtraAliases();
+        $this->registerApplicationProviders();
 
         $this->registerExtraProviders();
+
+        $this->registerExtraAliases();
     }
 
     public function boot()
@@ -38,7 +41,7 @@ class ServiceProvider extends BaseServiceProvider
             return;
         }
 
-        $applicationConfigFiles = \Symfony\Component\Finder\Finder::create()
+        $applicationConfigFiles = Finder::create()
             ->files()
             ->name('*.php')
             ->in(base_path('config'));
@@ -80,13 +83,20 @@ class ServiceProvider extends BaseServiceProvider
         }
     }
 
-    protected function registerExtraAliases()
+    protected function registerApplicationProviders()
     {
-        $this->app->booting(function () {
-            foreach (config('butler.service.extra.aliases', []) as $key => $alias) {
-                \Illuminate\Foundation\AliasLoader::getInstance()->alias($key, $alias);
-            }
-        });
+        if (! is_dir(app_path('Providers'))) {
+            return;
+        }
+
+        $serviceProviderFiles = Finder::create()
+            ->files()
+            ->name('*Provider.php')
+            ->in(app_path('Providers'));
+
+        foreach ($serviceProviderFiles as $file) {
+            $this->app->register("App\\Providers\\{$file->getBasename('.php')}");
+        }
     }
 
     protected function registerExtraProviders()
@@ -94,6 +104,15 @@ class ServiceProvider extends BaseServiceProvider
         foreach (config('butler.service.extra.providers', []) as $provider) {
             $this->app->register($provider);
         }
+    }
+
+    protected function registerExtraAliases()
+    {
+        $this->app->booting(function () {
+            foreach (config('butler.service.extra.aliases', []) as $key => $alias) {
+                \Illuminate\Foundation\AliasLoader::getInstance()->alias($key, $alias);
+            }
+        });
     }
 
     protected function loadCommands()
