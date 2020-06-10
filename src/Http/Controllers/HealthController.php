@@ -29,6 +29,7 @@ class HealthController extends Controller
         return [
             'php' => PHP_VERSION,
             'laravel' => Application::VERSION,
+            'butlerService' => Application::BUTLER_SERVICE_VERSION,
             'name' => config('app.name'),
             'timezone' => config('app.timezone'),
         ];

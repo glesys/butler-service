@@ -13,14 +13,18 @@
 
 <div class="mt-2">
 
-  <table class="text-xs mb-3">
+  <table class="w-full text-xs mb-3">
     <tr>
-      <td class="font-bold w-20">PHP</td>
-      <td>{{ $service['php']}}</td>
+      <td class="w-1/3 font-bold w-20">PHP</td>
+      <td class="w-2/3">{{ $service['php']}}</td>
     </tr>
     <tr>
       <td class="font-bold">Laravel</td>
       <td>{{ $service['laravel']}}</td>
+    </tr>
+    <tr>
+      <td class="font-bold">Butler Service</td>
+      <td>{{ $service['butlerService']}}</td>
     </tr>
     <tr>
       <td class="font-bold">Timezone</td>

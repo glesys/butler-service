@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Constant `Application::BUTLER_SERVICE_VERSION`.
+- Show butler service version in `/health` endpoint.
 
 ## [0.2.12] - 2020-06-09
 
