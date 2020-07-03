@@ -2,7 +2,6 @@
 
 use Butler\Service\Http\Controllers\GraphqlController;
 use Butler\Service\Http\Controllers\HealthController;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('web')->group(function () {
@@ -13,8 +12,7 @@ Route::middleware('web')->group(function () {
 
     Route::view(
         config('butler.service.routes.schema', '/schema'),
-        'service::schema',
-        ['schema' => fn() => File::get(config('butler.graphql.schema'))]
+        'service::schema'
     )->name('schema');
 
     Route::get(
