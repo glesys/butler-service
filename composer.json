@@ -9,7 +9,7 @@
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
-        "glesys/butler-auth": "^2.0",
+        "glesys/butler-auth": "^2.1.0",
         "glesys/butler-graphql": "^3.1",
         "glesys/butler-guru": "^0.4.0",
         "graylog2/gelf-php": "^1.6",
