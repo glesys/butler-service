@@ -76,8 +76,10 @@ Add your own health checks by extending `Butler\Service\Health\Check` and add it
 the `butler.service.health.checks` configuration.
 
 ```php
-    'health_checks' => [
-        App\Health\MyCheck::class,
+    'health' => [
+        'checks' => [
+            App\Health\MyCheck::class,
+        ],
     ],
 ```
 
