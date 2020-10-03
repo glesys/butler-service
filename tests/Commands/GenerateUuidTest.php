@@ -15,12 +15,12 @@ class GenerateUuidTest extends TestCase
     public function test_command()
     {
         $this->assertEquals(0, $this->runCommand());
-        $this->assertRegExp('/^[a-f0-9-]{36}$/', $this->app[Kernel::class]->output());
+        $this->assertMatchesRegularExpression('/^[a-f0-9-]{36}$/', $this->app[Kernel::class]->output());
     }
 
     public function test_command_with_strip_dashes_option()
     {
         $this->assertEquals(0, $this->runCommand(['--strip-dashes' => true]));
-        $this->assertRegExp('/^[a-f0-9]{32}$/', $this->app[Kernel::class]->output());
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{32}$/', $this->app[Kernel::class]->output());
     }
 }
