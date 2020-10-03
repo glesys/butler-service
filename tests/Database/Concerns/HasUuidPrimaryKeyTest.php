@@ -28,7 +28,7 @@ class HasUuidPrimaryKeyTest extends TestCase
     {
         $this->model->fireCreatingEvent();
 
-        $this->assertRegExp('/^[a-f0-9-]{36}$/', $this->model->id);
+        $this->assertMatchesRegularExpression('/^[a-f0-9-]{36}$/', $this->model->id);
     }
 
     public function test_creating_event_does_not_set_id_when_already_set()

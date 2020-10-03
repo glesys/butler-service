@@ -27,7 +27,7 @@ class ClientTest extends TestCase
     public function test_request_throws_exception_on_server_error()
     {
         $this->expectException(\Illuminate\Http\Client\RequestException::class);
-        $this->expectExceptionMessage('HTTP request returned status code 500.');
+        $this->expectExceptionMessage('HTTP request returned status code 500');
 
         Http::fakeSequence()->push('error', 500);
 

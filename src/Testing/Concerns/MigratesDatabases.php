@@ -29,7 +29,7 @@ trait MigratesDatabases
 
     private function seederName(string $database): string
     {
-        if ($database === 'default' && ! is_file(database_path('seeds/DefaultDatabaseSeeder.php'))) {
+        if ($database === 'default' && ! is_file(database_path('seeders/DefaultDatabaseSeeder.php'))) {
             return 'DatabaseSeeder';
         }
 
