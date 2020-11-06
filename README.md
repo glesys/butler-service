@@ -97,6 +97,10 @@ See [butler-graphql](https://github.com/glesys/butler-graphql).
 
 See [butler-guru](https://github.com/glesys/butler-guru).
 
+## Audit with butler-audit
+
+See [butler-audit](https://github.com/glesys/butler-audit).
+
 ## Testing
 
 ```shell

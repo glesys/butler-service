@@ -2,6 +2,7 @@
 
 namespace Butler\Service\Tests;
 
+use Butler\Audit\ServiceProvider as AuditServiceProvider;
 use Butler\Graphql\ServiceProvider as GraphqlServiceProvider;
 use Butler\Service\ServiceProvider;
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
@@ -26,6 +27,7 @@ abstract class TestCase extends AbstractPackageTestCase
     protected function getRequiredServiceProviders($app)
     {
         return [
+            AuditServiceProvider::class,
             GraphqlServiceProvider::class,
         ];
     }

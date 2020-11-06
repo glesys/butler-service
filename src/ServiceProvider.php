@@ -2,6 +2,7 @@
 
 namespace Butler\Service;
 
+use Butler\Audit\Auditor;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Symfony\Component\Finder\Finder;
 
@@ -14,6 +15,8 @@ class ServiceProvider extends BaseServiceProvider
         $this->configureExtraConfig();
 
         $this->configureTimezone();
+
+        $this->configureAuditInitiator();
 
         $this->registerBaseProviders();
 
@@ -74,6 +77,17 @@ class ServiceProvider extends BaseServiceProvider
         // LoadConfiguration bootstrapper but at that time we haven't yet merged
         // the config overrides.
         date_default_timezone_set(config('app.timezone'));
+    }
+
+    protected function configureAuditInitiator()
+    {
+        Auditor::setInitiatorResolver(fn () => [
+            auth()->id(),
+            [
+                'ip' => request()->ip(),
+                'userAgent' => request()->userAgent(),
+            ]
+        ]);
     }
 
     protected function registerBaseProviders()

@@ -2,6 +2,7 @@
 
 namespace Butler\Service\Tests;
 
+use Butler\Auth\JwtUser;
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -58,6 +59,20 @@ class ServiceProviderTest extends TestCase
     {
         $this->assertEquals('Europe/Stockholm', config('app.timezone'));
         $this->assertEquals('Europe/Stockholm', Carbon::now()->getTimezone());
+    }
+
+    public function test_audit_initiator_resolver_is_set()
+    {
+        $this->actingAs(new JwtUser(['sub' => 'service1']));
+
+        $auditor = audit('entity', 123);
+
+        $this->assertEquals('service1', $auditor['initiator']);
+
+        $this->assertEquals([
+            ['key' => 'ip', 'value' => '127.0.0.1'],
+            ['key' => 'userAgent', 'value' => 'Symfony'],
+        ], $auditor['initiatorContext']);
     }
 
     /**
