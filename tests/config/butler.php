@@ -2,6 +2,16 @@
 
 return [
 
+    'audit' => [
+
+        'url' => 'http://localhost',
+
+        'token' => 'secret',
+
+        'driver' => 'log',
+
+    ],
+
     'auth' => [
 
         'secret_key' => '',

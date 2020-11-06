@@ -2,6 +2,16 @@
 
 return [
 
+    'audit' => [
+
+        'url' => env('BUTLER_AUDIT_URL'),
+
+        'token' => env('BUTLER_AUDIT_TOKEN'),
+
+        'driver' => env('BUTLER_AUDIT_DRIVER'),
+
+    ],
+
     'auth' => [
 
         'secret_key' => env('BUTLER_AUTH_SECRET_KEY', ''),
