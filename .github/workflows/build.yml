@@ -21,7 +21,7 @@ jobs:
           coverage: none
 
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-interaction --no-suggest --no-ansi --no-progress
+        run: composer install --prefer-dist --no-interaction --no-ansi --no-progress
 
       - name: Execute tests
         run: |
