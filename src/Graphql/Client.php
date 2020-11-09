@@ -20,6 +20,7 @@ class Client
     public function request(string $query, array $variables = [])
     {
         $response = Http::withToken($this->token)
+            ->withCorrelationId()
             ->timeout($this->timeout)
             ->post($this->url, compact('query', 'variables'))
             ->throw();
