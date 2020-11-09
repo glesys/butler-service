@@ -5,6 +5,7 @@ namespace Butler\Service\Tests\Graphql;
 use Butler\Service\Graphql\Client;
 use Butler\Service\Tests\TestCase;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class ClientTest extends TestCase
 {
@@ -20,7 +21,9 @@ class ClientTest extends TestCase
         Http::assertSent(function ($request) {
             return $request->method() === 'POST'
                 && $request->url() === 'url'
-                && $request->hasHeader('Authorization', 'Bearer t0ken');
+                && $request->hasHeader('Authorization', 'Bearer t0ken')
+                && $request->hasHeader('X-Correlation-ID')
+                && Str::isUuid($request->header('X-Correlation-ID')[0]);
         });
     }
 
