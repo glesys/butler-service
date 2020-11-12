@@ -81,13 +81,23 @@ class ServiceProvider extends BaseServiceProvider
 
     protected function configureAuditInitiator()
     {
-        Auditor::setInitiatorResolver(fn () => [
-            auth()->id(),
-            [
-                'ip' => request()->ip(),
-                'userAgent' => request()->userAgent(),
-            ]
-        ]);
+        $resolver = $this->app->runningInConsole()
+            ? fn () => ['console', ['hostname' => gethostname()]]
+            : function () {
+                if (auth()->check()) {
+                    return [
+                        auth()->id(),
+                        [
+                            'ip' => request()->ip(),
+                            'userAgent' => request()->userAgent(),
+                        ]
+                    ];
+                }
+
+                return [request()->ip(), ['userAgent' => request()->userAgent()]];
+            };
+
+        Auditor::setInitiatorResolver($resolver);
     }
 
     protected function registerBaseProviders()

@@ -61,8 +61,19 @@ class ServiceProviderTest extends TestCase
         $this->assertEquals('Europe/Stockholm', Carbon::now()->getTimezone());
     }
 
-    public function test_audit_initiator_resolver_is_set()
+    public function test_audit_initiator_resolver_resolves_console()
     {
+        $auditor = audit('entity', 123);
+
+        $this->assertEquals('console', $auditor['initiator']);
+        $this->assertEquals('hostname', $auditor['initiatorContext'][0]['key']);
+        $this->assertNotEmpty($auditor['initiatorContext'][0]['value']);
+    }
+
+    public function test_audit_initiator_resolver_resolves_authenticated_user()
+    {
+        putenv('APP_RUNNING_IN_CONSOLE=false');
+        $this->refreshApplication();
         $this->actingAs(new JwtUser(['sub' => 'service1']));
 
         $auditor = audit('entity', 123);
@@ -71,6 +82,20 @@ class ServiceProviderTest extends TestCase
 
         $this->assertEquals([
             ['key' => 'ip', 'value' => '127.0.0.1'],
+            ['key' => 'userAgent', 'value' => 'Symfony'],
+        ], $auditor['initiatorContext']);
+    }
+
+    public function test_audit_initiator_resolver_resolves_unauthenticated_user()
+    {
+        putenv('APP_RUNNING_IN_CONSOLE=false');
+        $this->refreshApplication();
+
+        $auditor = audit('entity', 123);
+
+        $this->assertEquals('127.0.0.1', $auditor['initiator']);
+
+        $this->assertEquals([
             ['key' => 'userAgent', 'value' => 'Symfony'],
         ], $auditor['initiatorContext']);
     }
