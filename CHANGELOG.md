@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.3.3] - 2020-11-13
+
 ## Changed
 - Audit initiator resolver now supports anonymous users and when running in console.
 
