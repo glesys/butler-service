@@ -6,7 +6,7 @@
     "require": {
         "php": "^7.4",
         "bugsnag/bugsnag-laravel": "^2.18",
-        "doctrine/dbal": "^2.10",
+        "doctrine/dbal": "^2.10 || ^3.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "glesys/butler-audit": "^0.1.1",
