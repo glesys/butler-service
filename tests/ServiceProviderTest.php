@@ -2,6 +2,7 @@
 
 namespace Butler\Service\Tests;
 
+use Butler\Audit\Facades\Auditor;
 use Butler\Auth\JwtUser;
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
 use Illuminate\Support\Carbon;
@@ -63,41 +64,45 @@ class ServiceProviderTest extends TestCase
 
     public function test_audit_initiator_resolver_resolves_console()
     {
-        $auditor = audit('entity', 123);
+        Auditor::fake();
 
-        $this->assertEquals('console', $auditor['initiator']);
-        $this->assertEquals('hostname', $auditor['initiatorContext'][0]['key']);
-        $this->assertNotEmpty($auditor['initiatorContext'][0]['value']);
+        audit('foo', 123)->bar();
+
+        Auditor::assertLogged('foo.bar', fn ($data)
+            => $data->initiator === 'console'
+            && $data->hasInitiatorContext('hostname', gethostname()));
     }
 
     public function test_audit_initiator_resolver_resolves_authenticated_user()
     {
         putenv('APP_RUNNING_IN_CONSOLE=false');
+
         $this->refreshApplication();
         $this->actingAs(new JwtUser(['sub' => 'service1']));
 
-        $auditor = audit('entity', 123);
+        Auditor::fake();
 
-        $this->assertEquals('service1', $auditor['initiator']);
+        audit('foo', 123)->bar();
 
-        $this->assertEquals([
-            ['key' => 'ip', 'value' => '127.0.0.1'],
-            ['key' => 'userAgent', 'value' => 'Symfony'],
-        ], $auditor['initiatorContext']);
+        Auditor::assertLogged('foo.bar', fn ($data)
+            => $data->initiator === 'service1'
+            && $data->hasInitiatorContext('ip', '127.0.0.1')
+            && $data->hasInitiatorContext('userAgent', 'Symfony'));
     }
 
     public function test_audit_initiator_resolver_resolves_unauthenticated_user()
     {
         putenv('APP_RUNNING_IN_CONSOLE=false');
+
         $this->refreshApplication();
 
-        $auditor = audit('entity', 123);
+        Auditor::fake();
 
-        $this->assertEquals('127.0.0.1', $auditor['initiator']);
+        audit('foo', 123)->bar();
 
-        $this->assertEquals([
-            ['key' => 'userAgent', 'value' => 'Symfony'],
-        ], $auditor['initiatorContext']);
+        Auditor::assertLogged('foo.bar', fn ($data)
+            => $data->initiator === '127.0.0.1'
+            && $data->hasInitiatorContext('userAgent', 'Symfony'));
     }
 
     /**
