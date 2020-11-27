@@ -2,26 +2,23 @@ on: push
 
 jobs:
   tests:
+    name: Testing with PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
-    name: Tests
+    strategy:
+        matrix:
+            php: [7.4, 8.0]
     steps:
       - uses: actions/checkout@v2
-
-      - name: Cache Composer
-        uses: actions/cache@v2.1.3
-        with:
-          path: ~/.composer/cache/files
-          key: dependencies-composer-${{ hashFiles('composer.json') }}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: ${{ matrix.php }}
           extensions: dom, curl, libxml, mbstring, zip
           coverage: none
 
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-interaction --no-ansi --no-progress
+        run: composer update --prefer-dist --no-interaction --no-ansi --no-progress
 
       - name: Execute tests
         run: |
