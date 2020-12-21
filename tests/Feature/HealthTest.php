@@ -15,6 +15,7 @@ class HealthTest extends TestCase
                     'name',
                     'php',
                     'laravel',
+                    'butlerService',
                     'timezone',
                 ],
                 'checks' => [
