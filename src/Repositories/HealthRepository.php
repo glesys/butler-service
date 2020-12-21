@@ -24,7 +24,7 @@ class HealthRepository
         return [
             'php' => PHP_VERSION,
             'laravel' => Application::VERSION,
-            'butlerService' => InstalledVersions::getVersion('glesys/butler-service'),
+            'butlerService' => ltrim(InstalledVersions::getPrettyVersion('glesys/butler-service'), 'v'),
             'name' => config('app.name'),
             'timezone' => config('app.timezone'),
         ];
