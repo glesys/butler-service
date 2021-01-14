@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Changed
+- Use the correlation id from butler-audit when logging to graylog to enable tracing requests/executions into graylog.
 
 ## [0.6.1] - 2021-02-18
 
