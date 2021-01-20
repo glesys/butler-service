@@ -2,7 +2,7 @@
 
 namespace Butler\Service;
 
-use Butler\Audit\Auditor;
+use Butler\Audit\Facades\Auditor;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Symfony\Component\Finder\Finder;
 
@@ -97,7 +97,7 @@ class ServiceProvider extends BaseServiceProvider
                 return [request()->ip(), ['userAgent' => request()->userAgent()]];
             };
 
-        Auditor::setInitiatorResolver($resolver);
+        Auditor::initiatorResolver($resolver);
     }
 
     protected function registerBaseProviders()
