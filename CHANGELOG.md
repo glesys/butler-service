@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Added
+- Custom `Bus\Dispatcher` to support the new job trait `WithCorrelationId`.
+
 ## [0.5.0] - 2021-01-21
 
 ### Changed
