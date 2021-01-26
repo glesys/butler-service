@@ -4,13 +4,26 @@ namespace Butler\Service\Tests;
 
 use Butler\Audit\Facades\Auditor;
 use Butler\Auth\JwtUser;
+use Butler\Service\Bus\Dispatcher;
+use Butler\Service\Tests\Bus\JobWithCorrelationId;
+use Butler\Service\Tests\Bus\JobWithoutCorrelationId;
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
+use Illuminate\Bus\Dispatcher as BaseDispatcher;
+use Illuminate\Queue\Events\JobProcessed;
+use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 
 class ServiceProviderTest extends TestCase
 {
     use ServiceProviderTrait;
+
+    protected function setUp(): void
+    {
+        putenv('APP_RUNNING_IN_CONSOLE=true');
+
+        parent::setUp();
+    }
 
     public function test_routes_are_loaded()
     {
@@ -48,6 +61,11 @@ class ServiceProviderTest extends TestCase
     public function test_extra_aliases_are_registered()
     {
         $this->assertInstanceOf(Cache::class, app('Foobar'));
+    }
+
+    public function test_Dispatcher_is_extended()
+    {
+        $this->assertInstanceOf(Dispatcher::class, app(BaseDispatcher::class));
     }
 
     public function test_application_config_merges_butler_service_config()
@@ -102,6 +120,29 @@ class ServiceProviderTest extends TestCase
         Auditor::assertLogged('foo.bar', fn ($data)
             => $data->initiator === '127.0.0.1'
             && $data->hasInitiatorContext('userAgent', 'Symfony'));
+    }
+
+    public function test_correct_correlation_id_is_used_for_queued_job_using_WithCorrelationId_trait()
+    {
+        $this->assertTrue(app('events')->hasListeners(JobProcessing::class));
+
+        $job = new JobWithCorrelationId();
+        $job->correlationId = 'a-correlation-id';
+
+        event(new JobProcessing('connections', $job));
+
+        $this->assertEquals('a-correlation-id', Auditor::correlationId());
+    }
+
+    public function test_correlation_id_is_reset_after_each_queued_job()
+    {
+        $this->assertTrue(app('events')->hasListeners(JobProcessed::class));
+
+        $correlationId = Auditor::correlationId();
+
+        event(new JobProcessed('connection', new JobWithoutCorrelationId()));
+
+        $this->assertNotEquals($correlationId, Auditor::correlationId());
     }
 
     /**
