@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Added
 - Custom `Bus\Dispatcher` to support the new job trait `WithCorrelationId`.
 
+### Changed
+- **BREAKING**: Require [butler-audit](https://github.com/glesys/butler-audit/blob/master/CHANGELOG.md#030---2021-02-04) 0.3.
+
 ## [0.5.0] - 2021-01-21
 
 ### Changed
