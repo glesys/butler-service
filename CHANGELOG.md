@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Added
+- Abstract class `QueueableJob` that includes commonly used traits.
 
 ## [0.6.0] - 2021-02-09
 
