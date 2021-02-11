@@ -2,15 +2,10 @@
 
 namespace Butler\Service\Tests\Bus;
 
-use Butler\Service\Bus\WithCorrelationId;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Butler\Service\Jobs\QueueableJob;
 
-class JobWithCorrelationId implements ShouldQueue
+class JobWithCorrelationId extends QueueableJob
 {
-    use Queueable;
-    use WithCorrelationId;
-
     public function handle()
     {
         return true;
