@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Require Laravel 8.33.
+- **BREAKING**: Replaced butler-auth with [Laravel Sanctum](https://laravel.com/docs/8.x/sanctum).
+  Existing JWT tokens will not work if not migrated or new tokens are created.
+  The only way to authenticate now is with the `Authorization` header.
+- **BREAKING**: Renamed test method `actingAsJwtUser` to `actingAsConsumer`.
 
 ## [0.7.0] - 2021-03-18
 

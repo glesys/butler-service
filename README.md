@@ -2,16 +2,16 @@
 
 # Butler Service
 
-A Laravel-based micro-framework for web services using JWT, GraphQL and RabbitMQ.
+A Laravel-based micro-framework for web services using GraphQL and RabbitMQ.
 
 ## Getting Started
 
-*Requires a working Laravel app.*
+*Requires a working Laravel app with a database connection.*
 
 ```shell
 composer require glesys/butler-service
 php artisan vendor:publish --provider="Butler\Service\ServiceProvider" --tag=config
-php artisan butler-auth:generate-secret-key
+php artisan migrate
 ```
 
 Replace `Illuminate\Foundation\Application` with `Butler\Service\Foundation\Application` in `bootstrap/app.php`.
@@ -83,11 +83,15 @@ the `butler.service.health.checks` configuration.
     ],
 ```
 
-## JWT authentication with butler-auth
+## Authentication with Laravel Sanctum
 
-Generate tokens with `php artisan butler-auth:generate-token`.
+```php
+$user = \Butler\Service\Models\Consumer::create(['name' => 'Service A']);
 
-See [butler-auth](https://github.com/glesys/butler-auth).
+$token = $user->createToken('token-name', ['*'])->plainTextToken;
+```
+
+See [Laravel Sanctum](https://laravel.com/docs/8.x/sanctum) for more information.
 
 ## GraphQL with butler-graphql
 

@@ -12,17 +12,6 @@ return [
 
     ],
 
-    'auth' => [
-
-        'secret_key' => '',
-
-        'required_claims' => [
-            'aud' => 'example-service',
-            'iss' => 'example-service',
-        ],
-
-    ],
-
     'guru' => [
 
         'driver' => env('BUTLER_GURU_DRIVER', 'file'),

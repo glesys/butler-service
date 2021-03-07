@@ -76,23 +76,18 @@
           >POST</span>
           <span
             class="bg-purple-500 ml-1 px-1 text-xs text-white rounded cursor-default"
-            title="Requires authentication with JWT"
-          >JWT</span>
+            title="Requires token authentication"
+          >token</span>
         </div>
       </div>
 
       <div class="font-bold my-3 tracking-wide uppercase text-sm">Authentication</div>
       <div class="xl:w-3/4">
-        The recommended way to authenticate against this service is to
+        The only way to authenticate against this service is to
         provide your access token with the request headers;
         <span
           class="bg-secondary rounded p-1 font-mono text-sm text-white whitespace-no-wrap"
         >Authorization: Bearer TOKEN</span>.
-        <br>
-        If headers are unavailable you can also provide your access token in the query;
-        <span
-          class="bg-secondary rounded p-1 font-mono text-sm text-white whitespace-no-wrap"
-        >{{ route('graphql', [], false) }}?token=TOKEN</span>.
       </div>
 
       <div class="font-bold my-3 tracking-wide uppercase text-sm">Schema</div>

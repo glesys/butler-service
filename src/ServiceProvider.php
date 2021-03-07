@@ -10,12 +10,15 @@ use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Laravel\Sanctum\Sanctum;
 use Symfony\Component\Finder\Finder;
 
 class ServiceProvider extends BaseServiceProvider
 {
     public function register()
     {
+        Sanctum::ignoreMigrations();
+
         $this->mergeApplicationConfig();
 
         $this->configureExtraConfig();
@@ -37,6 +40,10 @@ class ServiceProvider extends BaseServiceProvider
 
     public function boot()
     {
+        $this->loadMigrations();
+
+        $this->registerMorphMap();
+
         $this->loadCommands();
 
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
@@ -95,12 +102,14 @@ class ServiceProvider extends BaseServiceProvider
             ? fn () => ['console', ['hostname' => gethostname()]]
             : function () {
                 if (auth()->check()) {
+                    $user = auth()->user();
                     return [
-                        auth()->id(),
-                        [
+                        $user->name,
+                        array_filter([
                             'ip' => request()->ip(),
                             'userAgent' => request()->userAgent(),
-                        ]
+                            'tokenName' => optional($user->currentAccessToken())->name,
+                        ])
                     ];
                 }
 
@@ -154,6 +163,24 @@ class ServiceProvider extends BaseServiceProvider
         $this->app->extend(BaseBusDispatcher::class, function ($dispatcher, $app) {
             return new BusDispatcher($app, $dispatcher);
         });
+    }
+
+    protected function loadMigrations()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->loadMigrationsFrom(realpath(__DIR__ . '/../database/migrations'));
+
+            if (is_dir($defaultPath = database_path('migrations/default'))) {
+                $this->loadMigrationsFrom(realpath($defaultPath));
+            }
+        }
+    }
+
+    protected function registerMorphMap()
+    {
+        \Illuminate\Database\Eloquent\Relations\Relation::morphMap([
+            'consumer' => \Butler\Service\Models\Consumer::class,
+        ]);
     }
 
     protected function loadCommands()

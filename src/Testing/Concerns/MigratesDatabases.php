@@ -20,11 +20,7 @@ trait MigratesDatabases
 
     private function migrationsPath(string $database): string
     {
-        if ($database === 'default' && ! is_dir(database_path('migrations/default'))) {
-            return 'database/migrations';
-        }
-
-        return "database/migrations/{$database}";
+        return $database === 'default' ? '' : "database/migrations/{$database}";
     }
 
     private function seederName(string $database): string

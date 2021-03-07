@@ -4,8 +4,8 @@
 
 namespace Butler\Service\Tests\Feature;
 
+use Butler\Service\Models\Consumer;
 use Butler\Service\Tests\TestCase;
-use Illuminate\Auth\GenericUser;
 use Illuminate\Testing\Fluent\AssertableJson;
 
 class GraphqlTest extends TestCase
@@ -21,7 +21,7 @@ class GraphqlTest extends TestCase
 
     public function test_authenticated()
     {
-        $this->actingAs(new GenericUser(['id' => 1]))
+        $this->actingAs(new Consumer())
             ->postJson(route('graphql'), ['query' => '{ __schema { directives { name } } }'])
             ->assertOk()
             ->assertJson(fn (AssertableJson $json) => $json->whereAll([
