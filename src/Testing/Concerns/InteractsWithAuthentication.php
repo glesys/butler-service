@@ -2,12 +2,12 @@
 
 namespace Butler\Service\Testing\Concerns;
 
-use Butler\Auth\JwtUser;
+use Butler\Service\Models\Consumer;
 
 trait InteractsWithAuthentication
 {
-    public function actingAsJwtUser(array $data = []): self
+    public function actingAsConsumer(array $data = []): self
     {
-        return $this->actingAs(new JwtUser($data));
+        return $this->actingAs(new Consumer($data));
     }
 }
