@@ -42,7 +42,8 @@ return [
         ],
 
         'api' => [
-            'driver' => 'jwt',
+            'driver' => 'token',
+            'provider' => 'consumers',
         ],
     ],
 
@@ -69,10 +70,10 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'consumers' => [
+            'driver' => 'eloquent',
+            'model' => Butler\Service\Models\Consumer::class,
+        ],
     ],
 
     /*

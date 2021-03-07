@@ -3,8 +3,8 @@
 namespace Butler\Service\Tests;
 
 use Butler\Audit\Facades\Auditor;
-use Butler\Auth\JwtUser;
 use Butler\Service\Bus\Dispatcher;
+use Butler\Service\Models\Consumer;
 use Butler\Service\Tests\Bus\JobWithCorrelationId;
 use Butler\Service\Tests\Bus\JobWithoutCorrelationId;
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
@@ -95,7 +95,7 @@ class ServiceProviderTest extends TestCase
         putenv('APP_RUNNING_IN_CONSOLE=false');
 
         $this->refreshApplication();
-        $this->actingAs(new JwtUser(['sub' => 'service1']));
+        $this->actingAs(new Consumer(['name' => 'service1']));
 
         Auditor::fake();
 

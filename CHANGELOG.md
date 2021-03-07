@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **BREAKING**: Replace butler-auth with built-in token authentication. Existing JWT tokens will not work if not migrated or new tokens are created.
+- **BREAKING**: Renamed help method `actingAsJwtUser` to `actingAsConsumer`.
 
 ## [0.7.0] - 2021-03-18
 

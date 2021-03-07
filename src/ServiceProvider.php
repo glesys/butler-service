@@ -37,6 +37,8 @@ class ServiceProvider extends BaseServiceProvider
 
     public function boot()
     {
+        $this->loadMigrations();
+
         $this->loadCommands();
 
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
@@ -96,7 +98,7 @@ class ServiceProvider extends BaseServiceProvider
             : function () {
                 if (auth()->check()) {
                     return [
-                        auth()->id(),
+                        auth()->user()->name,
                         [
                             'ip' => request()->ip(),
                             'userAgent' => request()->userAgent(),
@@ -156,10 +158,18 @@ class ServiceProvider extends BaseServiceProvider
         });
     }
 
+    protected function loadMigrations()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        }
+    }
+
     protected function loadCommands()
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
+                \Butler\Service\Console\Commands\CreateConsumer::class,
                 \Butler\Service\Console\Commands\GenerateUuid::class,
             ]);
         }

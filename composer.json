@@ -10,7 +10,6 @@
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "glesys/butler-audit": "^0.3",
-        "glesys/butler-auth": "^3.0",
         "glesys/butler-graphql": "^5.0",
         "glesys/butler-guru": "^0.7",
         "graylog2/gelf-php": "^1.6",

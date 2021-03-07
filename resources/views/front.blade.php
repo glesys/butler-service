@@ -76,8 +76,8 @@
           >POST</span>
           <span
             class="bg-purple-500 ml-1 px-1 text-xs text-white rounded cursor-default"
-            title="Requires authentication with JWT"
-          >JWT</span>
+            title="Requires token authentication"
+          >token</span>
         </div>
       </div>
 
@@ -92,7 +92,7 @@
         If headers are unavailable you can also provide your access token in the query;
         <span
           class="bg-secondary rounded p-1 font-mono text-sm text-white whitespace-no-wrap"
-        >{{ route('graphql', [], false) }}?token=TOKEN</span>.
+        >{{ route('graphql', [], false) }}?api_token=TOKEN</span>.
       </div>
 
       <div class="font-bold my-3 tracking-wide uppercase text-sm">Schema</div>
