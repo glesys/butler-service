@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Changed
 - Use the correlation id from butler-audit when logging to graylog to enable tracing requests/executions into graylog.
+- **BREAKING**: Require [butler-graphql](https://github.com/glesys/butler-graphql/blob/master/CHANGELOG.md) 5.0.
 
 ## [0.6.1] - 2021-02-18
 
