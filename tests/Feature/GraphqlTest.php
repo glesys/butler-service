@@ -1,9 +1,12 @@
 <?php
 
+// phpcs:disable PSR2.Methods.FunctionCallSignature.SpaceBeforeCloseBracket
+
 namespace Butler\Service\Tests\Feature;
 
 use Butler\Service\Tests\TestCase;
 use Illuminate\Auth\GenericUser;
+use Illuminate\Testing\Fluent\AssertableJson;
 
 class GraphqlTest extends TestCase
 {
@@ -21,10 +24,10 @@ class GraphqlTest extends TestCase
         $this->actingAs(new GenericUser(['id' => 1]))
             ->postJson(route('graphql'), ['query' => '{ __schema { directives { name } } }'])
             ->assertOk()
-            ->assertJsonPath('data.__schema.directives.*.name', [
-                'skip',
-                'include',
-                'deprecated',
-            ]);
+            ->assertJson(fn (AssertableJson $json) => $json->whereAll([
+                'data.__schema.directives.0.name' => 'skip',
+                'data.__schema.directives.1.name' => 'include',
+                'data.__schema.directives.2.name' => 'deprecated',
+            ]));
     }
 }
