@@ -15,7 +15,7 @@
         "glesys/butler-guru": "^0.7",
         "graylog2/gelf-php": "^1.6",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^8.0",
+        "laravel/framework": "^8.33",
         "laravel/tinker": "^2.0"
     },
     "require-dev": {
