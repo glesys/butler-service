@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.8.0] - 2021-03-24
+
 ### Changed
 - Require Laravel 8.33.
 - **BREAKING**: Replaced butler-auth with [Laravel Sanctum](https://laravel.com/docs/8.x/sanctum).
