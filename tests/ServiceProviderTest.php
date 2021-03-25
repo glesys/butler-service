@@ -14,6 +14,7 @@ use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Gate;
 use Laravel\Sanctum\PersonalAccessToken;
 use Laravel\Sanctum\Sanctum;
 
@@ -84,6 +85,11 @@ class ServiceProviderTest extends TestCase
         $this->assertEquals([
             'consumer' => \Butler\Service\Models\Consumer::class,
         ], Relation::morphMap());
+    }
+
+    public function test_gate_abilities()
+    {
+        $this->assertTrue(Gate::has('graphql'));
     }
 
     public function test_application_config_merges_butler_service_config()

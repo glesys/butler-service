@@ -37,7 +37,8 @@ abstract class TestCase extends AbstractPackageTestCase
     private static function createRequiredTestDirectories(string $appPath): void
     {
         $directories = [
-            'app/Http/Graphql',
+            'app/Http/Graphql/Mutations',
+            'app/Http/Graphql/Queries',
             'app/Providers',
             'database/migrations/default',
         ];
@@ -56,6 +57,8 @@ abstract class TestCase extends AbstractPackageTestCase
             'config/butler.php' => 'config/butler.php',
             'config/session.php' => 'config/session.php',
             'schema.graphql' => 'app/Http/Graphql/schema.graphql',
+            'StartMutation.txt' => 'app/Http/Graphql/Mutations/Start.php',
+            'PingQuery.txt' => 'app/Http/Graphql/Queries/Ping.php',
             'AppServiceProvider.txt' => 'app/Providers/AppServiceProvider.php',
         ];
 

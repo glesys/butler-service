@@ -93,6 +93,22 @@ $token = $user->createToken('token-name', ['*'])->plainTextToken;
 
 See [Laravel Sanctum](https://laravel.com/docs/8.x/sanctum) for more information.
 
+### Authorization
+
+GraphQL operations are authorized by the "graphql" `Gate` ability defined in the [ServiceProvider](src/ServiceProvider.php).
+
+```php
+// allow "query" operations only
+$consumer->createToken('read-only', ['query']);
+
+// allow "mutation" operations only
+$consumer->createToken('write-only', ['mutation']);
+
+// allow any operations
+$consumer->createToken('full-access', ['*']);
+$consumer->createToken('full-graphql', ['query', 'mutation', 'subscription']);
+```
+
 ## GraphQL with butler-graphql
 
 See [butler-graphql](https://github.com/glesys/butler-graphql).

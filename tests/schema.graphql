@@ -1,3 +1,7 @@
 type Query {
-    foo(bars: [String!]): [String!]!
+    ping: String!
+}
+
+type Mutation {
+    start: String!
 }

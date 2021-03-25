@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * NOTE: This is a template of an graphql mutation used only for testing.
+ *
+ * @see \Butler\Service\Tests\Feature\GraphqlTest
+ */
+
+namespace App\Http\Graphql\Mutations;
+
+class Start
+{
+    public function __invoke($root, $args, $context)
+    {
+        return 'started';
+    }
+}
