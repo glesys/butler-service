@@ -3,11 +3,14 @@
 namespace Butler\Service\Testing\Concerns;
 
 use Butler\Service\Models\Consumer;
+use Laravel\Sanctum\Sanctum;
 
 trait InteractsWithAuthentication
 {
-    public function actingAsConsumer(array $data = []): self
+    public function actingAsConsumer(array $data = [], $abilities = ['*']): self
     {
-        return $this->actingAs(new Consumer($data));
+        Sanctum::actingAs(new Consumer($data), $abilities);
+
+        return $this;
     }
 }
