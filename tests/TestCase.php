@@ -20,7 +20,7 @@ abstract class TestCase extends AbstractPackageTestCase
         static::createRequiredTestFiles($appPath);
     }
 
-    protected function getServiceProviderClass($app)
+    protected function getServiceProviderClass()
     {
         return ServiceProvider::class;
     }
