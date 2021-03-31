@@ -227,5 +227,9 @@ class ServiceProvider extends BaseServiceProvider
         Gate::define('graphql', function (Consumer $consumer, $operation) {
             return $operation ? $consumer->tokenCan($operation) : false;
         });
+
+        Gate::define('view-consumers', function (Consumer $consumer) {
+            return $consumer->tokenCan('view-consumers');
+        });
     }
 }

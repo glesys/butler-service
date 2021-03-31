@@ -20,6 +20,19 @@ abstract class TestCase extends AbstractPackageTestCase
         static::createRequiredTestFiles($appPath);
     }
 
+    protected function getEnvironmentSetUp($app)
+    {
+        parent::getEnvironmentSetUp($app);
+
+        $app->config->set('database.default', 'default');
+        $app->config->set('database.connections', [
+            'default' => [
+                'driver'   => 'sqlite',
+                'database' => ':memory:',
+            ]
+        ]);
+    }
+
     protected function getServiceProviderClass()
     {
         return ServiceProvider::class;

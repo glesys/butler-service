@@ -90,6 +90,7 @@ class ServiceProviderTest extends TestCase
     public function test_gate_abilities()
     {
         $this->assertTrue(Gate::has('graphql'));
+        $this->assertTrue(Gate::has('view-consumers'));
     }
 
     public function test_application_config_merges_butler_service_config()
@@ -185,6 +186,7 @@ class ServiceProviderTest extends TestCase
             ['butler.service.routes.front', '/'],
             ['butler.service.routes.graphql', '/graphql'],
             ['butler.service.routes.health', '/health'],
+            ['butler.service.routes.consumers', '/consumers'],
             ['butler.service.health.checks', [TestCheck::class]],
             ['butler.service.extra.config', [
                 'app.timezone' => 'Europe/Stockholm',

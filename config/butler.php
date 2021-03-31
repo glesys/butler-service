@@ -41,6 +41,7 @@ return [
             'front' => '/',
             'graphql' => '/graphql',
             'health' => '/health',
+            'consumers' => '/consumers',
         ],
 
         'health' => [

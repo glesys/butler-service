@@ -5,6 +5,7 @@ namespace Butler\Service\Repositories;
 use Butler\Service\Foundation\Application;
 use Butler\Service\Health\Check;
 use Butler\Service\Health\Checks;
+use Butler\Service\Models\Consumer;
 use Composer\InstalledVersions;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -13,10 +14,16 @@ class HealthRepository
 {
     public function __invoke()
     {
-        return [
+        $result = [
             'service' => $this->serviceInfo(),
             'checks' => $this->checks(),
         ];
+
+        if (auth()->check() && auth()->user()->can('view-consumers')) {
+            $result['consumers'] = $this->consumers();
+        }
+
+        return $result;
     }
 
     private function serviceInfo(): array
@@ -37,6 +44,11 @@ class HealthRepository
             ->map(fn($class) => $this->checkToArray(app($class)))
             ->sortByDesc(fn($check) => $check['result']->order())
             ->values();
+    }
+
+    private function consumers(): Collection
+    {
+        return Consumer::select('name')->get();
     }
 
     private function coreChecks(): array
