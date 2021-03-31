@@ -14,7 +14,7 @@ class FailedJobsCheckTest extends TestCase
     {
         parent::setUp();
 
-        config(['queue.failed.database' => 'sqlite']);
+        config(['queue.failed.database' => 'default']);
 
         Schema::create(config('queue.failed.table'), fn($table) => $table->id());
     }
