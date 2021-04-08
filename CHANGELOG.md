@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.9.0] - 2021-04-08
+
 ### Changed
 - **BREAKING**: Use [token abilities](https://laravel.com/docs/8.x/sanctum#token-abilities) to authorize GraphQL operations.
 
