@@ -5,7 +5,6 @@ namespace Butler\Service;
 use Butler\Audit\Facades\Auditor;
 use Butler\Service\Bus\Dispatcher as BusDispatcher;
 use Butler\Service\Bus\WithCorrelationId;
-use Butler\Service\Models\Consumer;
 use Illuminate\Bus\Dispatcher as BaseBusDispatcher;
 use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Queue\Events\JobProcessing;
@@ -224,8 +223,14 @@ class ServiceProvider extends BaseServiceProvider
 
     public function defineGateAbilities()
     {
-        Gate::define('graphql', function (Consumer $consumer, $operation) {
-            return $operation ? $consumer->tokenCan($operation) : false;
+        Gate::define('graphql', function ($user, $operation) {
+            $uses = class_uses_recursive($user);
+
+            if (in_array(\Laravel\Sanctum\HasApiTokens::class, $uses) && $operation) {
+                return $user->tokenCan($operation);
+            }
+
+            return false;
         });
     }
 }
