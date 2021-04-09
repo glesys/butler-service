@@ -8,6 +8,7 @@ use Butler\Service\Bus\WithCorrelationId;
 use Illuminate\Bus\Dispatcher as BaseBusDispatcher;
 use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Queue\Events\JobProcessing;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
@@ -56,6 +57,8 @@ class ServiceProvider extends BaseServiceProvider
         $this->listenForJobProcessEvents();
 
         $this->defineGateAbilities();
+
+        Blade::componentNamespace('Butler\\Service\\View\\Components', 'butler-service');
     }
 
     protected function mergeApplicationConfig()

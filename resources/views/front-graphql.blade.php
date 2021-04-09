@@ -1,19 +1,10 @@
-<div class="bg-white rounded p-4 mb-4">
-  <div class="flex flex-row mb-2">
-    <div class="flex-1 font-bold tracking-wide uppercase">GraphQL</div>
-    <div class="rounded bg-gray-100 border px-2">
-      <a class="text-blue-600" href="{{ route('graphql') }}">{{ route('graphql', [], false) }}</a>
-      <span
-        class="bg-secondary ml-1 px-1 text-xs text-white rounded cursor-default"
-        title="Only POST method allowed"
-      >POST</span>
-      <span
-        class="bg-purple-500 ml-1 px-1 text-xs text-white rounded cursor-default"
-        title="Requires token authentication"
-      >token</span>
-    </div>
-  </div>
-
+<x-butler-service::front-block
+  title="GraphQL"
+  http-method="POST"
+  response-type="JSON"
+  :requires-token="true"
+  :url="route('graphql', [], false)"
+>
   <div class="font-bold my-3 tracking-wide uppercase text-sm">Authentication</div>
   <div class="xl:w-3/4">
     The only way to authenticate against this service is to
@@ -25,7 +16,7 @@
 
   <div class="font-bold my-3 tracking-wide uppercase text-sm">Schema</div>
   <pre><code class="graphql rounded">{{ \File::get(config('butler.graphql.schema')) }}</code></pre>
-</div>
+</x-butler-service::front-block>
 
 @push('head')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/github.min.css" rel="stylesheet">
