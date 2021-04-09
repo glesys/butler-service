@@ -1,5 +1,4 @@
-<div class="bg-white rounded p-4 mb-4">
-  <div class="font-bold mb-2 tracking-wide uppercase">Details</div>
+<x-butler-service::front-block title="Details">
   <table class="w-full">
     <tr>
       <td class="w-1/3">PHP</td>
@@ -18,4 +17,4 @@
       <td class="font-bold">{{ $service['timezone'] }}</td>
     </tr>
   </table>
-</div>
+</x-butler-service::front-block>

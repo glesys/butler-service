@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - **BREAKING**: Requires PHP 8.
+- Refactor front page views to use blade components.
 
 ## [0.9.1] - 2021-04-09
 
