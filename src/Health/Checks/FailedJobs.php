@@ -21,7 +21,7 @@ class FailedJobs extends Check
 
         try {
             throw_unless(Schema::connection($connection)->hasTable($tableName), Exception::class);
-        } catch (Exception $_) {
+        } catch (Exception) {
             return Result::unknown("Table {$tableName} not found.");
         }
 

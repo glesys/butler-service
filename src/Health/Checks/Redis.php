@@ -31,7 +31,7 @@ class Redis extends Check
             if (RedisClient::get($key) === $string) {
                 return Result::ok("Connected to redis on {$host}.");
             }
-        } catch (\Exception $_) {
+        } catch (\Exception) {
             //
         }
 
