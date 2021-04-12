@@ -16,11 +16,7 @@ class GraphqlController extends Controller
             ->pluck('operation')
             ->unique()
             ->filter()
-            ->whenEmpty(function () {
-                abort(400, 'Invalid operation.');
-            })
-            ->each(function ($operation) {
-                $this->authorize('graphql', $operation);
-            });
+            ->whenEmpty(fn () => abort(400, 'Invalid operation.'))
+            ->each(fn ($operation) => $this->authorize('graphql', $operation));
     }
 }

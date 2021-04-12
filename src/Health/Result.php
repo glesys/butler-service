@@ -9,32 +9,28 @@ class Result
     public const CRITICAL = 'critical';
     public const UNKNOWN = 'unknown';
 
-    public string $message;
-    public string $state;
     public $value = null;
 
-    private function __construct(string $message, string $state)
+    private function __construct(public string $message, public string $state)
     {
-        $this->message = $message;
-        $this->state = $state;
     }
 
-    public static function ok(string $message): self
+    public static function ok(string $message): static
     {
         return new static($message, static::OK);
     }
 
-    public static function warning(string $message): self
+    public static function warning(string $message): static
     {
         return new static($message, static::WARNING);
     }
 
-    public static function critical(string $message): self
+    public static function critical(string $message): static
     {
         return new static($message, static::CRITICAL);
     }
 
-    public static function unknown(string $message): self
+    public static function unknown(string $message): static
     {
         return new static($message, static::UNKNOWN);
     }
@@ -50,16 +46,11 @@ class Result
 
     public function order(): int
     {
-        switch ($this->state) {
-            case static::CRITICAL:
-                return 3;
-            case static::WARNING:
-                return 2;
-            case static::OK:
-                return 1;
-            case static::UNKNOWN:
-            default:
-                return 0;
-        }
+        return match ($this->state) {
+            static::CRITICAL => 3,
+            static::WARNING => 2,
+            static::OK => 1,
+            static::UNKNOWN, 'default' => 0,
+        };
     }
 }

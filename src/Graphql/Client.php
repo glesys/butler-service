@@ -6,15 +6,11 @@ use Illuminate\Support\Facades\Http;
 
 class Client
 {
-    private $url;
-    private $token;
-    private $timeout;
-
-    public function __construct(string $url, string $token, int $timeout = 5)
-    {
-        $this->url = $url;
-        $this->token = $token;
-        $this->timeout = $timeout;
+    public function __construct(
+        private string $url,
+        private string $token,
+        private int $timeout = 5,
+    ) {
     }
 
     public function request(string $query, array $variables = [])

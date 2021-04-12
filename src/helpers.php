@@ -16,7 +16,7 @@ if (! function_exists('is_graphql')) {
     {
         try {
             GraphQL\Language\Parser::parse($query);
-        } catch (Exception $_) {
+        } catch (Exception) {
             return false;
         }
 

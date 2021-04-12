@@ -27,7 +27,7 @@ class Database extends Check
                 if (DB::connection($connection)->getPdo()) {
                     ++$connected;
                 }
-            } catch (\Exception $_) {
+            } catch (\Exception) {
                 //
             }
         }
