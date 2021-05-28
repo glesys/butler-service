@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'sanctum',
+        'guard' => 'butler',
     ],
 
     /*
@@ -40,9 +40,8 @@ return [
             'provider' => 'consumers',
         ],
 
-        'sanctum' => [
-            'driver' => 'sanctum',
-            'provider' => null,
+        'butler' => [
+            'driver' => 'butler',
         ],
     ],
 
