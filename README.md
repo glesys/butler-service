@@ -83,15 +83,15 @@ the `butler.service.health.checks` configuration.
     ],
 ```
 
-## Authentication with Laravel Sanctum
+## Authentication with butler-auth
 
 ```php
-$user = \Butler\Service\Models\Consumer::create(['name' => 'Service A']);
+$consumer = \Butler\Service\Models\Consumer::create(['name' => 'Service A']);
 
-$token = $user->createToken('token-name', ['*'])->plainTextToken;
+$token = $consumer->createToken(abilities: ['*'], name: 'token-name')->plainTextToken;
 ```
 
-See [Laravel Sanctum](https://laravel.com/docs/8.x/sanctum) for more information.
+See [butler-auth](https://github.com/glesys/butler-auth) for more information.
 
 ### Authorization
 
@@ -99,14 +99,14 @@ GraphQL operations are authorized by the "graphql" `Gate` ability defined in the
 
 ```php
 // allow "query" operations only
-$consumer->createToken('read-only', ['query']);
+$consumer->createToken(['query'], 'read-only');
 
 // allow "mutation" operations only
-$consumer->createToken('write-only', ['mutation']);
+$consumer->createToken(['mutation'], 'write-only');
 
 // allow any operations
-$consumer->createToken('full-access', ['*']);
-$consumer->createToken('full-graphql', ['query', 'mutation', 'subscription']);
+$consumer->createToken(['*'], 'full-access');
+$consumer->createToken(['query', 'mutation', 'subscription'], 'full-graphql');
 ```
 
 ## GraphQL with butler-graphql

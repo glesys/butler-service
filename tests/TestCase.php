@@ -3,10 +3,10 @@
 namespace Butler\Service\Tests;
 
 use Butler\Audit\ServiceProvider as AuditServiceProvider;
+use Butler\Auth\ServiceProvider as AuthServiceProvider;
 use Butler\Graphql\ServiceProvider as GraphqlServiceProvider;
 use Butler\Service\ServiceProvider;
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
-use Laravel\Sanctum\SanctumServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class TestCase extends AbstractPackageTestCase
@@ -29,8 +29,8 @@ abstract class TestCase extends AbstractPackageTestCase
     {
         return [
             AuditServiceProvider::class,
+            AuthServiceProvider::class,
             GraphqlServiceProvider::class,
-            SanctumServiceProvider::class,
         ];
     }
 
