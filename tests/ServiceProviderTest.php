@@ -3,6 +3,8 @@
 namespace Butler\Service\Tests;
 
 use Butler\Audit\Facades\Auditor;
+use Butler\Auth\AccessToken;
+use Butler\Auth\ButlerAuth;
 use Butler\Service\Bus\Dispatcher;
 use Butler\Service\Models\Consumer;
 use Butler\Service\Tests\Bus\JobWithCorrelationId;
@@ -15,8 +17,6 @@ use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Sanctum\PersonalAccessToken;
-use Laravel\Sanctum\Sanctum;
 
 class ServiceProviderTest extends TestCase
 {
@@ -120,7 +120,7 @@ class ServiceProviderTest extends TestCase
 
         $this->refreshApplication();
 
-        Sanctum::actingAs($this->makeConsumer(['name' => 'service1']));
+        ButlerAuth::actingAs($this->makeConsumer(['name' => 'service1']));
 
         Auditor::fake();
 
@@ -198,12 +198,12 @@ class ServiceProviderTest extends TestCase
     private function makeConsumer(array $attributes = []): Consumer
     {
         return new class ($attributes) extends Consumer {
-            public function currentAccessToken()
+            public function currentAccessToken(): AccessToken
             {
-                return new PersonalAccessToken([
-                    'name' => 'my token',
+                return new AccessToken([
                     'token' => 'secret',
                     'abilities' => ['*'],
+                    'name' => 'my token',
                 ]);
             }
         };

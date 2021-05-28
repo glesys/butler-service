@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+### Changed
+- **BREAKING**: Replace laravel/sanctum with [glesys/butler-auth](https://github.com/glesys/butler-auth/blob/master/CHANGELOG.md). See [UPGRADE.md](./UPGRADE.md) for more information.
+
 ## [0.10.0] - 2021-04-27
 
 ### Changed

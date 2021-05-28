@@ -3,6 +3,7 @@
 namespace Butler\Service;
 
 use Butler\Audit\Facades\Auditor;
+use Butler\Auth\Contracts\HasAccessTokens;
 use Butler\Service\Bus\Dispatcher as BusDispatcher;
 use Butler\Service\Bus\WithCorrelationId;
 use Illuminate\Bus\Dispatcher as BaseBusDispatcher;
@@ -12,15 +13,12 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Laravel\Sanctum\Sanctum;
 use Symfony\Component\Finder\Finder;
 
 class ServiceProvider extends BaseServiceProvider
 {
     public function register()
     {
-        Sanctum::ignoreMigrations();
-
         $this->mergeApplicationConfig();
 
         $this->configureExtraConfig();
@@ -227,9 +225,7 @@ class ServiceProvider extends BaseServiceProvider
     public function defineGateAbilities()
     {
         Gate::define('graphql', function ($user, $operation) {
-            $uses = class_uses_recursive($user);
-
-            if (in_array(\Laravel\Sanctum\HasApiTokens::class, $uses) && $operation) {
+            if ($user instanceof HasAccessTokens) {
                 return $user->tokenCan($operation);
             }
 

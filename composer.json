@@ -10,12 +10,12 @@
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "glesys/butler-audit": "^0.3",
+        "glesys/butler-auth": "^4.0",
         "glesys/butler-graphql": "^5.1",
         "glesys/butler-guru": "^0.7",
         "graylog2/gelf-php": "^1.6",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.33",
-        "laravel/sanctum": "^2.9",
         "laravel/tinker": "^2.0"
     },
     "require-dev": {
