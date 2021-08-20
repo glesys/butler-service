@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+### Added
+- [Laravel Octane](https://laravel.com/docs/8.x/octane).
+
 ## [0.11.0] - 2021-06-10
 
 ### Changed
