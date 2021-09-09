@@ -9,7 +9,7 @@ class Client
     public function __construct(
         private string $url,
         private string $token,
-        private int $timeout = 5,
+        private int $timeout = 10,
     ) {
     }
 

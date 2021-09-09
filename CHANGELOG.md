@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Increased graphql client default timeout to 10 seconds.
 
 ## [0.11.1] - 2021-08-25
 
