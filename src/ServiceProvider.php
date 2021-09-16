@@ -8,6 +8,7 @@ use Butler\Health\Checks as HealthChecks;
 use Butler\Health\Repository as HealthRepository;
 use Butler\Service\Bus\Dispatcher as BusDispatcher;
 use Butler\Service\Bus\WithCorrelationId;
+use Butler\Service\Listeners\FlushBugsnag;
 use Composer\InstalledVersions;
 use Illuminate\Bus\Dispatcher as BaseBusDispatcher;
 use Illuminate\Queue\Events\JobProcessed;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Laravel\Octane\Events\RequestTerminated;
 use Symfony\Component\Finder\Finder;
 
 class ServiceProvider extends BaseServiceProvider
@@ -149,6 +151,14 @@ class ServiceProvider extends BaseServiceProvider
     {
         if (config('bugsnag.api_key', false)) {
             $this->app->register(\Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class);
+
+            // NOTE: Temporary fix until "bugsnag/bugsnag-laravel" supports octane.
+            $this->app->singleton(FlushBugsnag::class);
+
+            $this->app['config']->push(
+                'octane.listeners.' . RequestTerminated::class,
+                FlushBugsnag::class
+            );
         }
     }
 
