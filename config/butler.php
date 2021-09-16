@@ -35,16 +35,20 @@ return [
 
     ],
 
+    'health' => [
+
+        'route' => false,
+
+        'checks' => [],
+
+    ],
+
     'service' => [
 
         'routes' => [
             'front' => '/',
             'graphql' => '/graphql',
             'health' => '/health',
-        ],
-
-        'health' => [
-            'checks' => [],
         ],
 
         'extra' => [

@@ -31,18 +31,22 @@ return [
 
     ],
 
+    'health' => [
+
+        'route' => false,
+
+        'checks' => [
+            Butler\Service\Tests\TestCheck::class,
+        ],
+
+    ],
+
     'service' => [
 
         'routes' => [
             'front' => '/',
             'graphql' => '/graphql',
             'health' => '/health',
-        ],
-
-        'health' => [
-            'checks' => [
-                Butler\Service\Tests\TestCheck::class
-            ],
         ],
 
         'extra' => [

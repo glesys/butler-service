@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **BREAKING** Use [glesys/butler-health](https://github.com/glesys/butler-health). See [UPGRADE.md](./UPGRADE.md) for more information.
 
 ## [0.11.2] - 2021-09-09
 

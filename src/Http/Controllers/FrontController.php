@@ -2,7 +2,7 @@
 
 namespace Butler\Service\Http\Controllers;
 
-use Butler\Service\Repositories\HealthRepository;
+use Butler\Health\Repository as HealthRepository;
 
 class FrontController extends Controller
 {
