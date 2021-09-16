@@ -4,8 +4,11 @@ namespace Butler\Service;
 
 use Butler\Audit\Facades\Auditor;
 use Butler\Auth\Contracts\HasAccessTokens;
+use Butler\Health\Checks as HealthChecks;
+use Butler\Health\Repository as HealthRepository;
 use Butler\Service\Bus\Dispatcher as BusDispatcher;
 use Butler\Service\Bus\WithCorrelationId;
+use Composer\InstalledVersions;
 use Illuminate\Bus\Dispatcher as BaseBusDispatcher;
 use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Queue\Events\JobProcessing;
@@ -26,6 +29,8 @@ class ServiceProvider extends BaseServiceProvider
         $this->configureTimezone();
 
         $this->configureAuditInitiator();
+
+        $this->configureHealth();
 
         $this->registerBaseProviders();
 
@@ -121,6 +126,23 @@ class ServiceProvider extends BaseServiceProvider
             };
 
         Auditor::initiatorResolver($resolver);
+    }
+
+    protected function configureHealth()
+    {
+        HealthRepository::customApplicationData(fn () => [
+            'butlerService' => ltrim(InstalledVersions::getPrettyVersion('glesys/butler-service'), 'v'),
+        ]);
+
+        if (! $this->app->configurationIsCached() && config('butler.health.core', true)) {
+            config([
+                'butler.health.checks' => array_merge([
+                    HealthChecks\Database::class,
+                    HealthChecks\Redis::class,
+                    HealthChecks\FailedJobs::class,
+                ], config('butler.health.checks', [])),
+            ]);
+        }
     }
 
     protected function registerBaseProviders()

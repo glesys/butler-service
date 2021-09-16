@@ -2,8 +2,8 @@
 
 namespace Butler\Service\Tests;
 
-use Butler\Service\Health\Check;
-use Butler\Service\Health\Result;
+use Butler\Health\Check;
+use Butler\Health\Result;
 
 class TestCheck extends Check
 {

@@ -1,3 +1,11 @@
+## Upgrade from v0.11 to v0.12
+
+### BREAKING: Use [glesys/butler-health](https://github.com/glesys/butler-health)
+
+1. Move your health checks (if any) from `butler.service.health.checks` to `butler.health.checks`.
+1. Remove `butler.service.health` from your configuration.
+1. Use `Butler\Health\Repository` instead of `Butler\Service\Repositories\HealthRepository`.
+
 ## Upgrade from v0.10 to v0.11
 
 ### BREAKING: Replace laravel/sanctum with [glesys/butler-auth](https://github.com/glesys/butler-audit/blob/master/CHANGELOG.md)

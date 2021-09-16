@@ -67,22 +67,6 @@ If you dont want a `config/app.php` you can use `butler.service.extra` in `confi
     ],
 ```
 
-### Health Checks
-
-Butler Service comes with some [default health checks](src/Health/Checks) enabled.
-Check results is listed on the "front" route but can also be accessed via the "health" route as JSON.
-
-Add your own health checks by extending `Butler\Service\Health\Check` and add it to
-the `butler.service.health.checks` configuration.
-
-```php
-    'health' => [
-        'checks' => [
-            App\Health\MyCheck::class,
-        ],
-    ],
-```
-
 ## Authentication with butler-auth
 
 ```php
@@ -120,6 +104,10 @@ See [butler-guru](https://github.com/glesys/butler-guru).
 ## Audit with butler-audit
 
 See [butler-audit](https://github.com/glesys/butler-audit).
+
+## Health checks with butler-health
+
+See [butler-health](https://github.com/glesys/butler-health) for more information.
 
 ### Queued jobs and correlation ID
 

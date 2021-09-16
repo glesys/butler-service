@@ -13,6 +13,7 @@
         "glesys/butler-auth": "^4.0",
         "glesys/butler-graphql": "^6.0",
         "glesys/butler-guru": "^0.7",
+        "glesys/butler-health": "^0.1",
         "graylog2/gelf-php": "^1.6",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.33",

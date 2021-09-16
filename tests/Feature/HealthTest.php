@@ -14,14 +14,13 @@ class HealthTest extends TestCase
         $this->getJson(route('health'))
             ->assertOk()
             ->assertJson(fn (AssertableJson $json) => $json
-                ->has('service', fn (AssertableJson $json) => $json
-                    ->hasAll('php', 'laravel', 'butlerService', 'timezone')
-                    ->where('name', config('app.name'))
+                ->has('application', fn (AssertableJson $json) => $json
+                    ->hasAll('name', 'timezone', 'php', 'laravel', 'butlerHealth', 'butlerService')
                 )
                 ->has('checks', 4, fn (AssertableJson $json) => $json
                     ->hasAll('name', 'slug', 'group', 'description')
                     ->has('result', fn (AssertableJson $json) => $json
-                        ->hasAll('message', 'state', 'value')
+                        ->hasAll('value', 'message', 'state', 'order')
                     )
                 )
             );

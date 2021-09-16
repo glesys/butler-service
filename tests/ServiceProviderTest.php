@@ -5,10 +5,13 @@ namespace Butler\Service\Tests;
 use Butler\Audit\Facades\Auditor;
 use Butler\Auth\AccessToken;
 use Butler\Auth\ButlerAuth;
+use Butler\Health\Checks as HealthChecks;
+use Butler\Health\Repository as HealthRepository;
 use Butler\Service\Bus\Dispatcher;
 use Butler\Service\Models\Consumer;
 use Butler\Service\Tests\Bus\JobWithCorrelationId;
 use Butler\Service\Tests\Bus\JobWithoutCorrelationId;
+use Butler\Service\Tests\TestCheck;
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
 use Illuminate\Bus\Dispatcher as BaseDispatcher;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -17,6 +20,7 @@ use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Route;
 
 class ServiceProviderTest extends TestCase
 {
@@ -148,6 +152,26 @@ class ServiceProviderTest extends TestCase
             && $data->hasInitiatorContext('userAgent', 'Symfony'));
     }
 
+    public function test_health_is_configured()
+    {
+        $this->assertFalse(config('butler.health.route'));
+
+        $this->assertFalse(Route::has('butler-health'), 'butler-health route should not be registered');
+
+        $this->assertNotEmpty((new HealthRepository())()['application']['butlerService']);
+
+        $this->assertEquals(
+            [
+                HealthChecks\Database::class,
+                HealthChecks\Redis::class,
+                HealthChecks\FailedJobs::class,
+                TestCheck::class,
+            ],
+            config('butler.health.checks'),
+            '"Core" checks should be merged with "application" checks.'
+        );
+    }
+
     public function test_correct_correlation_id_is_used_for_queued_job_using_WithCorrelationId_trait()
     {
         $this->assertTrue(app('events')->hasListeners(JobProcessing::class));
@@ -185,7 +209,6 @@ class ServiceProviderTest extends TestCase
             ['butler.service.routes.front', '/'],
             ['butler.service.routes.graphql', '/graphql'],
             ['butler.service.routes.health', '/health'],
-            ['butler.service.health.checks', [TestCheck::class]],
             ['butler.service.extra.config', [
                 'app.timezone' => 'Europe/Stockholm',
                 'foo' => 'bar'
