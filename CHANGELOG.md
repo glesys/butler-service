@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - **BREAKING** Use [glesys/butler-health](https://github.com/glesys/butler-health). See [UPGRADE.md](./UPGRADE.md) for more information.
 
+### Added
+- Listener that flush bugsnag events when running octane.
+
 ## [0.11.2] - 2021-09-09
 
 ### Changed
