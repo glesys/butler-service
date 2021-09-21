@@ -10,6 +10,10 @@ return [
 
         'driver' => 'log',
 
+        'default_initiator_resolver' => false,
+
+        'extend_bus_dispatcher' => true,
+
     ],
 
     'guru' => [

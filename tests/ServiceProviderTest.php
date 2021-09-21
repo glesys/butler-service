@@ -7,16 +7,10 @@ use Butler\Auth\AccessToken;
 use Butler\Auth\ButlerAuth;
 use Butler\Health\Checks as HealthChecks;
 use Butler\Health\Repository as HealthRepository;
-use Butler\Service\Bus\Dispatcher;
 use Butler\Service\Models\Consumer;
-use Butler\Service\Tests\Bus\JobWithCorrelationId;
-use Butler\Service\Tests\Bus\JobWithoutCorrelationId;
 use Butler\Service\Tests\TestCheck;
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
-use Illuminate\Bus\Dispatcher as BaseDispatcher;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Queue\Events\JobProcessed;
-use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
@@ -69,11 +63,6 @@ class ServiceProviderTest extends TestCase
     public function test_extra_aliases_are_registered()
     {
         $this->assertInstanceOf(Cache::class, app('Foobar'));
-    }
-
-    public function test_Dispatcher_is_extended()
-    {
-        $this->assertInstanceOf(Dispatcher::class, app(BaseDispatcher::class));
     }
 
     public function test_migration_paths_are_loaded()
@@ -170,29 +159,6 @@ class ServiceProviderTest extends TestCase
             config('butler.health.checks'),
             '"Core" checks should be merged with "application" checks.'
         );
-    }
-
-    public function test_correct_correlation_id_is_used_for_queued_job_using_WithCorrelationId_trait()
-    {
-        $this->assertTrue(app('events')->hasListeners(JobProcessing::class));
-
-        $job = new JobWithCorrelationId();
-        $job->correlationId = 'a-correlation-id';
-
-        event(new JobProcessing('connections', $job));
-
-        $this->assertEquals('a-correlation-id', Auditor::correlationId());
-    }
-
-    public function test_correlation_id_is_reset_after_each_queued_job()
-    {
-        $this->assertTrue(app('events')->hasListeners(JobProcessed::class));
-
-        $correlationId = Auditor::correlationId();
-
-        event(new JobProcessed('connection', new JobWithoutCorrelationId()));
-
-        $this->assertNotEquals($correlationId, Auditor::correlationId());
     }
 
     /**

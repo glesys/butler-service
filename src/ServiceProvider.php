@@ -6,16 +6,10 @@ use Butler\Audit\Facades\Auditor;
 use Butler\Auth\Contracts\HasAccessTokens;
 use Butler\Health\Checks as HealthChecks;
 use Butler\Health\Repository as HealthRepository;
-use Butler\Service\Bus\Dispatcher as BusDispatcher;
-use Butler\Service\Bus\WithCorrelationId;
 use Butler\Service\Listeners\FlushBugsnag;
 use Composer\InstalledVersions;
-use Illuminate\Bus\Dispatcher as BaseBusDispatcher;
-use Illuminate\Queue\Events\JobProcessed;
-use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Laravel\Octane\Events\RequestTerminated;
 use Symfony\Component\Finder\Finder;
@@ -41,8 +35,6 @@ class ServiceProvider extends BaseServiceProvider
         $this->registerExtraProviders();
 
         $this->registerExtraAliases();
-
-        $this->extendBusDispatcher();
     }
 
     public function boot()
@@ -58,8 +50,6 @@ class ServiceProvider extends BaseServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'service');
 
         $this->loadPublishing();
-
-        $this->listenForJobProcessEvents();
 
         $this->defineGateAbilities();
 
@@ -194,13 +184,6 @@ class ServiceProvider extends BaseServiceProvider
         });
     }
 
-    protected function extendBusDispatcher()
-    {
-        $this->app->extend(BaseBusDispatcher::class, function ($dispatcher, $app) {
-            return new BusDispatcher($app, $dispatcher);
-        });
-    }
-
     protected function loadMigrations()
     {
         if ($this->app->runningInConsole()) {
@@ -236,21 +219,6 @@ class ServiceProvider extends BaseServiceProvider
 
             $this->publishes([$configSource => base_path('config/butler.php')], 'config');
             $this->publishes([$viewsSource => resource_path('views/vendor/service')], 'views');
-        }
-    }
-
-    public function listenForJobProcessEvents()
-    {
-        if ($this->app->runningInConsole()) {
-            Queue::before(function (JobProcessing $event) {
-                if (in_array(WithCorrelationId::class, class_uses_recursive($event->job))) {
-                    Auditor::correlationId($event->job->correlationId);
-                }
-            });
-
-            Queue::after(function (JobProcessed $event) {
-                Auditor::correlationId(null);
-            });
         }
     }
 
