@@ -109,10 +109,6 @@ See [butler-audit](https://github.com/glesys/butler-audit).
 
 See [butler-health](https://github.com/glesys/butler-health) for more information.
 
-### Queued jobs and correlation ID
-
-The trait `WithCorrelationId` can be used on queable jobs that needs the same correlation id as the request.
-
 ## Testing
 
 ```shell
