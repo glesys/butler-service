@@ -10,7 +10,7 @@ A Laravel-based micro-framework for web services using GraphQL and RabbitMQ.
 
 ```shell
 composer require glesys/butler-service
-php artisan vendor:publish --provider="Butler\Service\ServiceProvider" --tag=config
+php artisan vendor:publish --provider="Butler\Service\ServiceProvider" --tag=config # optional
 php artisan migrate
 ```
 
@@ -33,7 +33,9 @@ All service providers in your `app/Providers` directory will be registered autom
 
 ## Config
 
-You can use your configuration files as usual. See `./src/config/` for our defaults.
+You can use your configuration files as usual. See [src/config](src/config) for our defaults.
+
+:information_source: Remember that your applications `config/butler.php` only merges the first level of the [default configuration](src/config/butler.php).
 
 ### Default routes
 

@@ -2,39 +2,6 @@
 
 return [
 
-    'audit' => [
-
-        'url' => 'http://localhost',
-
-        'token' => 'secret',
-
-        'driver' => 'log',
-
-        'default_initiator_resolver' => false,
-
-        'extend_bus_dispatcher' => true,
-
-    ],
-
-    'guru' => [
-
-        'driver' => env('BUTLER_GURU_DRIVER', 'file'),
-
-        'events' => [],
-
-    ],
-
-    'graphql' => [
-
-        'include_debug_message' => false,
-        'include_trace' => false,
-
-        'namespace' => '\\App\\Http\\Graphql\\',
-
-        'schema' => app_path('Http/Graphql/schema.graphql'),
-
-    ],
-
     'health' => [
 
         'route' => false,
@@ -46,12 +13,6 @@ return [
     ],
 
     'service' => [
-
-        'routes' => [
-            'front' => '/',
-            'graphql' => '/graphql',
-            'health' => '/health',
-        ],
 
         'extra' => [
             'config' => [
@@ -65,6 +26,12 @@ return [
                 Butler\Service\Tests\ExtraServiceProvider::class,
             ],
         ],
+
+    ],
+
+    'custom' => [
+
+        'foo' => 'bar',
 
     ],
 

@@ -62,6 +62,8 @@ class ServiceProvider extends BaseServiceProvider
             return;
         }
 
+        $this->mergeConfigFrom(__DIR__ . '/../config/butler.php', 'butler');
+
         $applicationConfigFiles = Finder::create()
             ->files()
             ->name('*.php')
