@@ -37,8 +37,6 @@ return [
 
     'health' => [
 
-        'route' => false,
-
         'checks' => [],
 
     ],

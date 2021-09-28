@@ -4,8 +4,6 @@ return [
 
     'health' => [
 
-        'route' => false,
-
         'checks' => [
             Butler\Service\Tests\TestCheck::class,
         ],

@@ -133,7 +133,13 @@ class ServiceProvider extends BaseServiceProvider
             'butlerService' => ltrim(InstalledVersions::getPrettyVersion('glesys/butler-service'), 'v'),
         ]);
 
-        if (! $this->app->configurationIsCached() && config('butler.health.core', true)) {
+        if ($this->app->configurationIsCached()) {
+            return;
+        }
+
+        config(['butler.health.route' => false]);
+
+        if (config('butler.health.core', true)) {
             config([
                 'butler.health.checks' => array_merge([
                     HealthChecks\Database::class,
