@@ -39,6 +39,20 @@ class ServiceProviderTest extends TestCase
         $this->assertNotEmpty(view('service::front'));
     }
 
+    public function test_mergeApplicationConfig_merges_source_and_application_config()
+    {
+        $this->assertEquals('log', config('butler.audit.driver'));
+        $this->assertEquals('file', config('butler.guru.driver'));
+        $this->assertFalse(config('butler.graphql.include_trace'));
+        $this->assertEquals([], config('butler.guru.events'));
+        $this->assertEquals('bar', config('butler.custom.foo'));
+    }
+
+    public function test_application_config_files_is_merged()
+    {
+        $this->assertEquals('foobar', config('session.table'));
+    }
+
     public function test_extra_config_is_configured()
     {
         $this->assertEquals('bar', config('foo'));
@@ -83,11 +97,6 @@ class ServiceProviderTest extends TestCase
     public function test_gate_abilities()
     {
         $this->assertTrue(Gate::has('graphql'));
-    }
-
-    public function test_application_config_merges_butler_service_config()
-    {
-        $this->assertEquals('foobar', config('session.table'));
     }
 
     public function test_can_override_timezone()
@@ -159,29 +168,6 @@ class ServiceProviderTest extends TestCase
             config('butler.health.checks'),
             '"Core" checks should be merged with "application" checks.'
         );
-    }
-
-    /**
-     * @dataProvider butlerServiceConfigProvider
-     */
-    public function test_butler_service_config($configKey, $expectedValue)
-    {
-        $this->assertEquals($expectedValue, config($configKey));
-    }
-
-    public function butlerServiceConfigProvider()
-    {
-        return [
-            ['butler.service.routes.front', '/'],
-            ['butler.service.routes.graphql', '/graphql'],
-            ['butler.service.routes.health', '/health'],
-            ['butler.service.extra.config', [
-                'app.timezone' => 'Europe/Stockholm',
-                'foo' => 'bar'
-            ]],
-            ['butler.service.extra.aliases', ['Foobar' => Cache::class]],
-            ['butler.service.extra.providers', [ExtraServiceProvider::class]],
-        ];
     }
 
     private function makeConsumer(array $attributes = []): Consumer

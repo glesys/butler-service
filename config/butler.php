@@ -8,7 +8,7 @@ return [
 
         'token' => env('BUTLER_AUDIT_TOKEN'),
 
-        'driver' => env('BUTLER_AUDIT_DRIVER'),
+        'driver' => env('BUTLER_AUDIT_DRIVER', 'log'),
 
         'default_initiator_resolver' => false,
 
