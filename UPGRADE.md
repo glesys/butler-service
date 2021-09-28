@@ -1,8 +1,10 @@
-## Upgrade from v0.11 to v0.12
+## Upgrade from v0.12 to v0.13
 
 ### BREAKING: Require glesys/butler-audit [v0.4](https://github.com/glesys/butler-audit/blob/master/CHANGELOG.md#040---2021-09-23)
 
 1. Use `Butler\Audit\Bus\WithCorrelationId` instead of `Butler\Service\Bus\WithCorrelationId`.
+
+## Upgrade from v0.11 to v0.12
 
 ### BREAKING: Use [glesys/butler-health](https://github.com/glesys/butler-health)
 
