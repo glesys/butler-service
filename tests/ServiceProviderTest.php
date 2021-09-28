@@ -156,7 +156,7 @@ class ServiceProviderTest extends TestCase
             && $data->hasInitiatorContext('userAgent', 'Symfony'));
     }
 
-    public function test_health_is_configured()
+    public function test_configureHealth_configures_health()
     {
         $this->assertFalse(config('butler.health.route'));
 
