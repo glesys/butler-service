@@ -24,7 +24,7 @@ class ServiceProvider extends BaseServiceProvider
 
         $this->configureTimezone();
 
-        $this->configureAuditInitiator();
+        $this->configureAudit();
 
         $this->configureHealth();
 
@@ -99,8 +99,13 @@ class ServiceProvider extends BaseServiceProvider
         date_default_timezone_set(config('app.timezone'));
     }
 
-    protected function configureAuditInitiator()
+    protected function configureAudit()
     {
+        if (! $this->app->configurationIsCached()) {
+            config(['butler.audit.default_initiator_resolver' => false]);
+            config(['butler.audit.extend_bus_dispatcher' => true]);
+        }
+
         $resolver = $this->app->runningInConsole()
             ? fn () => ['console', ['hostname' => gethostname()]]
             : function () {

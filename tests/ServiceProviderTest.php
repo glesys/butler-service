@@ -105,7 +105,13 @@ class ServiceProviderTest extends TestCase
         $this->assertEquals('Europe/Stockholm', Carbon::now()->getTimezone());
     }
 
-    public function test_audit_initiator_resolver_resolves_console()
+    public function test_configureAudit_configures_audit()
+    {
+        $this->assertFalse(config('butler.audit.default_initiator_resolver'));
+        $this->assertTrue(config('butler.audit.extend_bus_dispatcher'));
+    }
+
+    public function test_configureAudit_sets_initiator_resolver_for_console()
     {
         Auditor::fake();
 
@@ -116,7 +122,7 @@ class ServiceProviderTest extends TestCase
             && $data->hasInitiatorContext('hostname', gethostname()));
     }
 
-    public function test_audit_initiator_resolver_resolves_authenticated_user()
+    public function test_configureAudit_sets_initiator_resolver_for_authenticated_user()
     {
         putenv('APP_RUNNING_IN_CONSOLE=false');
 
@@ -135,7 +141,7 @@ class ServiceProviderTest extends TestCase
             && $data->hasInitiatorContext('tokenName', 'my token'));
     }
 
-    public function test_audit_initiator_resolver_resolves_unauthenticated_user()
+    public function test_configureAudit_sets_initiator_resolver_for_unauthenticated_user()
     {
         putenv('APP_RUNNING_IN_CONSOLE=false');
 
