@@ -22,6 +22,7 @@ class HealthTest extends TestCase
                     ->has('result', fn (AssertableJson $json) => $json
                         ->hasAll('value', 'message', 'state', 'order')
                     )
+                    ->etc()
                 )
             );
     }
