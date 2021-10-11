@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.14.1] - 2021-10-11
+
+### Changed
+- Require butler-auth v4.1.1.
+
 ## [0.14.0] - 2021-09-30
 
 ### Changed
