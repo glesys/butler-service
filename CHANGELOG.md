@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Update to bugsnag v2.22.2 config.
 
 ## [0.14.1] - 2021-10-11
 

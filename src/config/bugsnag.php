@@ -75,11 +75,11 @@ return [
     | passwords, and credit card numbers to our servers. Any keys which
     | contain these strings will be filtered.
     |
+    | This option has been deprecated in favour of 'redacted_keys'
+    |
     */
 
-    'filters' => empty(env('BUGSNAG_FILTERS'))
-        ? ['password']
-        : explode(',', str_replace(' ', '', env('BUGSNAG_FILTERS'))),
+    'filters' => empty(env('BUGSNAG_FILTERS')) ? null : explode(',', str_replace(' ', '', env('BUGSNAG_FILTERS'))),
 
     /*
     |--------------------------------------------------------------------------
@@ -106,9 +106,7 @@ return [
     'proxy' => array_filter([
         'http' => env('HTTP_PROXY'),
         'https' => env('HTTPS_PROXY'),
-        'no' => empty(env('NO_PROXY'))
-            ? null
-            : explode(',', str_replace(' ', '', env('NO_PROXY'))),
+        'no' => empty(env('NO_PROXY')) ? null : explode(',', str_replace(' ', '', env('NO_PROXY'))),
     ]),
 
     /*
@@ -127,17 +125,47 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Project Root Regex
+    |--------------------------------------------------------------------------
+    |
+    | Bugsnag marks stacktrace lines as in-project if they come from files
+    | inside your “project root”. You can set this here.
+    |
+    | This option allows you to set it as a regular expression and will take
+    | precedence over "project_root" if both are defined.
+    |
+    */
+
+    'project_root_regex' => env('BUGSNAG_PROJECT_ROOT_REGEX'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Strip Path
     |--------------------------------------------------------------------------
     |
-    | You can set a strip path to have it also trimmed from the start of any
-    | filepath in your stacktraces.
+    | The strip path is a path to be trimmed from the start of any filepaths in
+    | your stacktraces.
     |
     | If this is not set, we will automatically try to detect it.
     |
     */
 
     'strip_path' => env('BUGSNAG_STRIP_PATH'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Strip Path Regex
+    |--------------------------------------------------------------------------
+    |
+    | The strip path is a path to be trimmed from the start of any filepaths in
+    | your stacktraces.
+    |
+    | This option allows you to set it as a regular expression and will take
+    | precedence over "strip_path" if both are defined.
+    |
+    */
+
+    'strip_path_regex' => env('BUGSNAG_STRIP_PATH_REGEX'),
 
     /*
     |--------------------------------------------------------------------------
@@ -281,4 +309,27 @@ return [
 
     'build_endpoint' => env('BUGSNAG_BUILD_ENDPOINT'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Discard Classes
+    |--------------------------------------------------------------------------
+    |
+    | An array of classes that should not be sent to Bugsnag.
+    |
+    | This can contain both fully qualified class names and regular expressions.
+    |
+    */
+
+    'discard_classes' => empty(env('BUGSNAG_DISCARD_CLASSES')) ? null : explode(',', env('BUGSNAG_DISCARD_CLASSES')),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Redacted Keys
+    |--------------------------------------------------------------------------
+    |
+    | An array of metadata keys that should be redacted.
+    |
+    */
+
+    'redacted_keys' => empty(env('BUGSNAG_REDACTED_KEYS')) ? null : explode(',', env('BUGSNAG_REDACTED_KEYS')),
 ];
