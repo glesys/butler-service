@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.14.2] - 2021-11-09
+
 ### Added
 - Add PDO option MYSQL_ATTR_SSL_CA to default database connection
 
