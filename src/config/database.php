@@ -45,6 +45,9 @@ return [
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
         ],
 
     ],

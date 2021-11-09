@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add PDO option MYSQL_ATTR_SSL_CA to default database connection
+
 ### Changed
 - Require laravel v8.65.
 
