@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Require butler-audit v0.4.1.
 
 ## [0.14.2] - 2021-11-09
 
