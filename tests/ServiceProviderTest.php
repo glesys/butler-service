@@ -8,6 +8,7 @@ use Butler\Auth\ButlerAuth;
 use Butler\Health\Checks as HealthChecks;
 use Butler\Health\Repository as HealthRepository;
 use Butler\Service\Models\Consumer;
+use Butler\Service\ServiceProvider as ButlerServiceProvider;
 use Butler\Service\Tests\TestCheck;
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -60,6 +61,8 @@ class ServiceProviderTest extends TestCase
 
     public function test_application_providers_are_registered()
     {
+        app()->getProvider(ButlerServiceProvider::class)->registerApplicationProviders();
+
         $this->assertInstanceOf(
             \App\Providers\AppServiceProvider::class,
             app()->getProvider(\App\Providers\AppServiceProvider::class)
@@ -68,6 +71,8 @@ class ServiceProviderTest extends TestCase
 
     public function test_extra_providers_are_registered()
     {
+        app()->getProvider(ButlerServiceProvider::class)->registerExtraProviders();
+
         $this->assertInstanceOf(
             ExtraServiceProvider::class,
             app()->getProvider(ExtraServiceProvider::class)

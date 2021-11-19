@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Register application service providers after 'base' providers.
+
 ## [0.14.3] - 2021-11-15
 
 ### Changed

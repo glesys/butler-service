@@ -30,10 +30,6 @@ class ServiceProvider extends BaseServiceProvider
 
         $this->registerBaseProviders();
 
-        $this->registerApplicationProviders();
-
-        $this->registerExtraProviders();
-
         $this->registerExtraAliases();
     }
 
@@ -165,7 +161,7 @@ class ServiceProvider extends BaseServiceProvider
         }
     }
 
-    protected function registerApplicationProviders()
+    public function registerApplicationProviders()
     {
         if (! is_dir(app_path('Providers'))) {
             return;
@@ -181,7 +177,7 @@ class ServiceProvider extends BaseServiceProvider
         }
     }
 
-    protected function registerExtraProviders()
+    public function registerExtraProviders()
     {
         foreach (config('butler.service.extra.providers', []) as $provider) {
             $this->app->register($provider);
