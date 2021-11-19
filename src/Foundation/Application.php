@@ -14,8 +14,11 @@ class Application extends BaseApplication
 
     public function registerConfiguredProviders()
     {
-        $this->register(new ServiceProvider($this));
+        $this->register($butlerService = new ServiceProvider($this));
 
         parent::registerConfiguredProviders();
+
+        $butlerService->registerApplicationProviders();
+        $butlerService->registerExtraProviders();
     }
 }
