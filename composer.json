@@ -8,7 +8,7 @@
         "bugsnag/bugsnag-laravel": "^2.18",
         "doctrine/dbal": "^2.10 || ^3.0",
         "fruitcake/laravel-cors": "^2.0",
-        "glesys/butler-audit": "^0.4.1",
+        "glesys/butler-audit": "^0.5",
         "glesys/butler-auth": "^4.1.1",
         "glesys/butler-graphql": "^6.0",
         "glesys/butler-guru": "^0.7",
