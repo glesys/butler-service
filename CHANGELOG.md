@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Register application service providers after 'base' providers.
+- **BREAKING**: Require butler-audit v0.5.
 
 ## [0.14.3] - 2021-11-15
 

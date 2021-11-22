@@ -2,7 +2,7 @@
 
 namespace Butler\Service\Jobs;
 
-use Butler\Audit\Bus\WithCorrelationId;
+use Butler\Audit\Bus\WithCorrelation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -15,5 +15,5 @@ abstract class QueueableJob implements ShouldQueue
     use InteractsWithQueue;
     use Queueable;
     use SerializesModels;
-    use WithCorrelationId;
+    use WithCorrelation;
 }
