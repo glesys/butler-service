@@ -62,6 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Require laravel v8.75.
+- Rename publish 'tags'
 
 ## [0.15.1] - 2021-11-25
 
