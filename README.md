@@ -69,6 +69,16 @@ If you dont want a `config/app.php` you can use `butler.service.extra` in `confi
     ],
 ```
 
+## index.php
+
+To keep your applications "index.php" up to date you can publish the one in butler-service.
+
+:information_source: Maintenance mode is not supported.
+
+```shell
+php artisan vendor:publish --force --tag=butler-index
+```
+
 ## Authentication with butler-auth
 
 ```php
