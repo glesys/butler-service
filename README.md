@@ -10,11 +10,14 @@ A Laravel-based micro-framework for web services using GraphQL.
 
 ```shell
 composer require glesys/butler-service
-php artisan vendor:publish --provider="Butler\Service\ServiceProvider" --tag=config # optional
-php artisan migrate
 ```
 
 Replace `Illuminate\Foundation\Application` with `Butler\Service\Foundation\Application` in `bootstrap/app.php`.
+
+```shell
+php artisan vendor:publish --tag=butler-config
+php artisan migrate
+```
 
 It is optional (but recommended) to extend your `TestCase` (or whatever file that extends Laravels `TestCase`) with `Butler\Service\Testing\TestCase`.
 
@@ -47,7 +50,7 @@ For example you might want to listen for graphql on `/api` instead of `/graphql`
 Their views can be updated by publishing them:
 
 ```shell
-php artisan vendor:publish --provider="Butler\Service\ServiceProvider" --tag=views
+php artisan vendor:publish --tag=butler-views
 ```
 
 ### Extra

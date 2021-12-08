@@ -241,9 +241,9 @@ class ServiceProvider extends BaseServiceProvider
             $indexSource = __DIR__ . '/../public/index.php';
             $viewsSource = __DIR__ . '/../resources/views';
 
-            $this->publishes([$configSource => base_path('config/butler.php')], 'config');
+            $this->publishes([$configSource => base_path('config/butler.php')], 'butler-config');
             $this->publishes([$indexSource => public_path('index.php')], 'butler-index');
-            $this->publishes([$viewsSource => resource_path('views/vendor/service')], 'views');
+            $this->publishes([$viewsSource => resource_path('views/vendor/service')], 'butler-views');
         }
     }
 
