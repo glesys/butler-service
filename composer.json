@@ -15,7 +15,7 @@
         "glesys/butler-health": "^0.1",
         "graylog2/gelf-php": "^1.6",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^8.65",
+        "laravel/framework": "^8.75",
         "laravel/octane": "^1.0",
         "laravel/tinker": "^2.5"
     },
