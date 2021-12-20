@@ -11,5 +11,5 @@ abstract class Model extends BaseModel
 
     protected $connection = 'default';
 
-    protected $guarded = [];
+    protected static $unguarded = true;
 }
