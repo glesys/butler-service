@@ -7,8 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.16.0] - 2021-12-29
+
 ### Removed
 - **BREAKING**: Package "doctrine/dbal" is not required.
+
+### Changed
+- Unguard model instead of setting guarded property to empty array.
 
 ## [0.15.2] - 2021-12-09
 
