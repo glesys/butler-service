@@ -3,7 +3,6 @@
 namespace Butler\Service\Testing\Concerns;
 
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Support\Str;
 
 trait MigratesDatabases
 {
@@ -29,6 +28,6 @@ trait MigratesDatabases
             return 'DatabaseSeeder';
         }
 
-        return Str::studly("{$database}DatabaseSeeder");
+        return str("{$database}DatabaseSeeder")->studly();
     }
 }
