@@ -3,7 +3,6 @@
 namespace Butler\Service\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 
 class GenerateUuid extends Command
 {
@@ -13,7 +12,7 @@ class GenerateUuid extends Command
 
     public function handle()
     {
-        $uuid = Str::uuid();
+        $uuid = str()->uuid();
 
         if ($this->option('strip-dashes')) {
             $uuid = $uuid->getHex();

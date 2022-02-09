@@ -2,15 +2,13 @@
 
 namespace Butler\Service\Database\Concerns;
 
-use Illuminate\Support\Str;
-
 trait HasUuidPrimaryKey
 {
     protected static function bootHasUuidPrimaryKey()
     {
         static::creating(function ($model) {
             if (! $model->getKey()) {
-                $model->{$model->getKeyName()} = (string) Str::uuid();
+                $model->{$model->getKeyName()} = (string) str()->uuid();
             }
         });
     }
