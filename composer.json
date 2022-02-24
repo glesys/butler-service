@@ -6,7 +6,7 @@
     "require": {
         "php": "^8.0.2",
         "bugsnag/bugsnag-laravel": "^2.18",
-        "fruitcake/laravel-cors": "^2.0.5",
+        "fruitcake/laravel-cors": "^2.0.5 || ^3.0.0",
         "glesys/butler-audit": "^0.6",
         "glesys/butler-auth": "^5.0",
         "glesys/butler-graphql": "^7.0",
