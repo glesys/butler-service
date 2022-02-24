@@ -15,7 +15,7 @@ abstract class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Butler\Service\Http\Middleware\TrustProxies::class,
-        \Fruitcake\Cors\HandleCors::class,
+        \Illuminate\Http\Middleware\HandleCors::class,
         \Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \Illuminate\Foundation\Http\Middleware\TrimStrings::class,
