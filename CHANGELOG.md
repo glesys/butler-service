@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Require laravel v9.2.
+
 ### Removed
 - **BREAKING**: Package "glesys/butler-guru" is not required.
 
