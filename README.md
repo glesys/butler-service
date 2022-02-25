@@ -2,7 +2,7 @@
 
 # Butler Service
 
-A Laravel-based micro-framework for web services using GraphQL and RabbitMQ.
+A Laravel-based micro-framework for web services using GraphQL.
 
 ## Getting Started
 
@@ -98,10 +98,6 @@ $consumer->createToken(['query', 'mutation', 'subscription'], 'my graphql token'
 ## GraphQL with butler-graphql
 
 See [butler-graphql](https://github.com/glesys/butler-graphql).
-
-## RabbitMQ with butler-guru
-
-See [butler-guru](https://github.com/glesys/butler-guru).
 
 ## Audit with butler-audit
 

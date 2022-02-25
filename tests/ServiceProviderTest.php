@@ -43,9 +43,7 @@ class ServiceProviderTest extends TestCase
     public function test_mergeApplicationConfig_merges_source_and_application_config()
     {
         $this->assertEquals('log', config('butler.audit.driver'));
-        $this->assertEquals('file', config('butler.guru.driver'));
         $this->assertFalse(config('butler.graphql.include_trace'));
-        $this->assertEquals([], config('butler.guru.events'));
         $this->assertEquals('bar', config('butler.custom.foo'));
     }
 

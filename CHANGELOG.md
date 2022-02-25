@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+- **BREAKING**: Package "glesys/butler-guru" is not required.
 
 ## [0.17.0] - 2022-02-22
 

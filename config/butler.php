@@ -12,18 +12,6 @@ return [
 
     ],
 
-    'guru' => [
-
-        'driver' => env('BUTLER_GURU_DRIVER', 'file'),
-
-        'events' => [
-            // 'example.event' => [
-            //     EventHandler::class,
-            // ],
-        ],
-
-    ],
-
     'graphql' => [
 
         'include_debug_message' => env('BUTLER_GRAPHQL_INCLUDE_DEBUG_MESSAGE', false),
