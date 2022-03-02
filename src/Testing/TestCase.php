@@ -8,7 +8,6 @@ abstract class TestCase extends BaseTestCase
 {
     use Concerns\CreatesApplication;
     use Concerns\InteractsWithAuthentication;
-    use Concerns\InteractsWithTime;
     use Concerns\MakesGraphqlRequests;
     use Concerns\MigratesDatabases;
 }
