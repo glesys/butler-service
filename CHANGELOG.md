@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 - **BREAKING**: Package "glesys/butler-guru" is not required.
+- "InteractsWithTime" not needed because of laravel v9.
 
 ## [0.17.0] - 2022-02-22
 
