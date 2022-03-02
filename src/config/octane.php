@@ -89,7 +89,7 @@ return [
 
         OperationTerminated::class => [
             FlushTemporaryContainerInstances::class,
-            // DisconnectFromDatabases::class,
+            DisconnectFromDatabases::class,
             // CollectGarbage::class,
         ],
 

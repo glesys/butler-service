@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `DisconnectFromDatabases` on every terminated octane operation.
+
 ### Removed
 - **BREAKING**: Package "glesys/butler-guru" is not required.
 
