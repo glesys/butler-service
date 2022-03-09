@@ -2,6 +2,8 @@
 
 namespace Butler\Service\Tests;
 
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use Bugsnag\Report;
 use Butler\Audit\Facades\Auditor;
 use Butler\Auth\AccessToken;
 use Butler\Auth\ButlerAuth;
@@ -16,6 +18,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
+use Mockery;
 
 class ServiceProviderTest extends TestCase
 {
@@ -177,6 +180,35 @@ class ServiceProviderTest extends TestCase
             config('butler.health.checks'),
             '"Core" checks should be merged with "application" checks.'
         );
+    }
+
+    public function test_bugsnag_callbacks_is_registered_if_bugsnag_is_loaded()
+    {
+        $this->app->register(\Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class);
+
+        Bugsnag::shouldReceive('registerCallback')
+            ->once()
+            ->with(Mockery::type(\Butler\Service\Bugsnag\Middlewares\IgnoreEmailConsumer::class));
+
+        app()->getProvider(ButlerServiceProvider::class)->registerBugsnagCallback();
+    }
+
+    public function test_bugsnag_callbacks_is_not_registered_if_bugsnag_is_not_loaded()
+    {
+        Bugsnag::shouldReceive('registerCallback')->never();
+
+        app()->getProvider(ButlerServiceProvider::class)->registerBugsnagCallback();
+    }
+
+    public function test_bugsnag_callbacks_is_not_registered_if_configured_not_to()
+    {
+        config(['butler.service.ignore_bugsnag_for_email_consumer' => false]);
+
+        $this->app->register(\Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class);
+
+        Bugsnag::shouldReceive('registerCallback')->never();
+
+        app()->getProvider(ButlerServiceProvider::class)->registerBugsnagCallback();
     }
 
     private function makeConsumer(array $attributes = []): Consumer

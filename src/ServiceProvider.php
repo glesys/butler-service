@@ -2,6 +2,8 @@
 
 namespace Butler\Service;
 
+use Bugsnag\BugsnagLaravel\BugsnagServiceProvider;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Butler\Audit\Facades\Auditor;
 use Butler\Auth\Contracts\HasAccessTokens;
 use Butler\Health\Checks as HealthChecks;
@@ -48,6 +50,8 @@ class ServiceProvider extends BaseServiceProvider
         $this->loadPublishing();
 
         $this->defineGateAbilities();
+
+        $this->registerBugsnagCallback();
 
         Blade::componentNamespace('Butler\\Service\\View\\Components', 'butler-service');
     }
@@ -149,7 +153,7 @@ class ServiceProvider extends BaseServiceProvider
     protected function registerBaseProviders()
     {
         if (config('bugsnag.api_key', false)) {
-            $this->app->register(\Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class);
+            $this->app->register(BugsnagServiceProvider::class);
 
             // NOTE: Temporary fix until "bugsnag/bugsnag-laravel" supports octane.
             $this->app->singleton(FlushBugsnag::class);
@@ -240,5 +244,16 @@ class ServiceProvider extends BaseServiceProvider
 
             return false;
         });
+    }
+
+    public function registerBugsnagCallback()
+    {
+        if (! $this->app->providerIsLoaded(BugsnagServiceProvider::class)) {
+            return;
+        }
+
+        if (config('butler.service.ignore_bugsnag_for_email_consumer', true)) {
+            Bugsnag::registerCallback(new \Butler\Service\Bugsnag\Middlewares\IgnoreEmailConsumer());
+        }
     }
 }
