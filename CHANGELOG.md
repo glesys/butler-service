@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Require laravel v9.2.
+- Don't notify bugsnag when consumer name is a email address.
 
 ### Removed
 - **BREAKING**: Package "glesys/butler-guru" is not required.
