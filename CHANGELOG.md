@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.18.0] - 2022-03-15
+
 ### Changed
 - Require laravel v9.2.
 - Don't notify bugsnag when consumer name is a email address.
