@@ -15,7 +15,16 @@ class HealthTest extends TestCase
             ->assertOk()
             ->assertJson(fn (AssertableJson $json) => $json
                 ->has('application', fn (AssertableJson $json) => $json
-                    ->hasAll('name', 'timezone', 'php', 'laravel', 'butlerHealth', 'butlerService')
+                    ->hasAll(
+                        'name',
+                        'timezone',
+                        'php',
+                        'laravel',
+                        'laravelOctane',
+                        'runningOctane',
+                        'butlerHealth',
+                        'butlerService',
+                    )
                 )
                 ->has('checks', 4, fn (AssertableJson $json) => $json
                     ->hasAll('name', 'slug', 'group', 'description')
