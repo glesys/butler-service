@@ -131,6 +131,8 @@ class ServiceProvider extends BaseServiceProvider
     {
         HealthRepository::customApplicationData(fn () => [
             'butlerService' => ltrim(InstalledVersions::getPrettyVersion('glesys/butler-service'), 'v'),
+            'laravelOctane' => ltrim(InstalledVersions::getPrettyVersion('laravel/octane'), 'v'),
+            'runningOctane' => (int) getenv('LARAVEL_OCTANE') === 1,
         ]);
 
         if ($this->app->configurationIsCached()) {
