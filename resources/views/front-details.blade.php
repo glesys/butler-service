@@ -8,6 +8,15 @@
       <td>Laravel</td>
       <td class="font-bold">{{ $application['laravel'] }}</td>
     </tr>
+    @if ($application['runningOctane'] ?? false)
+      <tr>
+        <td>Laravel Octane</td>
+        <td class="font-bold">
+          {{ $application['laravelOctane'] }}
+          <span class="font-normal text-green-500">(running)</span>
+        </td>
+      </tr>
+    @endif
     <tr>
       <td>Butler Service</td>
       <td class="font-bold">{{ $application['butlerService'] }}</td>
