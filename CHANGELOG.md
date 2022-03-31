@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.2] - 2022-03-31
+
 ### Added
 - Show "laravelOctane" and "runningOctane" on "front" route.
 - Added "laravelOctane" and "runningOctane" to health custom application data.
