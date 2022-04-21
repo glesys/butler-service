@@ -107,6 +107,23 @@ See [butler-audit](https://github.com/glesys/butler-audit).
 
 See [butler-health](https://github.com/glesys/butler-health) for more information.
 
+## Database host maintenance
+
+For applications using multiple database hosts, you may add a `maintenance`
+option on your database connection with a cron expression for when the host
+with the same index as the expression should be in maintenance mode.
+
+In the example below, "host1" will not be used by the application between 01:00 and 01:59.
+
+```php
+    // config/database.php
+    'host' => ['host1', 'host2', 'host3'],
+    'maintenance' => ['* 1 * * *', '* 2 * * *', '* 3 * * *'],
+```
+
+:information_source: When running i.e. laravel-octane you need to use the
+[DisconnectFromDatabases](https://github.com/laravel/octane/blob/1.x/src/Listeners/DisconnectFromDatabases.php) listener.
+
 ## Testing
 
 ```shell

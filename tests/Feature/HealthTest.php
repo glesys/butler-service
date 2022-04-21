@@ -22,6 +22,7 @@ class HealthTest extends TestCase
                         'laravel',
                         'laravelOctane',
                         'runningOctane',
+                        'databaseConnections',
                         'butlerHealth',
                         'butlerService',
                     )

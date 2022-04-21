@@ -20,5 +20,6 @@ class Application extends BaseApplication
 
         $butlerService->registerApplicationProviders();
         $butlerService->registerExtraProviders();
+        $butlerService->registerDatabaseConnectionFactory();
     }
 }
