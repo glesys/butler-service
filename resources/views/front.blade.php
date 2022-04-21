@@ -8,6 +8,7 @@
   <div class="w-full lg:w-1/3 lg:mr-4">
     @include('service::front-details')
     @include('service::front-health-checks')
+    @include('service::front-database-connections')
   </div>
 
   <div class="w-full lg:w-2/3 mb-2">

@@ -8,7 +8,9 @@ use Butler\Audit\Facades\Auditor;
 use Butler\Auth\Contracts\HasAccessTokens;
 use Butler\Health\Checks as HealthChecks;
 use Butler\Health\Repository as HealthRepository;
+use Butler\Service\Database\ConnectionFactory;
 use Butler\Service\Listeners\FlushBugsnag;
+use Butler\Service\Repositories\DatabaseRepository;
 use Composer\InstalledVersions;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
@@ -133,6 +135,7 @@ class ServiceProvider extends BaseServiceProvider
             'butlerService' => ltrim(InstalledVersions::getPrettyVersion('glesys/butler-service'), 'v'),
             'laravelOctane' => ltrim(InstalledVersions::getPrettyVersion('laravel/octane'), 'v'),
             'runningOctane' => (int) getenv('LARAVEL_OCTANE') === 1,
+            'databaseConnections' => app(DatabaseRepository::class)(),
         ]);
 
         if ($this->app->configurationIsCached()) {
@@ -188,6 +191,11 @@ class ServiceProvider extends BaseServiceProvider
         foreach (config('butler.service.extra.providers', []) as $provider) {
             $this->app->register($provider);
         }
+    }
+
+    public function registerDatabaseConnectionFactory()
+    {
+        $this->app->singleton('db.factory', fn ($app) => new ConnectionFactory($app));
     }
 
     protected function registerExtraAliases()
