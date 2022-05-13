@@ -9,6 +9,7 @@ use Butler\Auth\Contracts\HasAccessTokens;
 use Butler\Health\Checks as HealthChecks;
 use Butler\Health\Repository as HealthRepository;
 use Butler\Service\Database\ConnectionFactory;
+use Butler\Service\Database\DatabaseManager;
 use Butler\Service\Listeners\FlushBugsnag;
 use Butler\Service\Repositories\DatabaseRepository;
 use Composer\InstalledVersions;
@@ -191,6 +192,11 @@ class ServiceProvider extends BaseServiceProvider
         foreach (config('butler.service.extra.providers', []) as $provider) {
             $this->app->register($provider);
         }
+    }
+
+    public function registerDatabaseManager()
+    {
+        $this->app->singleton('db', fn ($app) => new DatabaseManager($app, $app['db.factory']));
     }
 
     public function registerDatabaseConnectionFactory()
