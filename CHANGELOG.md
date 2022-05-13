@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 - Custom TrustProxies middleware.
+- PreventRequestsDuringMaintenance middleware.
 
 ## [0.19.0] - 2022-04-28
 
