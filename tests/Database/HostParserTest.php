@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Support;
+namespace Tests\Database;
 
 use Butler\Service\Database\HostParser;
 use Butler\Service\Tests\TestCase;
