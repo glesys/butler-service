@@ -9,7 +9,7 @@ class Application extends BaseApplication
 {
     public function configPath($path = '')
     {
-        return realpath(__DIR__ . '/../config');
+        return realpath(__DIR__ . '/../config') . ($path != '' ? "/$path" : '');
     }
 
     public function registerConfiguredProviders()
