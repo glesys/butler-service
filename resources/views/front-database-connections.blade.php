@@ -7,7 +7,12 @@
       @endphp
 
       <div class="flex justify-between m-1 px-3 py-2 text-sm text-white rounded {{ $bgClass }}">
-        <span>{{ $host['address'] }}</span>
+        <span>
+          {{ $host['address'] }}
+          @if($host['type'])
+            (<abbr title="r = read, w = write, W = used for writing">{{ $host['type'] }}</abbr>)
+          @endif
+        </span>
         @if($host['maintenance'])
           <abbr title="maintenance cron expression">{{ $host['maintenance'] }}</abbr>
         @endif
