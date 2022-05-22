@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+### Changed
+- Use the first available write host on a read/write database connection.
+
 ## [0.19.1] - 2022-05-20
 
 ### Added
