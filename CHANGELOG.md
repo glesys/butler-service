@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Use the first available write host on a read/write database connection.
+- Disconnect from databases if needed before queue worker process jobs.
+- **BREAKING**: Renamed `ForgetConnections` to `DisconnectFromDatabasesIfNeeded`.
 
 ## [0.19.1] - 2022-05-20
 

@@ -1,19 +1,17 @@
 <?php
 
-namespace Butler\Service\Listeners;
+namespace Butler\Service\Database;
 
 use Cron\CronExpression;
+use Illuminate\Database\DatabaseManager;
 use PDO;
 
-class ForgetConnections
+class DisconnectFromDatabasesInMaintenance
 {
-    public function handle($event): void
+    public function __invoke(DatabaseManager $databaseManager): void
     {
-        $databaseManager = $event->sandbox->make('db');
-        $config = $event->app->make('config');
-
         foreach ($databaseManager->getConnections() as $name => $connection) {
-            $connectionConfig = $config->get("database.connections.$name", []);
+            $connectionConfig = config("database.connections.{$name}", []);
 
             if (! $this->connectionHasMultipleHosts($connectionConfig)) {
                 continue;
@@ -32,7 +30,7 @@ class ForgetConnections
 
     private function connectionHasMultipleHosts(array $config): bool
     {
-        $hosts = $config['host'] ?? null;
+        $hosts = $config['host'] ?? $config['read']['host'] ?? null;
 
         return is_array($hosts) && count($hosts) > 1;
     }
@@ -48,8 +46,14 @@ class ForgetConnections
     {
         $now = now()->toDateTimeString();
 
-        foreach ($config['maintenance'] ?? [] as $cron) {
-            if ((new CronExpression($cron))->isDue($now)) {
+        $cronExpressions = array_merge(
+            $config['maintenance'] ?? [],
+            $config['read']['maintenance'] ?? [],
+            $config['write']['maintenance'] ?? [],
+        );
+
+        foreach ($cronExpressions as $cronExpression) {
+            if ((new CronExpression($cronExpression))->isDue($now)) {
                 return true;
             }
         }

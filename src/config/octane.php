@@ -1,6 +1,6 @@
 <?php
 
-use Butler\Service\Listeners\ForgetConnections;
+use Butler\Service\Listeners\DisconnectFromDatabasesIfNeeded;
 use Laravel\Octane\Contracts\OperationTerminated;
 use Laravel\Octane\Events\RequestHandled;
 use Laravel\Octane\Events\RequestReceived;
@@ -92,7 +92,7 @@ return [
             FlushTemporaryContainerInstances::class,
             // DisconnectFromDatabases::class,
             // CollectGarbage::class,
-            ForgetConnections::class,
+            DisconnectFromDatabasesIfNeeded::class,
         ],
 
         WorkerErrorOccurred::class => [

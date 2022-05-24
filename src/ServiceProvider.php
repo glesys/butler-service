@@ -10,11 +10,14 @@ use Butler\Health\Checks as HealthChecks;
 use Butler\Health\Repository as HealthRepository;
 use Butler\Service\Database\ConnectionFactory;
 use Butler\Service\Database\DatabaseManager;
+use Butler\Service\Database\DisconnectFromDatabasesInMaintenance;
 use Butler\Service\Listeners\FlushBugsnag;
 use Butler\Service\Repositories\DatabaseRepository;
 use Composer\InstalledVersions;
+use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Laravel\Octane\Events\RequestTerminated;
 use Symfony\Component\Finder\Finder;
@@ -55,6 +58,8 @@ class ServiceProvider extends BaseServiceProvider
         $this->defineGateAbilities();
 
         $this->registerBugsnagCallback();
+
+        $this->listenForJobJobProcessingEvent();
 
         Blade::componentNamespace('Butler\\Service\\View\\Components', 'butler-service');
     }
@@ -202,6 +207,15 @@ class ServiceProvider extends BaseServiceProvider
     public function registerDatabaseConnectionFactory()
     {
         $this->app->singleton('db.factory', fn ($app) => new ConnectionFactory($app));
+    }
+
+    protected function listenForJobJobProcessingEvent()
+    {
+        if ($this->app->runningInConsole()) {
+            Queue::before(function (JobProcessing $event) {
+                app(DisconnectFromDatabasesInMaintenance::class)(app('db'));
+            });
+        }
     }
 
     protected function registerExtraAliases()
