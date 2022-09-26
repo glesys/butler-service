@@ -2,7 +2,6 @@
 
 namespace Butler\Service\Database;
 
-use Butler\Service\Database\HostParser;
 use Illuminate\Database\Connectors\ConnectionFactory as BaseConnectionFactory;
 
 class ConnectionFactory extends BaseConnectionFactory

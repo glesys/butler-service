@@ -3,7 +3,6 @@
 namespace Butler\Service\Tests;
 
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
-use Bugsnag\Report;
 use Butler\Audit\Facades\Auditor;
 use Butler\Auth\AccessToken;
 use Butler\Auth\ButlerAuth;
@@ -11,7 +10,6 @@ use Butler\Health\Checks as HealthChecks;
 use Butler\Health\Repository as HealthRepository;
 use Butler\Service\Models\Consumer;
 use Butler\Service\ServiceProvider as ButlerServiceProvider;
-use Butler\Service\Tests\TestCheck;
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Carbon;
@@ -213,7 +211,8 @@ class ServiceProviderTest extends TestCase
 
     private function makeConsumer(array $attributes = []): Consumer
     {
-        return new class ($attributes) extends Consumer {
+        return new class($attributes) extends Consumer
+        {
             public function currentAccessToken(): AccessToken
             {
                 return new AccessToken([

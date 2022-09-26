@@ -21,6 +21,7 @@ class ForgetConnections
 
             if ($this->connectionIsPersistent($connectionConfig)) {
                 $databaseManager->forget($name);
+
                 continue;
             }
 

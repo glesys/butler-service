@@ -9,7 +9,8 @@ class ModelTest extends TestCase
 {
     public function test_connection_name()
     {
-        $model = new class extends Model {
+        $model = new class extends Model
+        {
             //
         };
 
@@ -18,7 +19,8 @@ class ModelTest extends TestCase
 
     public function test_is_unguarded()
     {
-        $model = new class extends Model {
+        $model = new class extends Model
+        {
             //
         };
 

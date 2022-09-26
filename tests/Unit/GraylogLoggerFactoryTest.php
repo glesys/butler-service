@@ -24,6 +24,7 @@ class GraylogLoggerFactoryTest extends TestCase
                         && $message->getAdditional('service') === 'butler-service';
                 })
             );
+
             return $transport;
         });
 

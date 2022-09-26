@@ -26,7 +26,7 @@ class DatabaseRepository
                         'available' => in_array($host, $availableHosts),
                         'maintenance' => $config['maintenance'][$index] ?? null,
                     ])->toArray(),
-                ]
+                ],
             ];
         })->toArray();
     }

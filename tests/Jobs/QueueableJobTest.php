@@ -15,7 +15,8 @@ class QueueableJobTest extends TestCase
 {
     public function test_is_queueable()
     {
-        $job = new class extends QueueableJob {
+        $job = new class extends QueueableJob
+        {
             //
         };
 

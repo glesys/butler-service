@@ -28,6 +28,7 @@ class GraylogLoggerFactory
             ->pushProcessor(function ($record) use ($config) {
                 $record['extra'][$config['name_key']] = $config['name'];
                 $record['extra']['trace_id'] = Auditor::correlationId();
+
                 return $record;
             });
 
