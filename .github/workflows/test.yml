@@ -22,5 +22,5 @@ jobs:
 
       - name: Execute tests
         run: |
-          vendor/bin/phpcs
+          vendor/bin/pint --test
           vendor/bin/phpunit

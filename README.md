@@ -141,7 +141,7 @@ In the example below, "host1" will not be used by the application between 01:00 
 
 ```shell
 vendor/bin/phpunit
-vendor/bin/phpcs
+vendor/bin/pint --test
 ```
 
 ## How To Contribute
