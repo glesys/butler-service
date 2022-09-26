@@ -2,8 +2,6 @@
 
 namespace Butler\Service\Tests;
 
-use Butler\Service\Tests\TestCase;
-
 class HelpersTest extends TestCase
 {
     public function test_sqlite_database_path()

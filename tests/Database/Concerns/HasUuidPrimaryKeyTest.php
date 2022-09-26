@@ -2,8 +2,8 @@
 
 namespace Butler\Service\Tests\Database\Concerns;
 
-use Butler\Service\Tests\TestCase;
 use Butler\Service\Database\Concerns\HasUuidPrimaryKey;
+use Butler\Service\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 
 class HasUuidPrimaryKeyTest extends TestCase
@@ -14,7 +14,8 @@ class HasUuidPrimaryKeyTest extends TestCase
     {
         parent::setUp();
 
-        $this->model = new class extends Model {
+        $this->model = new class extends Model
+        {
             use HasUuidPrimaryKey;
 
             public function fireCreatingEvent()

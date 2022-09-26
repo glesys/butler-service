@@ -9,7 +9,8 @@ class DatabaseManagerTest extends TestCase
 {
     public function test_forget()
     {
-        $databaseManager = new class extends DatabaseManager {
+        $databaseManager = new class extends DatabaseManager
+        {
             public function __construct()
             {
                 $this->connections = [

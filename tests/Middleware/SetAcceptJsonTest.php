@@ -15,7 +15,7 @@ class SetAcceptJsonTest extends TestCase
 
         $this->assertNotEquals('application/json', $request->headers->get('Accept'));
 
-        (new SetAcceptJson())->handle($request, fn() => new Response('data', 204));
+        (new SetAcceptJson())->handle($request, fn () => new Response('data', 204));
 
         $this->assertEquals('application/json', $request->headers->get('Accept'));
     }

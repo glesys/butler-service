@@ -114,13 +114,14 @@ class ServiceProvider extends BaseServiceProvider
             : function () {
                 if (auth()->check()) {
                     $user = auth()->user();
+
                     return [
                         $user->name,
                         array_filter([
                             'ip' => request()->ip(),
                             'userAgent' => request()->userAgent(),
                             'tokenName' => optional($user->currentAccessToken())->name,
-                        ])
+                        ]),
                     ];
                 }
 

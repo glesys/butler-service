@@ -13,7 +13,7 @@ class GraphqlTest extends TestCase
     public function test_unauthenticated()
     {
         $this->graphql('{ ping }')->assertUnauthorized()->assertExactJson([
-            'message' => 'Unauthenticated.'
+            'message' => 'Unauthenticated.',
         ]);
     }
 
