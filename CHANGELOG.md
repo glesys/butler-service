@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Laravel pint.
 
+### Changed
+- Require laravel v9.35.
+
 ## [0.19.1] - 2022-05-20
 
 ### Added
