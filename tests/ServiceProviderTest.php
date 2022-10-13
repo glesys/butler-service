@@ -11,6 +11,7 @@ use Butler\Health\Repository as HealthRepository;
 use Butler\Service\Models\Consumer;
 use Butler\Service\ServiceProvider as ButlerServiceProvider;
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -207,6 +208,13 @@ class ServiceProviderTest extends TestCase
         Bugsnag::shouldReceive('registerCallback')->never();
 
         app()->getProvider(ButlerServiceProvider::class)->registerBugsnagCallback();
+    }
+
+    public function test_eloquent_strictness()
+    {
+        $this->assertTrue(Model::preventsLazyLoading());
+        $this->assertTrue(Model::preventsSilentlyDiscardingAttributes());
+        $this->assertTrue(Model::preventsAccessingMissingAttributes());
     }
 
     private function makeConsumer(array $attributes = []): Consumer

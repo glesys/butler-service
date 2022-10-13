@@ -13,6 +13,7 @@ use Butler\Service\Database\DatabaseManager;
 use Butler\Service\Listeners\FlushBugsnag;
 use Butler\Service\Repositories\DatabaseRepository;
 use Composer\InstalledVersions;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
@@ -57,6 +58,8 @@ class ServiceProvider extends BaseServiceProvider
         $this->registerBugsnagCallback();
 
         Blade::componentNamespace('Butler\\Service\\View\\Components', 'butler-service');
+
+        Model::shouldBeStrict(! $this->app->isProduction());
     }
 
     protected function mergeApplicationConfig()
