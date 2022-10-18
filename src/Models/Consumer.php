@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Butler\Service\Models;
 
 use Butler\Auth\Concerns\HasAccessTokens;

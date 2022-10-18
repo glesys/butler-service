@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Butler\Service\Tests\Bugsnag\Middlewares;
 
 use Bugsnag\Report;

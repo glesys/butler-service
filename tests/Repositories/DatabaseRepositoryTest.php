@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Butler\Service\Tests\Repositories;
 
 use Butler\Service\Repositories\DatabaseRepository;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Butler\Service\Tests\Listeners;
 
 use Butler\Service\Database\DatabaseManager;

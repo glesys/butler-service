@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Butler\Service\Tests\Graphql;
 
 use Butler\Service\Graphql\Client;
