@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Butler\Service\Console;
 
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;

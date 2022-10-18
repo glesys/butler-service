@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Butler\Service\Tests\Database\Concerns;
 
 use Butler\Service\Database\Concerns\HasUuidPrimaryKey;

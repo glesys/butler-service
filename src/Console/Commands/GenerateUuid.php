@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Butler\Service\Console\Commands;
 
 use Illuminate\Console\Command;
@@ -18,6 +20,6 @@ class GenerateUuid extends Command
             $uuid = $uuid->getHex();
         }
 
-        $this->output->writeln($uuid);
+        $this->output->writeln($uuid->toString());
     }
 }

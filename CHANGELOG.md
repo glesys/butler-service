@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - A way to append items to navbar component.
+- Strict type declaration everywhere.
 
 ## [0.22.1] - 2023-03-23
 
