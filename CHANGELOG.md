@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use eloquent strictness when not in production environment.
 
 ### Changed
+- **BREAKING**: Require butler-graphql v9.0.
 - Require laravel v9.35.
 
 ## [0.19.1] - 2022-05-20
