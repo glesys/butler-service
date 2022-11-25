@@ -82,6 +82,12 @@ To keep your applications "index.php" up to date you can publish the one in butl
 php artisan vendor:publish --force --tag=butler-index
 ```
 
+## Authentication with OAuth
+
+Configure `butler.sso` in `config/butler.php`.
+
+See [laravel/socialite](https://github.com/laravel/socialite) for more information.
+
 ## Authentication with butler-auth
 
 ```php

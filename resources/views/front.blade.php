@@ -9,6 +9,9 @@
     @include('service::front-details')
     @include('service::front-health-checks')
     @include('service::front-database-connections')
+    @if(Route::has('auth.redirect'))
+      @include('service::front-auth')
+    @endif
   </div>
 
   <div class="w-full lg:w-2/3 mb-2">

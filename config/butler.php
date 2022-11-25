@@ -45,4 +45,14 @@ return [
 
     ],
 
+    'sso' => [
+
+        'enabled' => env('BUTLER_SSO_ENABLED', false),
+        'url' => env('BUTLER_SSO_URL'),
+        'client_id' => env('BUTLER_SSO_CLIENT_ID'),
+        'client_secret' => env('BUTLER_SSO_CLIENT_SECRET'),
+        'redirect' => env('BUTLER_SSO_REDIRECT', '/auth/callback'),
+
+    ],
+
 ];

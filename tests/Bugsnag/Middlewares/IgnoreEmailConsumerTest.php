@@ -6,9 +6,19 @@ use Bugsnag\Report;
 use Butler\Service\Bugsnag\Middlewares\IgnoreEmailConsumer;
 use Butler\Service\Tests\TestCase;
 use Exception;
+use Illuminate\Auth\GenericUser;
 
 class IgnoreEmailConsumerTest extends TestCase
 {
+    public function test_false_is_returned_for_user()
+    {
+        $report = $this->mock(Report::class, function ($mock) {
+            $mock->expects()->getUser()->andReturns(new GenericUser([]));
+        });
+
+        $this->assertFalse((new IgnoreEmailConsumer())($report));
+    }
+
     public function test_false_is_returned_for_consumer_with_email_as_name()
     {
         $report = $this->mock(Report::class, function ($mock) {

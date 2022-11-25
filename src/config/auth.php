@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'butler',
+        'guard' => 'web',
     ],
 
     /*
@@ -37,7 +37,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'consumers',
+            'provider' => 'users',
         ],
 
         'butler' => [
@@ -63,6 +63,9 @@ return [
     */
 
     'providers' => [
+        'users' => [
+            'driver' => 'session',
+        ],
         'consumers' => [
             'driver' => 'eloquent',
             'model' => Butler\Service\Models\Consumer::class,
