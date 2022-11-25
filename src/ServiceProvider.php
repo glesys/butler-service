@@ -7,16 +7,20 @@ use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Butler\Audit\Facades\Auditor;
 use Butler\Auth\Contracts\HasAccessTokens;
 use Butler\Health\Checks as HealthChecks;
+use Butler\Service\Auth\SessionUserProvider;
 use Butler\Service\Database\ConnectionFactory;
 use Butler\Service\Database\DatabaseManager;
 use Butler\Service\Listeners\FlushBugsnag;
+use Butler\Service\Socialite\PassportProvider;
 use Composer\InstalledVersions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Console\AboutCommand;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Laravel\Octane\Events\RequestTerminated;
+use Laravel\Socialite\Contracts\Factory as SocialiteFactory;
 use Symfony\Component\Finder\Finder;
 
 class ServiceProvider extends BaseServiceProvider
@@ -64,6 +68,12 @@ class ServiceProvider extends BaseServiceProvider
         $this->defineGateAbilities();
 
         $this->registerBugsnagCallback();
+
+        if (config('butler.sso.enabled')) {
+            $this->registerSocialiteDriver();
+
+            $this->registerSessionUserProvider();
+        }
 
         Blade::componentNamespace('Butler\\Service\\View\\Components', 'butler-service');
 
@@ -131,7 +141,9 @@ class ServiceProvider extends BaseServiceProvider
                         array_filter([
                             'ip' => request()->ip(),
                             'userAgent' => request()->userAgent(),
-                            'tokenName' => optional($user->currentAccessToken())->name,
+                            'tokenName' => $user instanceof HasAccessTokens
+                                ? $user->currentAccessToken()?->name
+                                : null,
                         ]),
                     ];
                 }
@@ -278,5 +290,21 @@ class ServiceProvider extends BaseServiceProvider
         if (config('butler.service.ignore_bugsnag_for_email_consumer', true)) {
             Bugsnag::registerCallback(new \Butler\Service\Bugsnag\Middlewares\IgnoreEmailConsumer());
         }
+    }
+
+    public function registerSocialiteDriver()
+    {
+        $socialite = $this->app->make(SocialiteFactory::class);
+        $config = config('butler.sso');
+
+        $socialite->extend('passport', fn () => $socialite
+            ->buildProvider(PassportProvider::class, $config)
+            ->setHost($config['url'])
+        );
+    }
+
+    public function registerSessionUserProvider()
+    {
+        Auth::provider('session', fn () => new SessionUserProvider());
     }
 }
