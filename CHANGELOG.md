@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - **BREAKING**: Require butler-health v0.3.
+- **BREAKING**: New design.
 
 ## [0.20.0] - 2022-10-26
 

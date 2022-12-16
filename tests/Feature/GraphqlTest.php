@@ -1,7 +1,5 @@
 <?php
 
-// phpcs:disable PSR2.Methods.FunctionCallSignature.SpaceBeforeCloseBracket
-
 namespace Butler\Service\Tests\Feature;
 
 use Butler\Auth\ButlerAuth;

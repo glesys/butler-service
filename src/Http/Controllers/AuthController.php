@@ -8,6 +8,11 @@ use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:web')->only('logout');
+    }
+
     public function redirect()
     {
         return $this->driver()->redirect();
@@ -31,7 +36,7 @@ class AuthController extends Controller
 
         session(['user' => $user]);
 
-        return redirect()->route('front');
+        return redirect()->route('home');
     }
 
     public function logout()
@@ -40,7 +45,7 @@ class AuthController extends Controller
 
         request()->session()->invalidate();
 
-        return redirect()->route('front');
+        return redirect()->route('home');
     }
 
     protected function driver()

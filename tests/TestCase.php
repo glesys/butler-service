@@ -8,6 +8,9 @@ use Butler\Graphql\ServiceProvider as GraphqlServiceProvider;
 use Butler\Health\ServiceProvider as HealthServiceProvider;
 use Butler\Service\ServiceProvider;
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
+use Illuminate\Auth\GenericUser;
+use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\SocialiteServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class TestCase extends AbstractPackageTestCase
@@ -33,7 +36,37 @@ abstract class TestCase extends AbstractPackageTestCase
             AuthServiceProvider::class,
             GraphqlServiceProvider::class,
             HealthServiceProvider::class,
+            SocialiteServiceProvider::class,
         ];
+    }
+
+    protected function getEnvironmentSetUp($app)
+    {
+        parent::getEnvironmentSetUp($app);
+
+        $this->addLoginRouteUsedByOrchestra();
+
+        $app->config->set('database.default', 'default');
+        $app->config->set('database.connections.default', [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+        ]);
+    }
+
+    protected function actingAsUser(array $data = [])
+    {
+        $user = new GenericUser(array_merge([
+            'id' => rand(0, 999),
+            'username' => 'username',
+            'name' => 'name',
+            'email' => 'user@example.com',
+            'oauth_token' => 'token',
+            'oauth_refresh_token' => 'refresh-token',
+            'remember_token' => null,
+        ], $data));
+
+        return $this->actingAs($user, 'web');
     }
 
     private static function createRequiredTestDirectories(string $appPath): void
@@ -67,5 +100,12 @@ abstract class TestCase extends AbstractPackageTestCase
         foreach ($files as $name => $path) {
             copy(__DIR__ . '/' . $name, $appPath . $path);
         }
+    }
+
+    private function addLoginRouteUsedByOrchestra(): void
+    {
+        Route::middleware('web')
+            ->get('orchestra-login', fn () => [])
+            ->name('login');
     }
 }

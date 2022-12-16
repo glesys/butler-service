@@ -31,12 +31,6 @@ return [
 
     'service' => [
 
-        'routes' => [
-            'front' => '/',
-            'graphql' => '/graphql',
-            'health' => '/health',
-        ],
-
         'extra' => [
             'config' => [],
             'aliases' => [],

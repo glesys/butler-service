@@ -1,0 +1,29 @@
+@import './highlight-js.css';
+
+@font-face {
+    font-family: "DM Sans";
+    src: url("fonts/dmsans/DMSans-Regular.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "DM Sans";
+    src: url("fonts/dmsans/DMSans-Bold.ttf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "DM Mono";
+    src: url("fonts/dmmono/DMMono-Regular.ttf");
+    font-weight: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    [x-cloak] {
+        display: none !important;
+    }
+}
