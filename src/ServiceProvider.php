@@ -16,7 +16,6 @@ use Composer\InstalledVersions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Laravel\Octane\Events\RequestTerminated;
@@ -61,7 +60,7 @@ class ServiceProvider extends BaseServiceProvider
 
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'service');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'butler');
 
         $this->loadPublishing();
 
@@ -71,11 +70,9 @@ class ServiceProvider extends BaseServiceProvider
 
         if (config('butler.sso.enabled')) {
             $this->registerSocialiteDriver();
-
-            $this->registerSessionUserProvider();
         }
 
-        Blade::componentNamespace('Butler\\Service\\View\\Components', 'butler-service');
+        $this->registerSessionUserProvider();
 
         Model::shouldBeStrict(! $this->app->isProduction());
     }
@@ -262,11 +259,13 @@ class ServiceProvider extends BaseServiceProvider
         if ($this->app->runningInConsole()) {
             $configSource = __DIR__ . '/../config/butler.php';
             $indexSource = __DIR__ . '/../public/index.php';
+            $assetsSource = __DIR__ . '/../public/vendor/butler';
             $viewsSource = __DIR__ . '/../resources/views';
 
             $this->publishes([$configSource => base_path('config/butler.php')], 'butler-config');
             $this->publishes([$indexSource => public_path('index.php')], 'butler-index');
-            $this->publishes([$viewsSource => resource_path('views/vendor/service')], 'butler-views');
+            $this->publishes([$assetsSource => public_path('vendor/butler')], 'butler-assets');
+            $this->publishes([$viewsSource => resource_path('views/vendor/butler')], 'butler-views');
         }
     }
 

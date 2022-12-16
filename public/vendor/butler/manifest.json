@@ -1,0 +1,28 @@
+{
+  "resources/images/favicon.ico": {
+    "file": "assets/favicon.41d3a538.ico",
+    "src": "resources/images/favicon.ico"
+  },
+  "resources/css/fonts/dmsans/DMSans-Bold.ttf": {
+    "file": "assets/DMSans-Bold.3edb1342.ttf",
+    "src": "resources/css/fonts/dmsans/DMSans-Bold.ttf"
+  },
+  "resources/css/fonts/dmmono/DMMono-Regular.ttf": {
+    "file": "assets/DMMono-Regular.57f0f4b4.ttf",
+    "src": "resources/css/fonts/dmmono/DMMono-Regular.ttf"
+  },
+  "resources/css/fonts/dmsans/DMSans-Regular.ttf": {
+    "file": "assets/DMSans-Regular.9ae2da66.ttf",
+    "src": "resources/css/fonts/dmsans/DMSans-Regular.ttf"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app.ef6ee56b.js",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/css/app.css": {
+    "file": "assets/app.1da0f3fc.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  }
+}

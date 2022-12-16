@@ -159,7 +159,7 @@ return [
         'views' => false, // Views with their data
         'route' => false, // Current route information
         'auth' => false, // Display Laravel authentication status
-        'gate' => false, // Display Laravel Gate checks
+        'gate' => true, // Display Laravel Gate checks
         'session' => false, // Display session data
         'symfony_request' => false, // Only one can be enabled..
         'mail' => false, // Catch mail messages

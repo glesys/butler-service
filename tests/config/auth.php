@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'butler',
+        'guard' => 'web',
     ],
 
     /*
@@ -30,14 +30,14 @@ return [
     | users are actually retrieved out of your database or other storage
     | mechanisms used by this application to persist your user's data.
     |
-    | Supported: "session", "token"
+    | Supported: "session"
     |
     */
 
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'consumers',
+            'provider' => 'users',
         ],
 
         'butler' => [
@@ -63,6 +63,9 @@ return [
     */
 
     'providers' => [
+        'users' => [
+            'driver' => 'session',
+        ],
         'consumers' => [
             'driver' => 'eloquent',
             'model' => Butler\Service\Models\Consumer::class,

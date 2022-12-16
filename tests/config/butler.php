@@ -33,4 +33,14 @@ return [
 
     ],
 
+    'sso' => [
+
+        'enabled' => true,
+        'url' => 'http://localhost',
+        'client_id' => 'client-id',
+        'client_secret' => 'client-secret',
+        'redirect' => '/auth/callback',
+
+    ],
+
 ];

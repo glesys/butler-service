@@ -15,7 +15,7 @@ composer require glesys/butler-service
 Replace `Illuminate\Foundation\Application` with `Butler\Service\Foundation\Application` in `bootstrap/app.php`.
 
 ```shell
-php artisan vendor:publish --tag=butler-config
+php artisan vendor:publish --tag=butler-config --tag=butler-assets
 php artisan migrate
 ```
 
@@ -40,14 +40,9 @@ You can use your configuration files as usual. See [src/config](src/config) for 
 
 :information_source: Remember that your applications `config/butler.php` only merges the first level of the [default configuration](src/config/butler.php).
 
-### Default routes
+## Views
 
-There are 3 default routes; "front", "graphql" and "health".
-They can be updated at `butler.service.routes` in `config/butler.php`.
-
-For example you might want to listen for graphql on `/api` instead of `/graphql`.
-
-Their views can be updated by publishing them:
+Views can be updated by publishing them:
 
 ```shell
 php artisan vendor:publish --tag=butler-views

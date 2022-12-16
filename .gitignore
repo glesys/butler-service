@@ -1,5 +1,7 @@
 /report
 /vendor
+/node_modules
+/public/hot
 .DS_STORE
 .phpunit.result.cache
 composer.lock

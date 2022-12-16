@@ -31,14 +31,14 @@ class ServiceProviderTest extends TestCase
 
     public function test_routes_are_loaded()
     {
-        $this->assertEquals('http://localhost', route('front'));
+        $this->assertEquals('http://localhost', route('home'));
         $this->assertEquals('http://localhost/graphql', route('graphql'));
         $this->assertEquals('http://localhost/health', route('health'));
     }
 
     public function test_views_are_loaded()
     {
-        $this->assertNotEmpty(view('service::front'));
+        $this->assertNotEmpty(view('butler::home'));
     }
 
     public function test_mergeApplicationConfig_merges_source_and_application_config()
