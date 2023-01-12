@@ -7,7 +7,6 @@ use Butler\Audit\Facades\Auditor;
 use Butler\Auth\AccessToken;
 use Butler\Auth\ButlerAuth;
 use Butler\Health\Checks as HealthChecks;
-use Butler\Health\Repository as HealthRepository;
 use Butler\Service\Models\Consumer;
 use Butler\Service\ServiceProvider as ButlerServiceProvider;
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
@@ -166,8 +165,6 @@ class ServiceProviderTest extends TestCase
         $this->assertFalse(config('butler.health.route'));
 
         $this->assertFalse(Route::has('butler-health'), 'butler-health route should not be registered');
-
-        $this->assertNotEmpty((new HealthRepository())()['application']['butlerService']);
 
         $this->assertEquals(
             [

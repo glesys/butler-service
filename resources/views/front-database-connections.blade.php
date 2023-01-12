@@ -1,5 +1,5 @@
 <x-butler-service::front-block title="Database connections">
-  @forelse($application['databaseConnections'] as $name => $connection)
+  @forelse($databaseConnections as $name => $connection)
     <div class="font-bold my-3 text-sm tracking-wide uppercase">{{ str($name)->title() }}</div>
     @foreach($connection['hosts'] ?? [] as $host)
       @php
