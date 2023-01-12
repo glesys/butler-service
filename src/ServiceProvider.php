@@ -7,13 +7,12 @@ use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Butler\Audit\Facades\Auditor;
 use Butler\Auth\Contracts\HasAccessTokens;
 use Butler\Health\Checks as HealthChecks;
-use Butler\Health\Repository as HealthRepository;
 use Butler\Service\Database\ConnectionFactory;
 use Butler\Service\Database\DatabaseManager;
 use Butler\Service\Listeners\FlushBugsnag;
-use Butler\Service\Repositories\DatabaseRepository;
 use Composer\InstalledVersions;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
@@ -37,6 +36,15 @@ class ServiceProvider extends BaseServiceProvider
         $this->registerBaseProviders();
 
         $this->registerExtraAliases();
+
+        AboutCommand::add('Butler Service', fn () => [
+            'Version' => ltrim(InstalledVersions::getPrettyVersion('glesys/butler-service'), 'v'),
+        ]);
+
+        AboutCommand::add('Laravel Octane', fn () => [
+            'Version' => ltrim(InstalledVersions::getPrettyVersion('laravel/octane'), 'v'),
+            'Running' => (int) getenv('LARAVEL_OCTANE') === 1,
+        ]);
     }
 
     public function boot()
@@ -136,13 +144,6 @@ class ServiceProvider extends BaseServiceProvider
 
     protected function configureHealth()
     {
-        HealthRepository::customApplicationData(fn () => [
-            'butlerService' => ltrim(InstalledVersions::getPrettyVersion('glesys/butler-service'), 'v'),
-            'laravelOctane' => ltrim(InstalledVersions::getPrettyVersion('laravel/octane'), 'v'),
-            'runningOctane' => (int) getenv('LARAVEL_OCTANE') === 1,
-            'databaseConnections' => app(DatabaseRepository::class)(),
-        ]);
-
         if ($this->app->configurationIsCached()) {
             return;
         }
