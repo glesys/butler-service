@@ -11,6 +11,7 @@ import tokensCard from "./components/tokens-card.js"
 window.Alpine = Alpine
 
 Alpine.store("health", {
+    about: {},
     checks: [],
 
     init() {
@@ -23,6 +24,7 @@ Alpine.store("health", {
         const response = await getJson("/health")
         const data = await response.json()
 
+        this.about = data.about || {}
         this.checks = data.checks || []
     },
 })
