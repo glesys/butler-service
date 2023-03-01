@@ -7,6 +7,7 @@ use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Butler\Audit\Facades\Auditor;
 use Butler\Auth\Contracts\HasAccessTokens;
 use Butler\Health\Checks as HealthChecks;
+use Butler\Health\Repository as HealthRepository;
 use Butler\Service\Auth\SessionUserProvider;
 use Butler\Service\Database\ConnectionFactory;
 use Butler\Service\Database\DatabaseManager;
@@ -14,7 +15,6 @@ use Butler\Service\Listeners\FlushBugsnag;
 use Butler\Service\Socialite\PassportProvider;
 use Composer\InstalledVersions;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
@@ -39,15 +39,6 @@ class ServiceProvider extends BaseServiceProvider
         $this->registerBaseProviders();
 
         $this->registerExtraAliases();
-
-        AboutCommand::add('Butler Service', fn () => [
-            'Version' => ltrim(InstalledVersions::getPrettyVersion('glesys/butler-service'), 'v'),
-        ]);
-
-        AboutCommand::add('Laravel Octane', fn () => [
-            'Version' => ltrim(InstalledVersions::getPrettyVersion('laravel/octane'), 'v'),
-            'Running' => (int) getenv('LARAVEL_OCTANE') === 1,
-        ]);
     }
 
     public function boot()
@@ -75,6 +66,15 @@ class ServiceProvider extends BaseServiceProvider
         $this->registerSessionUserProvider();
 
         Model::shouldBeStrict(! $this->app->isProduction());
+
+        HealthRepository::add('butler_service', [
+            'version' => ltrim(InstalledVersions::getPrettyVersion('glesys/butler-service'), 'v'),
+        ]);
+
+        HealthRepository::add('laravel_octane', [
+            'version' => ltrim(InstalledVersions::getPrettyVersion('laravel/octane'), 'v'),
+            'running' => (int) getenv('LARAVEL_OCTANE') === 1,
+        ]);
     }
 
     protected function mergeApplicationConfig()

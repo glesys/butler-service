@@ -9,6 +9,8 @@ window.badgeClassName = (state) => {
     }
 }
 
+window.deslug = (string) => string.replace(/[\W_]+/g, " ")
+
 window.getJson = async (url) => await fetch(url, {
     headers: {
         "Content-Type": "application/json",

@@ -2,8 +2,8 @@
 
 namespace Butler\Service\Tests\Feature;
 
-use Butler\Health\Repository;
 use Butler\Service\Tests\TestCase;
+use Illuminate\Testing\Fluent\AssertableJson;
 
 class HealthTest extends TestCase
 {
@@ -16,14 +16,16 @@ class HealthTest extends TestCase
             ->assertViewIs('butler::health.index');
     }
 
-    public function test_it_can_returns_json()
+    public function test_it_can_return_json()
     {
-        $this->mock(Repository::class, function ($mock) {
-            $mock->expects('__invoke')->andReturns(['foo' => 'bar']);
-        });
-
         $this->getJson(route('health'))
             ->assertOk()
-            ->assertExactJson(['foo' => 'bar']);
+            ->assertJson(fn (AssertableJson $json) =>
+                $json->hasAll('about', 'checks')->whereAllType([
+                    'about.butler_service.version' => 'string',
+                    'about.laravel_octane.version' => 'string',
+                    'about.laravel_octane.running' => 'boolean',
+                ])
+            );
     }
 }

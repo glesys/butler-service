@@ -24,12 +24,12 @@ abstract class TestCase extends AbstractPackageTestCase
         static::createRequiredTestFiles($appPath);
     }
 
-    protected function getServiceProviderClass()
+    protected static function getServiceProviderClass(): string
     {
         return ServiceProvider::class;
     }
 
-    protected function getRequiredServiceProviders($app)
+    protected static function getRequiredServiceProviders(): array
     {
         return [
             AuditServiceProvider::class,
@@ -40,7 +40,7 @@ abstract class TestCase extends AbstractPackageTestCase
         ];
     }
 
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
         parent::getEnvironmentSetUp($app);
 

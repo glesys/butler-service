@@ -3,5 +3,6 @@
 /node_modules
 /public/hot
 .DS_STORE
+.phpunit.cache
 .phpunit.result.cache
 composer.lock

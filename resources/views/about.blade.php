@@ -2,26 +2,25 @@
   <x-butler::container>
 
     <x-butler::card title="Details" class="lg:w-1/2">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-24 gap-y-4">
-        @foreach($about as $category => $values)
+      <div
+        x-cloak
+        x-data="{ about: {} }"
+        x-init="$watch('$store.health.about', data => about = data)"
+        class="grid grid-cols-1 lg:grid-cols-2 gap-x-24 gap-y-4"
+      >
+        <template x-for="(values, category) in about">
           <div class="mb-4">
-            <x-butler::h2>{{ str($category)->headline() }}</x-butler::h2>
-            @foreach($values as $key => $value)
+            <x-butler::h2 class="capitalize" x-text="deslug(category)"></x-butler::h2>
+            <template x-for="(value, key) in values">
               <div class="flex justify-between">
-                <x-butler::label>{{ str($key)->headline() }}</x-butler::label>
-                @if($value === 'NOT CACHED')
-                  <span class="text-red-dark">{{ $value }}</span>
-                @elseif($value === 'CACHED')
-                  <span class="text-green-dark">{{ $value }}</span>
-                @elseif(is_bool($value))
-                  <x-butler::muted>{{ $value ? 'TRUE' : 'FALSE' }}</x-butler::muted>
-                @else
-                  <x-butler::muted>{{ $value }}</x-butler::muted>
-                @endif
+                <x-butler::label class="capitalize" x-text="deslug(key)"></x-butler::label>
+
+                <span x-show="category === 'cache'" :class="value ? 'text-green-dark' : 'text-red-dark'" x-text="value"></span>
+                <x-butler::muted x-show="category !== 'cache'" x-text="value"></x-butler::muted>
               </div>
-            @endforeach
+            </template>
           </div>
-        @endforeach
+        </template>
       </div>
     </x-butler::card>
 
