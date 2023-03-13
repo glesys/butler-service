@@ -65,16 +65,9 @@ class ServiceProvider extends BaseServiceProvider
 
         $this->registerSessionUserProvider();
 
+        $this->addHealthInformation();
+
         Model::shouldBeStrict(! $this->app->isProduction());
-
-        HealthRepository::add('butler_service', [
-            'version' => ltrim(InstalledVersions::getPrettyVersion('glesys/butler-service'), 'v'),
-        ]);
-
-        HealthRepository::add('laravel_octane', [
-            'version' => ltrim(InstalledVersions::getPrettyVersion('laravel/octane'), 'v'),
-            'running' => (int) getenv('LARAVEL_OCTANE') === 1,
-        ]);
     }
 
     protected function mergeApplicationConfig()
@@ -305,5 +298,21 @@ class ServiceProvider extends BaseServiceProvider
     public function registerSessionUserProvider()
     {
         Auth::provider('session', fn () => new SessionUserProvider());
+    }
+
+    public function addHealthInformation(): void
+    {
+        HealthRepository::add('butler_service', [
+            'version' => ltrim(InstalledVersions::getPrettyVersion('glesys/butler-service'), 'v'),
+        ]);
+
+        HealthRepository::add('laravel_octane', [
+            'version' => ltrim(InstalledVersions::getPrettyVersion('laravel/octane'), 'v'),
+            'running' => (int) getenv('LARAVEL_OCTANE') === 1,
+        ]);
+
+        if (function_exists('swoole_version')) {
+            HealthRepository::add('laravel_octane', ['swoole' => swoole_version()]);
+        }
     }
 }
