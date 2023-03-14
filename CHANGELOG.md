@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - **BREAKING**: Require Laravel 10 and PHP 8.1.
+- Default `octane.https` to `true`.
 
 ## [0.21.0] - 2023-03-01
 
