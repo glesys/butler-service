@@ -16,6 +16,7 @@ class Client
     public function request(string $query, array $variables = [])
     {
         $response = Http::withToken($this->token)
+            ->acceptJson()
             ->withCorrelation()
             ->timeout($this->timeout)
             ->post($this->url, compact('query', 'variables'))
