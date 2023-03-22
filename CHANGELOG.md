@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update blade component confirm-button.
 - Blade component "a".
 
+### Changed
+- Refactor exception handler.
+
 ## [0.22.0] - 2023-03-16
 
 ### Added
