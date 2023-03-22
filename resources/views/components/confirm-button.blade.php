@@ -30,5 +30,6 @@ $classNames = match ($color) {
     :class="$classNames"
     x-show="confirm"
     @click="$dispatch('{{ $dispatch }}'); confirm = false"
+    @click.outside="confirm = false"
   >{{ $confirmText }}</x-butler::button>
 </span>
