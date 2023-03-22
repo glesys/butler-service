@@ -50,7 +50,7 @@
             @endauth
             <td class="py-3 px-4">
               @auth
-                <a class="text-blue-light" :href="failedJob.url" x-text="failedJob.name"></a>
+                <x-butler::a ::href="failedJob.url" x-text="failedJob.name"></x-butler::a>
               @else
                 <span x-text="failedJob.name"></span>
               @endauth
