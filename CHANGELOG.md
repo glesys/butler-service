@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.22.1] - 2023-03-23
+
 ### Added
 - Accept header to graphql client.
 - Update blade component confirm-button.
