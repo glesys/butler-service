@@ -18,5 +18,6 @@
         Tokens
       </span>
     @endauth
+    @includeIf('butler::navbar-append')
   </div>
 </nav>
