@@ -34,7 +34,7 @@ class AuthTest extends TestCase
 
     public function test_logout_as_guest()
     {
-        $this->post(route('auth.logout'))->assertRedirectToRoute('login');
+        $this->post(route('auth.logout'))->assertRedirectToRoute('home');
 
         $this->assertGuest();
     }

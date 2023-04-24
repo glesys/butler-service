@@ -2,12 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * NOTE: This is a template of an graphql mutation used only for testing.
- *
- * @see \Butler\Service\Tests\Feature\GraphqlTest
- */
-
 namespace App\Http\Graphql\Mutations;
 
 class Start

@@ -12,7 +12,7 @@ class TokenTest extends TestCase
 
     public function test_index_as_guest()
     {
-        $this->get(route('tokens.index'))->assertRedirectToRoute('login');
+        $this->get(route('tokens.index'))->assertRedirectToRoute('home');
     }
 
     public function test_index_can_return_view()
@@ -38,7 +38,7 @@ class TokenTest extends TestCase
 
     public function test_store_as_guest()
     {
-        $this->post(route('tokens.store'))->assertRedirectToRoute('login');
+        $this->post(route('tokens.store'))->assertRedirectToRoute('home');
     }
 
     public function test_store_as_user()
@@ -56,7 +56,7 @@ class TokenTest extends TestCase
 
     public function test_destroy_as_guest()
     {
-        $this->post(route('tokens.delete'))->assertRedirectToRoute('login');
+        $this->post(route('tokens.delete'))->assertRedirectToRoute('home');
     }
 
     public function test_destroy_as_user()

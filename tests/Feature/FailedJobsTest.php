@@ -2,9 +2,9 @@
 
 namespace Butler\Service\Tests\Feature;
 
+use App\Jobs\Job;
+use App\Jobs\ViewableJob;
 use Butler\Service\Tests\TestCase;
-use Butler\Service\Tests\TestJob;
-use Butler\Service\Tests\TestViewableJob;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Queue\Failed\FailedJobProviderInterface;
@@ -70,17 +70,17 @@ class FailedJobsTest extends TestCase
         $this->mock(Encrypter::class)
             ->expects('decrypt')
             ->with('encrypted-command')
-            ->andReturn(serialize(new TestJob()));
+            ->andReturn(serialize(new Job()));
 
         $this->withoutMiddleware(EncryptCookies::class)
             ->get(route('failed-jobs.index'))
             ->assertOk()
-            ->assertJsonPath('*.name', ['TestJob', 'Job2']);
+            ->assertJsonPath('*.name', ['Job', 'Job2']);
     }
 
     public function test_show_as_guest()
     {
-        $this->get(route('failed-jobs.show', 1))->assertRedirectToRoute('login');
+        $this->get(route('failed-jobs.show', 1))->assertRedirectToRoute('home');
     }
 
     public function test_show_as_user()
@@ -98,7 +98,7 @@ class FailedJobsTest extends TestCase
 
     public function test_show_with_viewable_job_as_user()
     {
-        $job = new TestViewableJob();
+        $job = new ViewableJob();
 
         $this->queueFailer->expects('find')->with(1)->andReturn(
             $this->makeFailedJob(['data' => ['command' => serialize($job)]])
@@ -114,7 +114,7 @@ class FailedJobsTest extends TestCase
 
     public function test_retry_as_guest()
     {
-        $this->post(route('failed-jobs.retry'))->assertRedirectToRoute('login');
+        $this->post(route('failed-jobs.retry'))->assertRedirectToRoute('home');
     }
 
     public function test_retry_as_user()
@@ -128,7 +128,7 @@ class FailedJobsTest extends TestCase
 
     public function test_forget_as_guest()
     {
-        $this->post(route('failed-jobs.forget'))->assertRedirectToRoute('login');
+        $this->post(route('failed-jobs.forget'))->assertRedirectToRoute('home');
     }
 
     public function test_forget_as_user()

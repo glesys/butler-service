@@ -2,12 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * NOTE: This is a template of an graphql query used only for testing.
- *
- * @see \Butler\Service\Tests\Feature\GraphqlTest
- */
-
 namespace App\Http\Graphql\Queries;
 
 class Ping

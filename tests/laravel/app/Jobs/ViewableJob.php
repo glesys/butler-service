@@ -1,11 +1,13 @@
 <?php
 
-namespace Butler\Service\Tests;
+declare(strict_types=1);
+
+namespace App\Jobs;
 
 use Butler\Service\Jobs\Contracts\Viewable;
 use Butler\Service\Jobs\QueueableJob;
 
-class TestViewableJob extends QueueableJob implements Viewable
+class ViewableJob extends QueueableJob implements Viewable
 {
     public function handle()
     {

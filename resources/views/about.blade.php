@@ -31,7 +31,7 @@
             <x-butler::badge ::class="badgeClassName('{{ $connection['connected'] ? 'ok' : 'critical' }}')"/>
             <span class="ml-4 text-lg">
               <x-butler::label>{{ $key }}</x-butler::label>
-              @if($connection['host'])
+              @if($connection['host'] && is_string($connection['host']))
                 <x-butler::muted>&dash; {{ $connection['host'] }}</x-butler::muted>
               @endif
             </span>

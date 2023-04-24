@@ -5,7 +5,7 @@ return [
     'health' => [
 
         'checks' => [
-            Butler\Service\Tests\TestCheck::class,
+            App\TestCheck::class,
         ],
 
     ],
@@ -21,7 +21,7 @@ return [
                 'Foobar' => Illuminate\Support\Facades\Cache::class,
             ],
             'providers' => [
-                Butler\Service\Tests\ExtraServiceProvider::class,
+                App\Providers\ExtraServiceProvider::class,
             ],
         ],
 

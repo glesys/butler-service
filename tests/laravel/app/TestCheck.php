@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Butler\Service\Tests;
+namespace App;
 
 use Butler\Health\Check;
 use Butler\Health\Result;

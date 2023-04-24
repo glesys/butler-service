@@ -11,7 +11,6 @@ use Butler\Auth\ButlerAuth;
 use Butler\Health\Checks as HealthChecks;
 use Butler\Service\Models\Consumer;
 use Butler\Service\ServiceProvider as ButlerServiceProvider;
-use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Carbon;
@@ -22,8 +21,6 @@ use Mockery;
 
 class ServiceProviderTest extends TestCase
 {
-    use ServiceProviderTrait;
-
     protected function setUp(): void
     {
         putenv('APP_RUNNING_IN_CONSOLE=true');
@@ -52,7 +49,7 @@ class ServiceProviderTest extends TestCase
 
     public function test_application_config_files_is_merged()
     {
-        $this->assertEquals('foobar', config('session.table'));
+        $this->assertEquals('test-dummy-value', config('session.table'));
     }
 
     public function test_extra_config_is_configured()
@@ -62,8 +59,6 @@ class ServiceProviderTest extends TestCase
 
     public function test_application_providers_are_registered()
     {
-        app()->getProvider(ButlerServiceProvider::class)->registerApplicationProviders();
-
         $this->assertInstanceOf(
             \App\Providers\AppServiceProvider::class,
             app()->getProvider(\App\Providers\AppServiceProvider::class)
@@ -72,11 +67,9 @@ class ServiceProviderTest extends TestCase
 
     public function test_extra_providers_are_registered()
     {
-        app()->getProvider(ButlerServiceProvider::class)->registerExtraProviders();
-
         $this->assertInstanceOf(
-            ExtraServiceProvider::class,
-            app()->getProvider(ExtraServiceProvider::class)
+            \App\Providers\ExtraServiceProvider::class,
+            app()->getProvider(\App\Providers\ExtraServiceProvider::class)
         );
     }
 
@@ -173,7 +166,7 @@ class ServiceProviderTest extends TestCase
                 HealthChecks\Database::class,
                 HealthChecks\Redis::class,
                 HealthChecks\FailedJobs::class,
-                TestCheck::class,
+                \App\TestCheck::class,
             ],
             config('butler.health.checks'),
             '"Core" checks should be merged with "application" checks.'
