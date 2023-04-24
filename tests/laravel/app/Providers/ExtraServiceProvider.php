@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Butler\Service\Tests;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

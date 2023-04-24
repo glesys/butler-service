@@ -29,10 +29,10 @@ class QueueableJobTest extends TestCase
     {
         $uses = class_uses(QueueableJob::class);
 
-        $this->assertInArray(Dispatchable::class, $uses);
-        $this->assertInArray(InteractsWithQueue::class, $uses);
-        $this->assertInArray(Queueable::class, $uses);
-        $this->assertInArray(SerializesModels::class, $uses);
-        $this->assertInArray(WithCorrelation::class, $uses);
+        $this->assertContains(Dispatchable::class, $uses);
+        $this->assertContains(InteractsWithQueue::class, $uses);
+        $this->assertContains(Queueable::class, $uses);
+        $this->assertContains(SerializesModels::class, $uses);
+        $this->assertContains(WithCorrelation::class, $uses);
     }
 }

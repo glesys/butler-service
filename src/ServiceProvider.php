@@ -288,6 +288,10 @@ class ServiceProvider extends BaseServiceProvider
 
     public function registerSocialiteDriver()
     {
+        if (! $this->app->has(SocialiteFactory::class)) {
+            return;
+        }
+
         $socialite = $this->app->make(SocialiteFactory::class);
         $config = config('butler.sso');
 

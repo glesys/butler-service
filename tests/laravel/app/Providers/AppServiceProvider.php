@@ -2,13 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * NOTE: This is a template of an empty service provider used to test automatic
- * service provider registration.
- *
- * @see \Butler\Service\Tests\ServiceProviderTest
- */
-
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;

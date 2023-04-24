@@ -19,7 +19,6 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.12",
-        "graham-campbell/testbench": "^6.0",
         "laravel/pint": "^1.2",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
@@ -30,6 +29,15 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php tests/laravel/artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php tests/laravel/artisan vendor:publish --tag=butler-assets --ansi --force"
+        ]
     },
     "extra": {
         "laravel": {
@@ -49,7 +57,7 @@
     "autoload-dev": {
         "psr-4": {
             "Butler\\Service\\Tests\\": "tests/",
-            "App\\": "vendor/orchestra/testbench-core/laravel/app"
+            "App\\": "tests/laravel/app"
         }
     },
     "minimum-stability": "stable",
