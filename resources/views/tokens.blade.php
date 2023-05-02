@@ -49,17 +49,17 @@
     <x-butler::card title="Create Token" class="w-full lg:w-1/3" x-data="tokenFormCard('{{ route('tokens.store') }}')">
       <x-butler::label>Consumer</x-butler::label>
       <div class="my-4">
-        <input type="text" x-model="consumer" class="p-2 w-full rounded border border-gray-100" placeholder="E.g. email or application name">
+        <x-butler::input-text x-model="consumer" placeholder="E.g. email or application name"/>
         <x-butler::error x-show="errors.consumer" x-text="errors.consumer?.[0]"/>
       </div>
       <x-butler::label>Abilities (comma separated)</x-butler::label>
       <div class="my-4">
-        <input type="text" x-model="abilities" class="p-2 w-full rounded border border-gray-100" placeholder="E.g. query,mutation">
+        <x-butler::input-text x-model="abilities" placeholder="E.g. query,mutation"/>
         <x-butler::error x-show="errors.abilities" x-text="errors.abilities?.[0]"/>
       </div>
       <x-butler::label>Name</x-butler::label>
       <div class="my-4">
-        <input type="text" x-model="name" class="p-2 w-full rounded border border-gray-100" placeholder="Optional name">
+        <x-butler::input-text x-model="name" placeholder="Optional name"/>
         <x-butler::error x-show="errors.name" x-text="errors.name?.[0]"/>
       </div>
       <div class="flex justify-end pt-4">
