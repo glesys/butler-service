@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Return correct type from "MigratesDatabases".
 
 ## [0.22.2] - 2023-05-16
 

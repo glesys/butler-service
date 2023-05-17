@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Butler\Service\Testing\Concerns;
 
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Support\Facades\File;
 
 trait MigratesDatabases
 {
@@ -19,17 +20,17 @@ trait MigratesDatabases
         $this->app[Kernel::class]->setArtisan(null);
     }
 
-    private function migrationsPath(string $database): string
+    protected function migrationsPath(string $database): string
     {
         return $database === 'default' ? '' : "database/migrations/{$database}";
     }
 
-    private function seederName(string $database): string
+    protected function seederName(string $database): string
     {
-        if ($database === 'default' && ! is_file(database_path('seeders/DefaultDatabaseSeeder.php'))) {
+        if ($database === 'default' && File::missing(database_path('seeders/DefaultDatabaseSeeder.php'))) {
             return 'DatabaseSeeder';
         }
 
-        return str("{$database}DatabaseSeeder")->studly();
+        return str("{$database}DatabaseSeeder")->studly()->toString();
     }
 }
