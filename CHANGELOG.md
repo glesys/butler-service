@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.22.3] - 2023-05-22
+
 ### Changed
 - Update laravel/octane requirement to `^1.0 || ^2.0`.
 
