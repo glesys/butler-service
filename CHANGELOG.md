@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Method `fromArray` and `fromConfig` to graphql client.
 
 ## [0.22.3] - 2023-05-22
 

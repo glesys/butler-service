@@ -15,6 +15,18 @@ class Client
     ) {
     }
 
+    public static function fromArray(array $array): static
+    {
+        return isset($array['timeout'])
+            ? new static($array['url'], $array['token'], $array['timeout'])
+            : new static($array['url'], $array['token']);
+    }
+
+    public static function fromConfig(string $configKey): static
+    {
+        return static::fromArray(config($configKey));
+    }
+
     public function request(string $query, array $variables = [])
     {
         $response = Http::withToken($this->token)
