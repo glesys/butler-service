@@ -10,6 +10,33 @@ use Illuminate\Support\Facades\Http;
 
 class ClientTest extends TestCase
 {
+    public function test_fromArray()
+    {
+        $arrayWithoutTimeout = [
+            'url' => 'localhost',
+            'token' => 'secret',
+        ];
+
+        $arrayWithTimeout = [
+            'url' => 'localhost',
+            'token' => 'secret',
+            'timeout' => 3,
+        ];
+
+        $this->assertInstanceOf(Client::class, Client::fromArray($arrayWithoutTimeout));
+        $this->assertInstanceOf(Client::class, Client::fromArray($arrayWithTimeout));
+    }
+
+    public function test_fromConfig()
+    {
+        config(['services.example-service' => [
+            'url' => 'localhost',
+            'token' => 'secret',
+        ]]);
+
+        $this->assertInstanceOf(Client::class, Client::fromConfig('services.example-service'));
+    }
+
     public function test_request_happy_path()
     {
         Http::fakeSequence()->push(['data' => 'foobar']);
