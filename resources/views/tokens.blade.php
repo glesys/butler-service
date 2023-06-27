@@ -37,7 +37,7 @@
                 <td class="py-3 px-4" x-text="token.owner"></td>
                 <td class="py-3 px-4" x-text="token.abilities"></td>
                 <td class="py-3 px-4" x-text="token.name"></td>
-                <td class="py-3 px-4" x-text="token.last_used_at"></td>
+                <td class="py-3 px-4" x-text="token.last_used_at || 'Never used'" :class="{'text-yellow-dark': token.is_stale}"></td>
                 <td class="py-3 px-4" x-text="token.created_at"></td>
               </tr>
             </template>
