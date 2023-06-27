@@ -28,6 +28,9 @@ class TokensController extends BaseController
                 'abilities' => $token->abilities,
                 'last_used_at' => $token->last_used_at?->toDateTimeString(),
                 'created_at' => $token->created_at->toDateTimeString(),
+                'is_stale' => $token->last_used_at
+                    ? $token->last_used_at->diffInMonths() > 2
+                    : $token->created_at->diffInMonths() > 2,
             ]);
         }
 

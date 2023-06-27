@@ -2,6 +2,7 @@
 
 namespace Butler\Service\Tests\Feature;
 
+use Butler\Auth\AccessToken;
 use Butler\Service\Models\Consumer;
 use Butler\Service\Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -27,13 +28,30 @@ class TokenTest extends TestCase
 
     public function test_index_can_returns_json()
     {
-        Consumer::create(['name' => 'consumer1'])->createToken();
-        Consumer::create(['name' => 'consumer2'])->createToken();
+        $this->freezeTime();
+
+        AccessToken::unguard();
+
+        Consumer::create(['name' => 'example-service'])->createToken();
+
+        Consumer::create(['name' => 'owner1@example.com'])->createToken()->accessToken->update([
+            'last_used_at' => now()->subDay(),
+            'created_at' => now()->subMonths(3),
+        ]);
+
+        Consumer::create(['name' => 'owner2@example.com'])->createToken()->accessToken->update([
+            'last_used_at' => now()->subMonths(3),
+        ]);
+
+        Consumer::create(['name' => 'owner3@example.com'])->createToken()->accessToken->update([
+            'created_at' => now()->subMonths(3),
+        ]);
 
         $this->actingAsUser()
             ->getJson(route('tokens.index'))
             ->assertOk()
-            ->assertJsonPath('*.owner', ['consumer1', 'consumer2']);
+            ->assertJsonPath('*.owner', ['example-service', 'owner1@example.com', 'owner2@example.com', 'owner3@example.com'])
+            ->assertJsonPath('*.is_stale', [false, false, true, true]);
     }
 
     public function test_store_as_guest()
