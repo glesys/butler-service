@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Method `fromArray` and `fromConfig` to graphql client.
 
+### Changed
+- **BREAKING**: Do not use middleware aliases.
+
 ## [0.22.3] - 2023-05-22
 
 ### Changed

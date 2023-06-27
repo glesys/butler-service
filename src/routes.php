@@ -37,7 +37,5 @@ Route::middleware('web')->group(function () {
 });
 
 Route::middleware('api')->group(function () {
-    Route::post('graphql', GraphqlController::class)
-        ->middleware('auth:butler')
-        ->name('graphql');
+    Route::post('graphql', GraphqlController::class)->name('graphql');
 });

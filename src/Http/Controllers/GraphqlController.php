@@ -5,12 +5,18 @@ declare(strict_types=1);
 namespace Butler\Service\Http\Controllers;
 
 use Butler\Graphql\Concerns\HandlesGraphqlRequests;
+use Butler\Service\Http\Middleware\Authenticate;
 use GraphQL\Language\AST\DocumentNode;
 use GraphQL\Type\Schema;
 
 class GraphqlController extends Controller
 {
     use HandlesGraphqlRequests;
+
+    public function __construct()
+    {
+        $this->middleware(Authenticate::using('butler'));
+    }
 
     protected function beforeExecutionHook(Schema $schema, DocumentNode $source): void
     {

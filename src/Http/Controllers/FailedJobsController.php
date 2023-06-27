@@ -2,6 +2,7 @@
 
 namespace Butler\Service\Http\Controllers;
 
+use Butler\Service\Http\Middleware\Authenticate;
 use Butler\Service\Jobs\Contracts\Viewable;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Queue\Failed\FailedJobProviderInterface;
@@ -11,7 +12,7 @@ class FailedJobsController extends Controller
 {
     public function __construct(private FailedJobProviderInterface $queueFailer)
     {
-        $this->middleware('auth:web')->except('index');
+        $this->middleware(Authenticate::using('web'))->except('index');
     }
 
     public function index()
