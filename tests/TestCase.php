@@ -8,7 +8,6 @@ use Illuminate\Auth\GenericUser;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Illuminate\Support\Facades\Hash;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -17,8 +16,6 @@ abstract class TestCase extends BaseTestCase
         $app = require __DIR__ . '/laravel/bootstrap/app.php';
 
         $app->make(Kernel::class)->bootstrap();
-
-        Hash::driver('bcrypt')->setRounds(4);
 
         return $app;
     }
