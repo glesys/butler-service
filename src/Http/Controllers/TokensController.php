@@ -3,8 +3,10 @@
 namespace Butler\Service\Http\Controllers;
 
 use Butler\Auth\AccessToken;
+use Butler\Service\Http\Middleware\Authenticate;
 use Butler\Service\Models\Consumer;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -14,8 +16,8 @@ class TokensController extends BaseController
 
     public function __construct()
     {
-        $this->middleware('auth:web');
-        $this->middleware('cache.headers:no_store,no_cache,must_revalidate');
+        $this->middleware(Authenticate::using('web'));
+        $this->middleware(SetCacheHeaders::using('no_store'));
     }
 
     public function index(Request $request)
