@@ -10,10 +10,12 @@ use Butler\Audit\Facades\Auditor;
 use Butler\Auth\Contracts\HasAccessTokens;
 use Butler\Health\Checks as HealthChecks;
 use Butler\Health\Repository as HealthRepository;
+use Butler\Service\Auth\SessionUser;
 use Butler\Service\Auth\SessionUserProvider;
 use Butler\Service\Database\ConnectionFactory;
 use Butler\Service\Database\DatabaseManager;
 use Butler\Service\Listeners\FlushBugsnag;
+use Butler\Service\Models\Consumer;
 use Butler\Service\Socialite\PassportProvider;
 use Composer\InstalledVersions;
 use Illuminate\Database\Eloquent\Model;
@@ -126,10 +128,11 @@ class ServiceProvider extends BaseServiceProvider
             ? fn () => ['console', ['hostname' => gethostname()]]
             : function () {
                 if (auth()->check()) {
+                    /** @var SessionUser|Consumer */
                     $user = auth()->user();
 
                     return [
-                        $user->name,
+                        $user instanceof SessionUser ? $user->email : $user->name,
                         array_filter([
                             'ip' => request()->ip(),
                             'userAgent' => request()->userAgent(),
