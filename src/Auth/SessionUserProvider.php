@@ -1,20 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Butler\Service\Auth;
 
-use Illuminate\Auth\GenericUser;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
 
 class SessionUserProvider implements UserProvider
 {
-    public function retrieveById($identifier): Authenticatable|null
+    public function retrieveById($identifier): ?Authenticatable
     {
-        if ($identifier && $user = session('user')) {
-            return new GenericUser($user);
-        }
-
-        return null;
+        return $identifier ? SessionUser::retrieve() : null;
     }
 
     public function retrieveByToken($identifier, $token)

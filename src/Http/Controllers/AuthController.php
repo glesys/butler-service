@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Butler\Service\Http\Controllers;
 
+use Butler\Service\Auth\SessionUser;
 use Butler\Service\Http\Middleware\Authenticate;
-use Illuminate\Auth\GenericUser;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -23,7 +25,7 @@ class AuthController extends Controller
     {
         $oauthUser = $this->driver()->user();
 
-        $user = [
+        $sessionUser = SessionUser::store([
             'id' => $oauthUser->id,
             'username' => $oauthUser->nickname,
             'name' => $oauthUser->name,
@@ -31,11 +33,9 @@ class AuthController extends Controller
             'oauth_token' => $oauthUser->token,
             'oauth_refresh_token' => $oauthUser->refreshToken,
             'remember_token' => null,
-        ];
+        ]);
 
-        Auth::login(new GenericUser($user));
-
-        session(['user' => $user]);
+        Auth::login($sessionUser);
 
         return redirect()->route('home');
     }
