@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Butler\Service\Testing\Concerns;
 
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Hash;
 
 trait CreatesApplication
@@ -19,12 +20,7 @@ trait CreatesApplication
         return dirname($reflection->getFileName(), 3) . '/bootstrap/app.php';
     }
 
-    /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
-    public function createApplication()
+    public function createApplication(): Application
     {
         $app = require $this->bootstrapFilePath();
 
