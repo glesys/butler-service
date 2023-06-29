@@ -4,12 +4,14 @@ namespace Butler\Service\Tests\Feature;
 
 use Butler\Auth\AccessToken;
 use Butler\Service\Models\Consumer;
+use Butler\Service\Testing\Concerns\InteractsWithAuthentication;
 use Butler\Service\Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class TokenTest extends TestCase
 {
     use DatabaseMigrations;
+    use InteractsWithAuthentication;
 
     public function test_index_as_guest()
     {

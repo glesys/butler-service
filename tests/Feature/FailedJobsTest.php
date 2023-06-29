@@ -4,6 +4,7 @@ namespace Butler\Service\Tests\Feature;
 
 use App\Jobs\Job;
 use App\Jobs\ViewableJob;
+use Butler\Service\Testing\Concerns\InteractsWithAuthentication;
 use Butler\Service\Tests\TestCase;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -13,6 +14,8 @@ use Mockery\Mock;
 
 class FailedJobsTest extends TestCase
 {
+    use InteractsWithAuthentication;
+
     /** @var FailedJobProviderInterface|Mock */
     private $queueFailer;
 
