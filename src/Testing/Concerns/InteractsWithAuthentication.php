@@ -5,14 +5,24 @@ declare(strict_types=1);
 namespace Butler\Service\Testing\Concerns;
 
 use Butler\Auth\ButlerAuth;
+use Butler\Service\Auth\SessionUser;
 use Butler\Service\Models\Consumer;
-use Illuminate\Auth\GenericUser;
 
 trait InteractsWithAuthentication
 {
     public function actingAsUser(array $data = [], $guard = null)
     {
-        return $this->be(new GenericUser($data), $guard);
+        $user = new SessionUser(array_merge([
+            'id' => rand(1, 999),
+            'username' => 'username',
+            'name' => 'name',
+            'email' => 'user@example.com',
+            'oauth_token' => 'token',
+            'oauth_refresh_token' => 'refresh-token',
+            'remember_token' => null,
+        ], $data));
+
+        return $this->actingAs($user, $guard);
     }
 
     public function actingAsConsumer(array $data = [], $abilities = ['*']): self

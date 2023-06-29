@@ -3,6 +3,7 @@
 namespace Butler\Service\Tests\Feature;
 
 use Butler\Service\Auth\SessionUser;
+use Butler\Service\Testing\Concerns\InteractsWithAuthentication;
 use Butler\Service\Tests\TestCase;
 use Illuminate\Http\RedirectResponse;
 use Laravel\Socialite\Facades\Socialite;
@@ -10,6 +11,8 @@ use Laravel\Socialite\Two\InvalidStateException;
 
 class AuthTest extends TestCase
 {
+    use InteractsWithAuthentication;
+
     public function test_redirect()
     {
         Socialite::shouldReceive('driver->redirect')

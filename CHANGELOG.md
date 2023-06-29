@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - **BREAKING**: Do not use middleware aliases.
 - Renamed session key for web auth.
+- Use `SessionUser` instead of `GenericUser` in tests.
 
 ## [0.22.3] - 2023-05-22
 
