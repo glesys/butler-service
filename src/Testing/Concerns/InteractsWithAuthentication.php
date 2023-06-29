@@ -10,7 +10,7 @@ use Butler\Service\Models\Consumer;
 
 trait InteractsWithAuthentication
 {
-    public function actingAsUser(array $data = [], $guard = null)
+    public function actingAsUser(array $data = [], $guard = null): static
     {
         $user = new SessionUser(array_merge([
             'id' => rand(1, 999),
@@ -25,7 +25,7 @@ trait InteractsWithAuthentication
         return $this->actingAs($user, $guard);
     }
 
-    public function actingAsConsumer(array $data = [], $abilities = ['*']): self
+    public function actingAsConsumer(array $data = [], $abilities = ['*']): static
     {
         ButlerAuth::actingAs(new Consumer($data), $abilities);
 
