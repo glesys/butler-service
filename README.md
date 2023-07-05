@@ -81,6 +81,8 @@ php artisan vendor:publish --force --tag=butler-index
 
 Configure `butler.sso` in `config/butler.php`.
 
+Set `butler.sso.fake` to `true` to fake to login process.
+
 See [laravel/socialite](https://github.com/laravel/socialite) for more information.
 
 ## Authentication with butler-auth

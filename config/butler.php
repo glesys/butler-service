@@ -42,6 +42,7 @@ return [
     'sso' => [
 
         'enabled' => env('BUTLER_SSO_ENABLED', false),
+        'fake' => env('BUTLER_SSO_FAKE', false),
         'url' => env('BUTLER_SSO_URL'),
         'client_id' => env('BUTLER_SSO_CLIENT_ID'),
         'client_secret' => env('BUTLER_SSO_CLIENT_SECRET'),
