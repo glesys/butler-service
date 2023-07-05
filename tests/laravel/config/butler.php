@@ -36,6 +36,7 @@ return [
     'sso' => [
 
         'enabled' => true,
+        'fake' => true,
         'url' => 'http://localhost',
         'client_id' => 'client-id',
         'client_secret' => 'client-secret',

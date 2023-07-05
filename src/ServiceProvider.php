@@ -16,6 +16,7 @@ use Butler\Service\Database\ConnectionFactory;
 use Butler\Service\Database\DatabaseManager;
 use Butler\Service\Listeners\FlushBugsnag;
 use Butler\Service\Models\Consumer;
+use Butler\Service\Socialite\FakeProvider;
 use Butler\Service\Socialite\PassportProvider;
 use Composer\InstalledVersions;
 use Illuminate\Database\Eloquent\Model;
@@ -298,8 +299,12 @@ class ServiceProvider extends BaseServiceProvider
         $socialite = $this->app->make(SocialiteFactory::class);
         $config = config('butler.sso');
 
+        $provider = $this->app->isLocal() && ($config['fake'] ?? false)
+            ? FakeProvider::class
+            : PassportProvider::class;
+
         $socialite->extend('passport', fn () => $socialite
-            ->buildProvider(PassportProvider::class, $config)
+            ->buildProvider($provider, $config)
             ->setHost($config['url'])
         );
     }
