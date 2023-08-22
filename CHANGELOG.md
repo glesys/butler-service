@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.23.1] - 2023-08-22
+
 ### Added
 - Socialite provider `FakeProvider` useful for local environment.
 - A `Butler\Graphql\Service` as a alternative to `Butler\Graphql\Client`
