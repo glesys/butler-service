@@ -249,7 +249,6 @@ class ServiceProvider extends BaseServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 \Butler\Service\Console\Commands\Assets::class,
-                \Butler\Service\Console\Commands\GenerateUuid::class,
             ]);
         }
     }

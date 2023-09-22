@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Command for publishing assets.
 - Show alert if assets are not up-to-date
 
+### Removed
+- **BREAKING**: Remove command `GenerateUuid`
+
 ## [0.23.1] - 2023-08-22
 
 ### Added
