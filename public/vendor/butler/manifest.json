@@ -3,17 +3,17 @@
     "file": "assets/favicon.41d3a538.ico",
     "src": "resources/images/favicon.ico"
   },
-  "resources/css/fonts/dmsans/DMSans-Regular.ttf": {
-    "file": "assets/DMSans-Regular.9ae2da66.ttf",
-    "src": "resources/css/fonts/dmsans/DMSans-Regular.ttf"
+  "resources/css/fonts/dmsans/DMSans-Bold.ttf": {
+    "file": "assets/DMSans-Bold.3edb1342.ttf",
+    "src": "resources/css/fonts/dmsans/DMSans-Bold.ttf"
   },
   "resources/css/fonts/dmmono/DMMono-Regular.ttf": {
     "file": "assets/DMMono-Regular.57f0f4b4.ttf",
     "src": "resources/css/fonts/dmmono/DMMono-Regular.ttf"
   },
-  "resources/css/fonts/dmsans/DMSans-Bold.ttf": {
-    "file": "assets/DMSans-Bold.3edb1342.ttf",
-    "src": "resources/css/fonts/dmsans/DMSans-Bold.ttf"
+  "resources/css/fonts/dmsans/DMSans-Regular.ttf": {
+    "file": "assets/DMSans-Regular.9ae2da66.ttf",
+    "src": "resources/css/fonts/dmsans/DMSans-Regular.ttf"
   },
   "resources/js/app.js": {
     "file": "assets/app.0f8aee8b.js",
@@ -21,7 +21,7 @@
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app.dad26a4a.css",
+    "file": "assets/app.e652af71.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }

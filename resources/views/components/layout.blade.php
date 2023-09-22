@@ -42,7 +42,16 @@
       <x-butler::navbar/>
     </header>
 
-    <main class="p-5">{{ $slot }}</main>
+    <main class="p-5">
+      @unless(\Butler\Service\Butler::assetsAreCurrent())
+        <div class="mb-6 p-3 rounded text-zinc-100 bg-blue-500 dark:bg-sky-900">
+          The published assets are not up-to-date with the installed version. To update, run
+          <code class="text-sm text-zinc-200 border bg-blue-500 border-blue-400 dark:bg-sky-800 dark:border-sky-600 rounded py-1 px-2 mx-1">php artisan butler-service:assets</code>
+        </div>
+      @endunless
+
+      {{ $slot }}
+    </main>
 
     <div x-cloak x-data="alert" x-bind="bind" class="flex justify-between fixed top-2 inset-x-0 mx-auto p-3 max-w-xl rounded border text-white">
       <span x-text="content"></span>
