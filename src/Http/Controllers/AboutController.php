@@ -13,7 +13,7 @@ class AboutController extends Controller
         ]);
     }
 
-    private function databaseConnections(): array
+    protected function databaseConnections(): array
     {
         return collect(config('database.connections'))->map(function ($connection, $key) {
             return [
