@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Artisan;
 
 class FailedJobsController extends Controller
 {
-    public function __construct(private FailedJobProviderInterface $queueFailer)
+    public function __construct(protected FailedJobProviderInterface $queueFailer)
     {
         $this->middleware(Authenticate::using('web'))->except('index');
     }
@@ -60,7 +60,7 @@ class FailedJobsController extends Controller
         return response()->noContent();
     }
 
-    private function getDetailsFromRawPayload(string $payload): array
+    protected function getDetailsFromRawPayload(string $payload): array
     {
         $payload = rescue(fn () => json_decode($payload, true, flags: JSON_THROW_ON_ERROR));
 
@@ -77,7 +77,7 @@ class FailedJobsController extends Controller
         ];
     }
 
-    private function getCommandFromPayloadData(array $data): ?object
+    protected function getCommandFromPayloadData(array $data): ?object
     {
         return rescue(function () use ($data) {
             if (str_starts_with($data['command'], 'O:')) {
