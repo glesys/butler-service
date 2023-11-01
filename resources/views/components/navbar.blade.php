@@ -14,9 +14,7 @@
         Tokens
       </x-butler::nav-link>
     @else
-      <span class="block text-gray-300 dark:text-gray-500 cursor-not-allowed py-3 px-1">
-        Tokens
-      </span>
+      <x-butler::nav-muted>Tokens</x-butler::nav-muted>
     @endauth
     @includeIf('butler::navbar-append')
   </div>
