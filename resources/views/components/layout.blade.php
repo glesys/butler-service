@@ -42,6 +42,19 @@
       <x-butler::navbar/>
     </header>
 
+    @isset($searchbar)
+      <div x-data="{query: ''}" class="w-full flex flex-row items-center bg-white dark:bg-gray-700 border-b border-gray-100 dark:border-gray-500">
+        <x-butler::icons.search class="ml-5 mr-1"/>
+        <input
+          type="text"
+          class="p-2 w-full outline-none text-black dark:text-white bg-white dark:bg-gray-700"
+          x-model="query"
+          @keyup.debounce="$dispatch('searchbar', { query })"
+          @keydown.escape="query = ''"
+        />
+      </div>
+    @endisset
+
     <main class="p-5">
       @unless(\Butler\Service\Butler::assetsAreCurrent())
         <div class="mb-6 p-3 rounded text-zinc-100 bg-blue-500 dark:bg-sky-900">
