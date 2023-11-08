@@ -1,5 +1,5 @@
 <nav x-data="navbar" class="text-lg border-b border-gray-100 dark:border-gray-500">
-  <div class="flex flex-row gap-5 px-5 -mb-px">
+  <div class="flex flex-row gap-5 px-5">
     <x-butler::nav-link route="home" :active="request()->routeIs('home')">
       GraphQL
     </x-butler::nav-link>
