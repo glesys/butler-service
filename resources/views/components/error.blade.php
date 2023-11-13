@@ -1,1 +1,1 @@
-<span {{ $attributes->class(['text-sm text-red-dark']) }}></span>
+<span {{ $attributes->class(['text-sm text-red-dark']) }}>{{ $slot }}</span>
