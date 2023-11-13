@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Blade components.
 
+### Changed
+- Update bugsnag config file.
+
 ## [0.24.1] - 2023-10-04
 
 ### Added
