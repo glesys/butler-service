@@ -4,6 +4,9 @@ module.exports = {
         "./resources/views/**/*.blade.php",
         "./resources/js/**/*.js",
     ],
+    plugins: [
+        require('tailwind-scrollbar')({ nocompatible: true }),
+    ],
     theme: {
         fontFamily: {
             'sans': 'DM Sans, Helvetica, Arial, sans-serif',
