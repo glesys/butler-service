@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Dropdown component for navbar.
 
 ## [0.24.2] - 2023-11-15
 
