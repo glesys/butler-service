@@ -41,7 +41,7 @@ abstract class Service
     public function query(
         string $query,
         array $variables = [],
-        string $key = null,
+        ?string $key = null,
         mixed $default = null,
         bool $rescue = true,
     ): mixed {

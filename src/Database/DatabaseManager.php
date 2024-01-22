@@ -11,7 +11,7 @@ class DatabaseManager extends BaseDatabaseManager
     /**
      * Remove connection from local cache.
      */
-    public function forget(string $name = null): void
+    public function forget(?string $name = null): void
     {
         $name = $name ?: $this->getDefaultConnection();
 
