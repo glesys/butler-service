@@ -7,6 +7,7 @@ namespace Butler\Service\Testing\Concerns;
 use Illuminate\Http\Client\Request;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
+use PHPUnit\Framework\Assert;
 
 trait InteractsWithGraphql
 {
@@ -26,6 +27,8 @@ trait InteractsWithGraphql
                 (! $query || $query === $request['query']) &&
                 (! $variables || $variables === $request['variables'] ?? [])
             ) {
+                Assert::assertTrue(true);
+
                 return $this;
             }
         }
