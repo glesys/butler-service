@@ -22,8 +22,10 @@ class InteractsWithGraphqlTest extends TestCase
         ]);
 
         $class = $this->dummyClass();
+        $result = $class->assertGraphqlSent(...$arguments);
 
-        $this->assertSame($class, $class->assertGraphqlSent(...$arguments));
+        $this->assertSame(1, $this->getCount());
+        $this->assertSame($class, $result);
     }
 
     public static function assertGraphqlSentHappyProvider()
