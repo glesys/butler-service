@@ -4,14 +4,19 @@
     <x-butler::card title="Details" class="lg:w-1/2">
       <div
         x-cloak
-        x-data="{ about: {} }"
+        x-data="{
+          about: {},
+          filtered(values) { delete values.user_agent; return values; }
+        }"
         x-init="$watch('$store.health.about', data => about = data)"
         class="grid grid-cols-1 lg:grid-cols-2 gap-x-24 gap-y-4"
       >
+        <x-butler::spinner x-show="$store.health.loading"/>
+
         <template x-for="(values, category) in about">
           <div class="mb-4">
             <x-butler::h2 class="capitalize" x-text="deslug(category)"></x-butler::h2>
-            <template x-for="(value, key) in values">
+            <template x-for="(value, key) in filtered(values)">
               <div class="flex justify-between">
                 <x-butler::label class="capitalize" x-text="deslug(key)"></x-butler::label>
 
