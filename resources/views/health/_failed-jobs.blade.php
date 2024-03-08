@@ -26,8 +26,11 @@
     </x-slot>
   @endauth
 
+  <x-butler::spinner x-show="loading"/>
+
   <div class="text-gray-500/70 dark:text-gray-300 overflow-x-auto">
-    <div x-cloak x-show="! failedJobs.length">
+
+    <div x-cloak x-show="! loading && ! failedJobs.length">
       <span x-show="error" class="text-red-dark" x-text="error"></span>
       <span x-show="! error">No failed jobs.</span>
     </div>

@@ -14,6 +14,8 @@
         />
       </x-slot>
 
+      <x-butler::icons.loading x-show="loading" class="animate-spin"/>
+
       <div class="text-gray-500/70 dark:text-gray-300 overflow-x-auto">
         <span x-cloak x-show="! loading && ! tokens.length" class="dark:text-white">
           No tokens found.

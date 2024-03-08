@@ -1,4 +1,5 @@
 export default (failedJobsUrl, retryUrl, forgetUrl) => ({
+    loading: true,
     error: null,
     failedJobs: [],
     selectedIds: [],
@@ -32,6 +33,8 @@ export default (failedJobsUrl, retryUrl, forgetUrl) => ({
             this.error = "Could not fetch failed jobs."
             this.failedJobs = []
         }
+
+        this.loading = false
     },
 
     retrySelectedJobs() {

@@ -1,5 +1,6 @@
 <x-butler::card title="Checks" x-data="healthChecksCard">
-  <div x-cloak x-show="! sortedChecks.length">No health checks found.</div>
+  <x-butler::spinner x-show="$store.health.loading"/>
+  <div x-cloak x-show="! $store.health.loading && ! sortedChecks.length">No health checks found.</div>
   <div x-cloak x-show="sortedChecks.length" class="flex flex-col gap-4">
     <template x-for="check in sortedChecks" :key="check.slug + check.timestamp">
       <x-butler::accordion>
