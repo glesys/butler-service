@@ -24,9 +24,9 @@ class HealthTest extends TestCase
             ->assertOk()
             ->assertJson(fn (AssertableJson $json) =>
                 $json->hasAll('about', 'checks')->whereAllType([
-                    'about.butler_service.version' => 'string',
-                    'about.laravel_octane.version' => 'string',
-                    'about.laravel_octane.running' => 'boolean',
+                    'about.butlerService.version' => 'string',
+                    'about.laravelOctane.version' => 'string',
+                    'about.laravelOctane.running' => 'boolean',
                 ])
             );
     }

@@ -10,8 +10,9 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may specify which of the database connections below you wish
-    | to use as your default connection for all database work. Of course
-    | you may use many connections at once using the Database library.
+    | to use as your default connection for database operations. This is
+    | the connection which will be utilized unless another connection
+    | is explicitly specified when you execute a query / statement.
     |
     */
 
@@ -22,14 +23,9 @@ return [
     | Database Connections
     |--------------------------------------------------------------------------
     |
-    | Here are each of the database connections setup for your application.
-    | Of course, examples of configuring each database platform that is
-    | supported by Laravel is shown below to make development simple.
-    |
-    |
-    | All database work in Laravel is done through the PHP PDO facilities
-    | so make sure you have the driver for your particular database of
-    | choice installed on your machine before you begin development.
+    | Below are all of the database connections defined for your application.
+    | An example configuration is provided for each database system which
+    | is supported by Laravel. You're free to add / remove connections.
     |
     */
 
@@ -65,11 +61,14 @@ return [
     |
     | This table keeps track of all the migrations that have already run for
     | your application. Using this information, we can determine which of
-    | the migrations on disk haven't actually been run in the database.
+    | the migrations on disk haven't actually been run on the database.
     |
     */
 
-    'migrations' => 'migrations',
+    'migrations' => [
+        'table' => 'migrations',
+        'update_date_on_publish' => true,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +77,7 @@ return [
     |
     | Redis is an open source, fast, and advanced key-value store that also
     | provides a richer body of commands than a typical key-value system
-    | such as APC or Memcached. Laravel makes it easy to dig right in.
+    | such as Memcached. You may define your connection settings here.
     |
     */
 

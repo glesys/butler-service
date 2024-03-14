@@ -50,17 +50,12 @@ php artisan vendor:publish --tag=butler-views
 
 ### Extra
 
-If you dont want a `config/app.php` you can use `butler.service.extra` in `config/butler.php` to add "providers", "aliases" and "config". Note that "config" **will not** merge with existing config.
+If you dont want a `config/app.php` you can use `butler.service.extra` in `config/butler.php` to add "config". Note that "config" **will not** merge with existing config.
 
 ```php
     // example
-    'providers' => [
-        Foo\BarServiceProvider::class,
-    ],
-    'aliases' => [
-        'Backend' => App\Facades\Backend::class,
-    ],
     'config' => [
+        'foo' => 'bar',
         'trustedproxy.proxies' => [
             '10.0.0.0/8',
         ],

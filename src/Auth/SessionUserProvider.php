@@ -29,4 +29,8 @@ class SessionUserProvider implements UserProvider
     public function validateCredentials(Authenticatable $user, array $credentials)
     {
     }
+
+    public function rehashPasswordIfRequired(Authenticatable $user, array $credentials, bool $force = false)
+    {
+    }
 }

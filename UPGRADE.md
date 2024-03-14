@@ -1,3 +1,37 @@
+## Upgrade from v0.26 to v0.27
+
+### Update `bootstrap/app.php`
+
+Replace everything with:
+
+```php
+return Butler\Service\Foundation\Application::configure()->create();
+```
+
+### Copy files
+
+1. [public/index.php](https://github.com/laravel/laravel/blob/11.x/public/index.php)
+1. [artisan](https://github.com/laravel/laravel/blob/11.x/artisan)
+
+### Remove files
+
+*Use `bootstrap/app.php` instead*
+
+* `app/Http/Kernel.php`
+* `app/Console/Kernel.php`
+* `app/Exceptions/Handler.php`
+
+### Config changes
+
+* Use `CACHE_STORE` instead of `CACHE_DRIVER`
+* `MAIL_MAILER` now defaults to "log"
+* Removed `butler.service.extra.aliases` and `butler.service.extra.providers`
+
+### Additional breaking changes
+
+* [butler-health](https://github.com/glesys/butler-health/blob/main/CHANGELOG.md#060---2024-05-28)
+* [laravel](https://laravel.com/docs/11.x/upgrade)
+
 ## Upgrade from v0.12 to v0.13
 
 ### BREAKING: Require glesys/butler-audit [v0.4](https://github.com/glesys/butler-audit/blob/master/CHANGELOG.md#040---2021-09-23)

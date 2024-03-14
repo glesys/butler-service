@@ -40,8 +40,6 @@ class ServiceProvider extends BaseServiceProvider
         $this->configureHealth();
 
         $this->registerBaseProviders();
-
-        $this->registerExtraAliases();
     }
 
     public function boot()
@@ -49,10 +47,6 @@ class ServiceProvider extends BaseServiceProvider
         $this->loadMigrations();
 
         $this->registerMorphMap();
-
-        $this->loadCommands();
-
-        $this->loadRoutesFrom(__DIR__ . '/routes.php');
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'butler');
 
@@ -198,22 +192,6 @@ class ServiceProvider extends BaseServiceProvider
         }
     }
 
-    public function registerExtraProviders()
-    {
-        foreach (config('butler.service.extra.providers', []) as $provider) {
-            $this->app->register($provider);
-        }
-    }
-
-    protected function registerExtraAliases()
-    {
-        $this->app->booting(function () {
-            foreach (config('butler.service.extra.aliases', []) as $key => $alias) {
-                \Illuminate\Foundation\AliasLoader::getInstance()->alias($key, $alias);
-            }
-        });
-    }
-
     protected function loadMigrations()
     {
         if ($this->app->runningInConsole()) {
@@ -230,15 +208,6 @@ class ServiceProvider extends BaseServiceProvider
         \Illuminate\Database\Eloquent\Relations\Relation::morphMap([
             'consumer' => \Butler\Service\Models\Consumer::class,
         ]);
-    }
-
-    protected function loadCommands()
-    {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                \Butler\Service\Console\Commands\Assets::class,
-            ]);
-        }
     }
 
     protected function loadPublishing()
@@ -306,17 +275,17 @@ class ServiceProvider extends BaseServiceProvider
 
     public function addHealthInformation(): void
     {
-        HealthRepository::add('butler_service', [
+        HealthRepository::add('butlerService', [
             'version' => ltrim(InstalledVersions::getPrettyVersion('glesys/butler-service'), 'v'),
         ]);
 
-        HealthRepository::add('laravel_octane', [
+        HealthRepository::add('laravelOctane', [
             'version' => ltrim(InstalledVersions::getPrettyVersion('laravel/octane'), 'v'),
             'running' => (int) getenv('LARAVEL_OCTANE') === 1,
         ]);
 
         if (function_exists('swoole_version')) {
-            HealthRepository::add('laravel_octane', ['swoole' => swoole_version()]);
+            HealthRepository::add('laravelOctane', ['swoole' => swoole_version()]);
         }
     }
 }

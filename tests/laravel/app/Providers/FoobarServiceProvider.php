@@ -6,7 +6,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class FoobarServiceProvider extends ServiceProvider
 {
     public function register()
     {

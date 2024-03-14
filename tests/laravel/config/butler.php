@@ -17,12 +17,6 @@ return [
                 'app.timezone' => 'Europe/Stockholm',
                 'foo' => 'bar',
             ],
-            'aliases' => [
-                'Foobar' => Illuminate\Support\Facades\Cache::class,
-            ],
-            'providers' => [
-                App\Providers\ExtraServiceProvider::class,
-            ],
         ],
 
     ],
