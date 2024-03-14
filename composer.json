@@ -4,26 +4,26 @@
     "description": "Web service library based on Laravel",
     "license": "MIT",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "bugsnag/bugsnag-laravel": "^2.18",
-        "glesys/butler-audit": "^0.7",
-        "glesys/butler-auth": "^6.0",
-        "glesys/butler-graphql": "^10.0",
-        "glesys/butler-health": "^0.5.1",
+        "glesys/butler-audit": "^0.8",
+        "glesys/butler-auth": "^7.0",
+        "glesys/butler-graphql": "^11.0",
+        "glesys/butler-health": "^0.6",
         "graylog2/gelf-php": "^1.6",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^10.9",
+        "laravel/framework": "^11.0",
         "laravel/octane": "^1.0 || ^2.0",
         "laravel/socialite": "^5.5",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.9"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.12",
-        "laravel/pint": "^1.2",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^10.0",
-        "spatie/laravel-ignition": "^2.0"
+        "fakerphp/faker": "^1.23.1",
+        "laravel/pint": "^1.14",
+        "mockery/mockery": "^1.6.9",
+        "nunomaduro/collision": "^8.1.1",
+        "phpunit/phpunit": "^10.5.13",
+        "spatie/laravel-ignition": "^2.4.2"
     },
     "config": {
         "optimize-autoloader": true,

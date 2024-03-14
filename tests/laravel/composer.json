@@ -2,11 +2,11 @@
     "name": "laravel/laravel",
     "type": "project",
     "require": {
-        "php": "^8.1",
-        "glesys/butler-service": "^0.22.1"
+        "php": "^8.2",
+        "glesys/butler-service": "^0.26"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.1.1"
+        "phpunit/phpunit": "^10.5"
     },
     "autoload": {
         "psr-4": {

@@ -14,7 +14,6 @@ use Butler\Service\ServiceProvider as ButlerServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Mockery;
@@ -49,7 +48,8 @@ class ServiceProviderTest extends TestCase
 
     public function test_application_config_files_is_merged()
     {
-        $this->assertEquals('test-dummy-value', config('session.table'));
+        $this->assertEquals('sessions', config('session.table'));
+        $this->assertEquals('baz', config('session.foobar'));
     }
 
     public function test_extra_config_is_configured()
@@ -60,22 +60,9 @@ class ServiceProviderTest extends TestCase
     public function test_application_providers_are_registered()
     {
         $this->assertInstanceOf(
-            \App\Providers\AppServiceProvider::class,
-            app()->getProvider(\App\Providers\AppServiceProvider::class)
+            \App\Providers\FoobarServiceProvider::class,
+            app()->getProvider(\App\Providers\FoobarServiceProvider::class)
         );
-    }
-
-    public function test_extra_providers_are_registered()
-    {
-        $this->assertInstanceOf(
-            \App\Providers\ExtraServiceProvider::class,
-            app()->getProvider(\App\Providers\ExtraServiceProvider::class)
-        );
-    }
-
-    public function test_extra_aliases_are_registered()
-    {
-        $this->assertInstanceOf(Cache::class, app('Foobar'));
     }
 
     public function test_migration_paths_are_loaded()

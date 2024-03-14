@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Graphql exception `BackendValidation`.
 - `returnsOnException` method to `Query` test helper class.
 
+### Changed
+- **BREAKING**: Require Laravel 11 and PHP 8.2.
+
 ## [0.26.0] - 2024-04-04
 
 ### Added

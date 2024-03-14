@@ -35,8 +35,6 @@ return [
 
         'extra' => [
             'config' => [],
-            'aliases' => [],
-            'providers' => [],
         ],
 
     ],
