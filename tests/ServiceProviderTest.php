@@ -49,7 +49,8 @@ class ServiceProviderTest extends TestCase
 
     public function test_application_config_files_is_merged()
     {
-        $this->assertEquals('test-dummy-value', config('session.table'));
+        $this->assertEquals('sessions', config('session.table'));
+        $this->assertEquals('baz', config('session.foobar'));
     }
 
     public function test_extra_config_is_configured()

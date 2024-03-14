@@ -52,10 +52,6 @@ class ServiceProvider extends BaseServiceProvider
 
         $this->registerMorphMap();
 
-        $this->loadCommands();
-
-        $this->loadRoutesFrom(__DIR__ . '/routes.php');
-
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'butler');
 
         $this->loadPublishing();
@@ -242,15 +238,6 @@ class ServiceProvider extends BaseServiceProvider
         \Illuminate\Database\Eloquent\Relations\Relation::morphMap([
             'consumer' => \Butler\Service\Models\Consumer::class,
         ]);
-    }
-
-    protected function loadCommands()
-    {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                \Butler\Service\Console\Commands\Assets::class,
-            ]);
-        }
     }
 
     protected function loadPublishing()
