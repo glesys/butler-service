@@ -37,13 +37,19 @@ return [
 
         'default' => [
             'driver' => env('DB_DRIVER', 'mysql'),
+            'url' => env('DB_URL'),
             'host' => explode(',', env('DB_HOST', '127.0.0.1')),
             'port' => env('DB_PORT', '3306'),
             'database' => sqlite_database_path(env('DB_DATABASE'), env('DB_DRIVER')),
             'username' => env('DB_USERNAME', 'username'),
             'password' => env('DB_PASSWORD', 'password'),
-            'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
