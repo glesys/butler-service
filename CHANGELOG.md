@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Loading spinner.
 - Test helper class `ServiceTestCase`.
 
+### Removed
+- **BREAKING**: Database host maintenance feature.
+
 ## [0.25.0] - 2024-02-05
 
 ### Added
