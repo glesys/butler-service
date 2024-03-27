@@ -12,8 +12,6 @@ use Butler\Health\Checks as HealthChecks;
 use Butler\Health\Repository as HealthRepository;
 use Butler\Service\Auth\SessionUser;
 use Butler\Service\Auth\SessionUserProvider;
-use Butler\Service\Database\ConnectionFactory;
-use Butler\Service\Database\DatabaseManager;
 use Butler\Service\Listeners\FlushBugsnag;
 use Butler\Service\Models\Consumer;
 use Butler\Service\Socialite\FakeProvider;
@@ -207,16 +205,6 @@ class ServiceProvider extends BaseServiceProvider
         }
     }
 
-    public function registerDatabaseManager()
-    {
-        $this->app->singleton('db', fn ($app) => new DatabaseManager($app, $app['db.factory']));
-    }
-
-    public function registerDatabaseConnectionFactory()
-    {
-        $this->app->singleton('db.factory', fn ($app) => new ConnectionFactory($app));
-    }
-
     protected function registerExtraAliases()
     {
         $this->app->booting(function () {
@@ -303,9 +291,11 @@ class ServiceProvider extends BaseServiceProvider
             ? FakeProvider::class
             : PassportProvider::class;
 
-        $socialite->extend('passport', fn () => $socialite
-            ->buildProvider($provider, $config)
-            ->setHost($config['url'])
+        $socialite->extend(
+            'passport',
+            fn () => $socialite
+                ->buildProvider($provider, $config)
+                ->setHost($config['url'])
         );
     }
 
