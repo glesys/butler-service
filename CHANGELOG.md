@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **BREAKING**: Require Laravel 11 and PHP 8.2.
+
+## [0.25.1] - 2024-03-nn
+
 ### Added
 - Assertion in 'assertGraphqlSent' helper.
 - Loading spinner.

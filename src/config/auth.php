@@ -7,14 +7,15 @@ return [
     | Authentication Defaults
     |--------------------------------------------------------------------------
     |
-    | This option controls the default authentication "guard" and password
-    | reset options for your application. You may change these defaults
+    | This option defines the default authentication "guard" and password
+    | reset "broker" for your application. You may change these values
     | as required, but they're a perfect start for most applications.
     |
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => env('AUTH_GUARD', 'web'),
+        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
     ],
 
     /*
@@ -24,11 +25,11 @@ return [
     |
     | Next, you may define every authentication guard for your application.
     | Of course, a great default configuration has been defined for you
-    | here which uses session storage and the Eloquent user provider.
+    | which utilizes session storage plus the Eloquent user provider.
     |
-    | All authentication drivers have a user provider. This defines how the
+    | All authentication guards have a user provider, which defines how the
     | users are actually retrieved out of your database or other storage
-    | mechanisms used by this application to persist your user's data.
+    | system used by the application. Typically, Eloquent is utilized.
     |
     | Supported: "session"
     |
@@ -50,12 +51,12 @@ return [
     | User Providers
     |--------------------------------------------------------------------------
     |
-    | All authentication drivers have a user provider. This defines how the
+    | All authentication guards have a user provider, which defines how the
     | users are actually retrieved out of your database or other storage
-    | mechanisms used by this application to persist your user's data.
+    | system used by the application. Typically, Eloquent is utilized.
     |
     | If you have multiple user tables or models you may configure multiple
-    | sources which represent each model / table. These sources may then
+    | providers to represent the model / table. These providers may then
     | be assigned to any extra authentication guards you have defined.
     |
     | Supported: "database", "eloquent"
@@ -68,7 +69,7 @@ return [
         ],
         'consumers' => [
             'driver' => 'eloquent',
-            'model' => Butler\Service\Models\Consumer::class,
+            'model' => env('AUTH_MODEL', Butler\Service\Models\Consumer::class),
         ],
     ],
 
