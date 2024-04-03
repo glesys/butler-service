@@ -51,6 +51,7 @@
           x-model="query"
           @keyup.debounce="$dispatch('searchbar', { query })"
           @keydown.escape="query = ''"
+          @searchbar-set.window="query = $event.detail?.query || ''"
         />
       </div>
     @endisset

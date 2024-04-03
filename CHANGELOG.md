@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Assertion in 'assertGraphqlSent' helper.
 - Loading spinner.
 - Test helper class `ServiceTestCase`.
+- Listen for event in searchbar.
 
 ### Removed
 - **BREAKING**: Database host maintenance feature.
