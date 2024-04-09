@@ -4,12 +4,18 @@ declare(strict_types=1);
 
 namespace Butler\Service\Exceptions;
 
+use Butler\Service\Graphql\Exceptions\BackendValidation;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    public function register()
+    {
+        $this->internalDontReport[] = BackendValidation::class;
+    }
+
     /**
      * Convert an authentication exception into a response.
      *
