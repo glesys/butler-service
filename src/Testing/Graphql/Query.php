@@ -35,6 +35,13 @@ class Query
         return $this;
     }
 
+    public function returnsOnException(mixed $expectedResultOnException): static
+    {
+        $this->expectedResultOnException = $expectedResultOnException;
+
+        return $this;
+    }
+
     public function sends(string $expectedQuery, array $expectedVariables = []): static
     {
         throw_unless(is_graphql($expectedQuery), 'Expected query is not a valid GraphQL query.');
