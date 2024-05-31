@@ -11,6 +11,12 @@ window.badgeClassName = (state) => {
 
 window.deslug = (string) => string.replace(/[\W_]+/g, " ")
 
+window.camelCaseToTitle = (string) => {
+    const result = string.replace(/([A-Z])/g, ' $1')
+
+    return result.charAt(0).toUpperCase() + result.slice(1)
+};
+
 window.getJson = async (url) => await fetch(url, {
     headers: {
         "Content-Type": "application/json",
