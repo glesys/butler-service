@@ -15,10 +15,10 @@
 
         <template x-for="(values, category) in about">
           <div class="mb-4">
-            <x-butler::h2 class="capitalize" x-text="deslug(category)"></x-butler::h2>
+            <x-butler::h2 class="capitalize" x-text="camelCaseToTitle(category)"></x-butler::h2>
             <template x-for="(value, key) in filtered(values)">
               <div class="flex justify-between">
-                <x-butler::label class="capitalize" x-text="deslug(key)"></x-butler::label>
+                <x-butler::label class="capitalize" x-text="camelCaseToTitle(key)"></x-butler::label>
 
                 <span x-show="category === 'cache'" :class="value ? 'text-green-dark' : 'text-red-dark'" x-text="value"></span>
                 <x-butler::muted x-show="category !== 'cache'" x-text="value"></x-butler::muted>
