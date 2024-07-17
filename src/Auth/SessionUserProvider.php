@@ -14,23 +14,13 @@ class SessionUserProvider implements UserProvider
         return $identifier ? SessionUser::retrieve() : null;
     }
 
-    public function retrieveByToken($identifier, $token)
-    {
-    }
+    public function retrieveByToken($identifier, $token) {}
 
-    public function updateRememberToken(Authenticatable $user, $token)
-    {
-    }
+    public function updateRememberToken(Authenticatable $user, $token) {}
 
-    public function retrieveByCredentials(array $credentials)
-    {
-    }
+    public function retrieveByCredentials(array $credentials) {}
 
-    public function validateCredentials(Authenticatable $user, array $credentials)
-    {
-    }
+    public function validateCredentials(Authenticatable $user, array $credentials) {}
 
-    public function rehashPasswordIfRequired(Authenticatable $user, array $credentials, bool $force = false)
-    {
-    }
+    public function rehashPasswordIfRequired(Authenticatable $user, array $credentials, bool $force = false) {}
 }

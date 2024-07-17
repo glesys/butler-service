@@ -198,6 +198,4 @@ class ServiceTest extends TestCase
     }
 }
 
-class DummyService extends Service
-{
-}
+class DummyService extends Service {}
