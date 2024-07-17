@@ -12,8 +12,7 @@ class Client
         private string $url,
         private string $token,
         private int $timeout = 10,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $array): static
     {

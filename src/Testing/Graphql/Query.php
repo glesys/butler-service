@@ -24,9 +24,7 @@ class Query
         return new static($callback);
     }
 
-    public function __construct(public readonly Closure $callback)
-    {
-    }
+    public function __construct(public readonly Closure $callback) {}
 
     public function returns(mixed $expectedResult): static
     {
