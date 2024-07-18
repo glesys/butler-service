@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - **BREAKING**: Don't merge framework configuration.
+- **BREAKING**: Update how authorization is done in GraphqlController.
 
 ### Removed
 - **BREAKING**: Middleware Authenticate.
