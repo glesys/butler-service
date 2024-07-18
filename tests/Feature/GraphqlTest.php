@@ -6,6 +6,7 @@ namespace Butler\Service\Tests\Feature;
 
 use Butler\Service\Testing\Concerns\InteractsWithAuthentication;
 use Butler\Service\Tests\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class GraphqlTest extends TestCase
 {
@@ -20,64 +21,93 @@ class GraphqlTest extends TestCase
         ]);
     }
 
-    public function test_query_for_consumer_without_query_ability_is_forbidden()
+    #[DataProvider('queryAbilitiesProvider')]
+    public function test_query(bool $expectOk, array $abilities)
+    {
+        $this->actingAsConsumer(abilities: $abilities)->graphql('{ ping }')->when(
+            $expectOk,
+            fn ($response) => $response
+                ->assertOk()
+                ->assertJsonPath('data.ping', 'pong'),
+            fn ($response) => $response
+                ->assertForbidden()
+                ->assertExactJson(['message' => 'This action is unauthorized.']),
+        );
+    }
+
+    public static function queryAbilitiesProvider()
+    {
+        return [
+            [false, []],
+            [false, ['foobar']],
+            [false, ['query:pong']],
+            [false, ['mutation']],
+            [false, ['mutation:stop']],
+
+            [true, ['*']],
+            [true, ['query']],
+            [true, ['query:ping']],
+            [true, ['query:ping', 'query']],
+            [true, ['query:ping', 'mutation']],
+        ];
+    }
+
+    #[DataProvider('mutationAbilitiesProvider')]
+    public function test_mutation(bool $expectOk, array $abilities)
+    {
+        $this->actingAsConsumer(abilities: $abilities)->graphql('mutation { start }')->when(
+            $expectOk,
+            fn ($response) => $response
+                ->assertOk()
+                ->assertJsonPath('data.start', 'started'),
+            fn ($response) => $response
+                ->assertForbidden()
+                ->assertExactJson(['message' => 'This action is unauthorized.']),
+        );
+    }
+
+    public static function mutationAbilitiesProvider()
+    {
+        return [
+            [false, []],
+            [false, ['foobar']],
+            [false, ['mutation:stop']],
+            [false, ['query']],
+            [false, ['query:stop']],
+
+            [true, ['*']],
+            [true, ['mutation']],
+            [true, ['mutation:start']],
+            [true, ['mutation:start', 'mutation']],
+            [true, ['mutation:start', 'query']],
+        ];
+    }
+
+    public function test_introspection_is_allowed_without_abilities()
     {
         $this->actingAsConsumer(abilities: [])
-            ->graphql('{ ping }')
-            ->assertForbidden()
-            ->assertExactJson([
-                'message' => 'This action is unauthorized.',
-            ]);
-    }
+            ->graphql(<<<'GQL'
+                {
+                    __schema {
+                        types {
+                            ...someTypeFragment
+                        }
+                    }
+                    __type(name: "Query") {
+                        name
+                    }
+                    __typename
+                }
 
-    public function test_query_for_consumer_with_query_ability_is_allowed()
-    {
-        $this->actingAsConsumer(abilities: ['query'])
-            ->graphql('{ ping }')
+                fragment someTypeFragment on __Type {
+                    name
+                }
+                GQL,
+            )
             ->assertOk()
-            ->assertJsonPath('data.ping', 'pong');
-    }
-
-    public function test_query_for_consumer_with_all_abilities_is_allowed()
-    {
-        $this->actingAsConsumer(abilities: ['*'])
-            ->graphql('{ ping }')
-            ->assertOk()
-            ->assertJsonPath('data.ping', 'pong');
-    }
-
-    public function test_mutation_for_consumer_without_mutation_ability_is_forbidden()
-    {
-        $this->actingAsConsumer(abilities: ['query'])
-            ->graphql('mutation { start }')
-            ->assertForbidden()
-            ->assertExactJson([
-                'message' => 'This action is unauthorized.',
-            ]);
-    }
-
-    public function test_mutation_for_consumer_with_mutation_ability_is_allowed()
-    {
-        $this->actingAsConsumer(abilities: ['mutation'])
-            ->graphql('mutation { start }')
-            ->assertOk()
-            ->assertJsonPath('data.start', 'started');
-    }
-
-    public function test_mutation_for_consumer_with_all_abilities_is_allowed()
-    {
-        $this->actingAsConsumer(abilities: ['*'])
-            ->graphql('mutation { start }')
-            ->assertOk()
-            ->assertJsonPath('data.start', 'started');
-    }
-
-    public function test_query_without_operation_is_not_allowed()
-    {
-        $this->actingAsConsumer()
-            ->graphql('fragment Foo on __Bar { baz }')
-            ->assertStatus(400)
-            ->assertExactJson(['message' => 'Invalid operation.']);
+            ->assertJsonPath('data.__schema.types.0.name', 'Query')
+            ->assertJsonPath('data.__type.name', 'Query')
+            ->assertJsonPath('data.__typename', 'Query');
     }
 
     private function graphql($query)

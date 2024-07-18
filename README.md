@@ -101,6 +101,10 @@ $consumer->createToken(['query'], 'my read-only token');
 // allow "mutation" operations only
 $consumer->createToken(['mutation'], 'my write-only token');
 
+// allow specific operations
+$consumer->createToken(['query:ping'], 'my "ping" token');
+$consumer->createToken(['query', 'mutation:start'], 'my "start" token');
+
 // allow any operations
 $consumer->createToken(['*'], 'my full-access token');
 $consumer->createToken(['query', 'mutation', 'subscription'], 'my graphql token');

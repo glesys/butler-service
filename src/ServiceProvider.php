@@ -227,9 +227,9 @@ class ServiceProvider extends BaseServiceProvider
 
     public function defineGateAbilities()
     {
-        Gate::define('graphql', function ($user, $operation) {
+        Gate::define('graphql', function ($user, $ability) {
             if ($user instanceof HasAccessTokens) {
-                return $user->tokenCan($operation);
+                return $user->tokenCan($ability);
             }
 
             return false;
