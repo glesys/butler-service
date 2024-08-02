@@ -3,6 +3,7 @@
 use Butler\Service\Logging\GraylogLoggerFactory;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
+use Monolog\Handler\SyslogUdpHandler;
 use Monolog\Processor\PsrLogMessageProcessor;
 
 return [
@@ -45,7 +46,7 @@ return [
     | utilizes the Monolog PHP logging library, which includes a variety
     | of powerful log handlers and formatters that you're free to use.
     |
-    | Available Drivers: "single", "daily", "slack", "syslog",
+    | Available drivers: "single", "daily", "slack", "syslog",
     |                    "errorlog", "monolog", "custom", "stack"
     |
     */
@@ -55,7 +56,7 @@ return [
         'stack' => [
             'driver' => 'stack',
             'channels' => array_filter([
-                'daily',
+                ...explode(',', env('LOG_STACK', 'daily')),
                 env('BUGSNAG_API_KEY') ? 'bugsnag' : null,
                 env('GRAYLOG_HOST') ? 'graylog' : null,
             ]),
@@ -84,6 +85,18 @@ return [
             'emoji' => env('LOG_SLACK_EMOJI', ':boom:'),
             'level' => env('LOG_LEVEL', 'critical'),
             'replace_placeholders' => true,
+        ],
+
+        'papertrail' => [
+            'driver' => 'monolog',
+            'level' => env('LOG_LEVEL', 'debug'),
+            'handler' => env('LOG_PAPERTRAIL_HANDLER', SyslogUdpHandler::class),
+            'handler_with' => [
+                'host' => env('PAPERTRAIL_URL'),
+                'port' => env('PAPERTRAIL_PORT'),
+                'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
+            ],
+            'processors' => [PsrLogMessageProcessor::class],
         ],
 
         'stderr' => [
