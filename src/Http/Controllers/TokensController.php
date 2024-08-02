@@ -8,16 +8,18 @@ use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class TokensController extends BaseController
+class TokensController implements HasMiddleware
 {
     use ValidatesRequests;
 
-    public function __construct()
+    public static function middleware(): array
     {
-        $this->middleware(Authenticate::using('web'));
-        $this->middleware(SetCacheHeaders::using('no_store'));
+        return [
+            Authenticate::using('web'),
+            SetCacheHeaders::using('no_store'),
+        ];
     }
 
     public function index(Request $request)

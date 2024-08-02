@@ -6,14 +6,18 @@ namespace Butler\Service\Http\Controllers;
 
 use Butler\Service\Auth\SessionUser;
 use Illuminate\Auth\Middleware\Authenticate;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
-class AuthController extends Controller
+class AuthController implements HasMiddleware
 {
-    public function __construct()
+    public static function middleware(): array
     {
-        $this->middleware(Authenticate::using('web'))->only('logout');
+        return [
+            new Middleware(Authenticate::using('web'), only: ['logout']),
+        ];
     }
 
     public function redirect()

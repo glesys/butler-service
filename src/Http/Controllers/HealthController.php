@@ -4,13 +4,15 @@ namespace Butler\Service\Http\Controllers;
 
 use Butler\Health\Repository;
 use Illuminate\Http\Middleware\SetCacheHeaders;
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class HealthController extends BaseController
+class HealthController implements HasMiddleware
 {
-    public function __construct()
+    public static function middleware(): array
     {
-        $this->middleware(SetCacheHeaders::using('no_store'));
+        return [
+            SetCacheHeaders::using('no_store'),
+        ];
     }
 
     public function __invoke(Repository $repository)

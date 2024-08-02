@@ -4,7 +4,7 @@ namespace Butler\Service\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 
-class AboutController extends Controller
+class AboutController
 {
     public function __invoke()
     {
