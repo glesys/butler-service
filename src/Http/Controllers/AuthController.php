@@ -6,6 +6,7 @@ namespace Butler\Service\Http\Controllers;
 
 use Butler\Service\Auth\SessionUser;
 use Illuminate\Auth\Middleware\Authenticate;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
@@ -44,11 +45,11 @@ class AuthController implements HasMiddleware
         return redirect()->route('home');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
 
-        request()->session()->invalidate();
+        $request->session()->invalidate();
 
         return redirect()->route('home');
     }

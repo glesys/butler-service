@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Butler\Service\Http\Controllers;
 
 use Butler\Service\Jobs\Contracts\Viewable;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Queue\Failed\FailedJobProviderInterface;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -15,9 +18,7 @@ class FailedJobsController implements HasMiddleware
 {
     use ValidatesRequests;
 
-    public function __construct(protected FailedJobProviderInterface $queueFailer)
-    {
-    }
+    public function __construct(protected FailedJobProviderInterface $queueFailer) {}
 
     public static function middleware(): array
     {
@@ -28,16 +29,12 @@ class FailedJobsController implements HasMiddleware
 
     public function index()
     {
-        return collect($this->queueFailer->all())->map(function ($failedJob) {
-            $details = $this->getDetailsFromRawPayload($failedJob->payload);
-
-            return [
-                'id' => $failedJob->id,
-                'failedAt' => $failedJob->failed_at,
-                'name' => $details['name'],
-                'url' => route('failed-jobs.show', $failedJob->id),
-            ];
-        });
+        return collect($this->queueFailer->all())->map(fn ($failedJob) => [
+            'id' => $failedJob->id,
+            'failedAt' => $failedJob->failed_at,
+            'name' => $this->getDetailsFromRawPayload($failedJob->payload)['name'],
+            'url' => route('failed-jobs.show', $failedJob->id),
+        ]);
     }
 
     public function show($id)
@@ -51,18 +48,18 @@ class FailedJobsController implements HasMiddleware
         ]);
     }
 
-    public function retry()
+    public function retry(Request $request)
     {
-        $input = $this->validate(request(), ['ids' => 'required|array']);
+        $input = $this->validate($request, ['ids' => 'required|array']);
 
         Artisan::call('queue:retry', ['id' => $input['ids']]);
 
         return response()->noContent();
     }
 
-    public function forget()
+    public function forget(Request $request)
     {
-        $input = $this->validate(request(), ['ids' => 'required|array']);
+        $input = $this->validate($request, ['ids' => 'required|array']);
 
         foreach ($input['ids'] as $id) {
             $this->queueFailer->forget($id);
