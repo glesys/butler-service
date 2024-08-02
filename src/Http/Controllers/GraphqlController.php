@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Butler\Service\Http\Controllers;
 
 use Butler\Graphql\Concerns\HandlesGraphqlRequests;
-use Butler\Service\Http\Middleware\Authenticate;
 use GraphQL\Language\AST\DocumentNode;
 use GraphQL\Type\Schema;
+use Illuminate\Auth\Middleware\Authenticate;
 
 class GraphqlController extends Controller
 {

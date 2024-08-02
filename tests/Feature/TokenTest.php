@@ -16,6 +16,7 @@ class TokenTest extends TestCase
     public function test_index_as_guest()
     {
         $this->get(route('tokens.index'))->assertRedirectToRoute('home');
+        $this->getJson(route('tokens.index'))->assertUnauthorized();
     }
 
     public function test_index_can_return_view()

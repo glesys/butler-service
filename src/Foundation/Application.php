@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Butler\Service\Foundation;
 
 use Butler\Service\Graphql\Exceptions\BackendValidation;
-use Butler\Service\Http\Middleware\Authenticate;
 use Butler\Service\Http\Middleware\SetAcceptJson;
 use Butler\Service\ServiceProvider;
 use Illuminate\Foundation\Application as BaseApplication;
@@ -48,7 +47,6 @@ class Application extends BaseApplication
                     ->redirectGuestsTo('/')
                     ->validateCsrfTokens(except: ['telescope/*'])
                     ->alias([
-                        'auth' => Authenticate::class,
                         'set-accept-json' => SetAcceptJson::class,
                     ]);
             })
