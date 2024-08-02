@@ -25,6 +25,9 @@ use Laravel\Octane\Events\RequestTerminated;
 use Laravel\Socialite\Contracts\Factory as SocialiteFactory;
 use Symfony\Component\Finder\Finder;
 
+/**
+ * @property \Illuminate\Foundation\Application $app
+ */
 class ServiceProvider extends BaseServiceProvider
 {
     public function register()
