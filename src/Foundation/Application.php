@@ -23,7 +23,9 @@ class Application extends BaseApplication
             default => static::inferBasePath(),
         };
 
-        $app = (new static($basePath))->useConfigPath(realpath(__DIR__ . '/../config'));
+        $app = (new static($basePath))
+            ->useConfigPath(realpath(__DIR__ . '/../config'))
+            ->dontMergeFrameworkConfiguration();
 
         $routeFile = fn (string $path) => file_exists($path) ? $path : null;
 
