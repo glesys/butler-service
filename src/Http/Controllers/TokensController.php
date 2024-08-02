@@ -3,8 +3,8 @@
 namespace Butler\Service\Http\Controllers;
 
 use Butler\Auth\AccessToken;
-use Butler\Service\Http\Middleware\Authenticate;
 use Butler\Service\Models\Consumer;
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Http\Request;

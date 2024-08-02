@@ -56,6 +56,8 @@ class AuthTest extends TestCase
     {
         $this->post(route('auth.logout'))->assertRedirectToRoute('home');
 
+        $this->postJson(route('auth.logout'))->assertUnauthorized();
+
         $this->assertNull(SessionUser::retrieve());
 
         $this->assertGuest();

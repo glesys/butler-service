@@ -84,6 +84,7 @@ class FailedJobsTest extends TestCase
     public function test_show_as_guest()
     {
         $this->get(route('failed-jobs.show', 1))->assertRedirectToRoute('home');
+        $this->getJson(route('failed-jobs.show', 1))->assertUnauthorized();
     }
 
     public function test_show_as_user()
@@ -118,6 +119,7 @@ class FailedJobsTest extends TestCase
     public function test_retry_as_guest()
     {
         $this->post(route('failed-jobs.retry'))->assertRedirectToRoute('home');
+        $this->postJson(route('failed-jobs.retry'))->assertUnauthorized();
     }
 
     public function test_retry_as_user()
@@ -132,6 +134,7 @@ class FailedJobsTest extends TestCase
     public function test_forget_as_guest()
     {
         $this->post(route('failed-jobs.forget'))->assertRedirectToRoute('home');
+        $this->postJson(route('failed-jobs.forget'))->assertUnauthorized();
     }
 
     public function test_forget_as_user()

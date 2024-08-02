@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Butler\Service\Http\Controllers;
 
 use Butler\Service\Auth\SessionUser;
-use Butler\Service\Http\Middleware\Authenticate;
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 

@@ -2,8 +2,8 @@
 
 namespace Butler\Service\Http\Controllers;
 
-use Butler\Service\Http\Middleware\Authenticate;
 use Butler\Service\Jobs\Contracts\Viewable;
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Queue\Failed\FailedJobProviderInterface;
 use Illuminate\Support\Facades\Artisan;

@@ -11,8 +11,10 @@ class GraphqlTest extends TestCase
 {
     use InteractsWithAuthentication;
 
-    public function test_unauthenticated()
+    public function test_as_guest()
     {
+        $this->post(route('graphql'))->assertUnauthorized();
+
         $this->graphql('{ ping }')->assertUnauthorized()->assertExactJson([
             'message' => 'Unauthenticated.',
         ]);
