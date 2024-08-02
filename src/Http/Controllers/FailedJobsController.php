@@ -5,14 +5,25 @@ namespace Butler\Service\Http\Controllers;
 use Butler\Service\Jobs\Contracts\Viewable;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Contracts\Encryption\Encrypter;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Queue\Failed\FailedJobProviderInterface;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Artisan;
 
-class FailedJobsController extends Controller
+class FailedJobsController implements HasMiddleware
 {
+    use ValidatesRequests;
+
     public function __construct(protected FailedJobProviderInterface $queueFailer)
     {
-        $this->middleware(Authenticate::using('web'))->except('index');
+    }
+
+    public static function middleware(): array
+    {
+        return [
+            new Middleware(Authenticate::using('web'), except: ['index']),
+        ];
     }
 
     public function index()

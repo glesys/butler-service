@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING**: Middleware Authenticate.
 - **BREAKING**: Middleware ValidateCsrfToken.
 
+### Removed
+- **BREAKING**: src/Http/Controllers/Controller.php.
+
 ## [0.27.0] - 2024-05-31
 
 ### Added

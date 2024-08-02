@@ -10,15 +10,20 @@ use GraphQL\Language\AST\FieldNode;
 use GraphQL\Language\AST\OperationDefinitionNode;
 use GraphQL\Type\Schema;
 use Illuminate\Auth\Middleware\Authenticate;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\Gate;
 
-class GraphqlController extends Controller
+class GraphqlController implements HasMiddleware
 {
+    use AuthorizesRequests;
     use HandlesGraphqlRequests;
 
-    public function __construct()
+    public static function middleware(): array
     {
-        $this->middleware(Authenticate::using('butler'));
+        return [
+            Authenticate::using('butler'),
+        ];
     }
 
     protected function beforeExecutionHook(Schema $schema, DocumentNode $source): void

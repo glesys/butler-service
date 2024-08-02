@@ -4,7 +4,7 @@ namespace Butler\Service\Http\Controllers;
 
 use Illuminate\Support\Facades\File;
 
-class HomeController extends Controller
+class HomeController
 {
     public function __invoke()
     {
