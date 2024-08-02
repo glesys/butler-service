@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Butler\Service\Http\Controllers;
 
 use Butler\Auth\AccessToken;
@@ -41,9 +43,9 @@ class TokensController implements HasMiddleware
         return view('butler::tokens');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $input = $this->validate(request(), [
+        $input = $this->validate($request, [
             'consumer' => 'required|string',
             'abilities' => 'required|array|min:1',
             'abilities.*' => 'required|string',
@@ -57,9 +59,9 @@ class TokensController implements HasMiddleware
         return $token->toArray();
     }
 
-    public function destroy()
+    public function destroy(Request $request)
     {
-        $input = $this->validate(request(), ['ids' => 'required|array']);
+        $input = $this->validate($request, ['ids' => 'required|array']);
 
         AccessToken::destroy($input['ids']);
 
