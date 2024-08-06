@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.28.0] - 2024-08-06
+
 ### Changed
 - **BREAKING**: Don't merge framework configuration.
 - **BREAKING**: Update how authorization is done in GraphqlController.
@@ -14,8 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - **BREAKING**: Middleware Authenticate.
 - **BREAKING**: Middleware ValidateCsrfToken.
-
-### Removed
 - **BREAKING**: src/Http/Controllers/Controller.php.
 
 ## [0.27.0] - 2024-05-31
