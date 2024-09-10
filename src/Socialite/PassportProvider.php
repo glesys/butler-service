@@ -46,7 +46,7 @@ class PassportProvider extends AbstractProvider implements ProviderInterface
             ],
         ]);
 
-        return json_decode($response->getBody(), true);
+        return json_decode((string) $response->getBody(), true);
     }
 
     protected function mapUserToObject(array $user)
