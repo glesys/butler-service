@@ -15,8 +15,10 @@ use Illuminate\Http\Request;
 
 class Application extends BaseApplication
 {
-    public static function configure(?string $basePath = null)
-    {
+    public static function configure(
+        ?string $basePath = null,
+        string $apiPrefix = 'api',
+    ) {
         $basePath = match (true) {
             is_string($basePath) => $basePath,
             default => static::inferBasePath(),
@@ -40,6 +42,7 @@ class Application extends BaseApplication
                 web: $routeFile($app->basePath('routes/web.php')),
                 api: $routeFile($app->basePath('routes/api.php')),
                 commands: $routeFile($app->basePath('routes/console.php')),
+                apiPrefix: $apiPrefix,
                 then: fn () => require __DIR__ . '/../routes.php',
             )
             ->withMiddleware(function (Middleware $middleware) {

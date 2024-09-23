@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `apiPrefix` parameter to `Application::configure`.
 
 ## [0.28.0] - 2024-08-06
 
