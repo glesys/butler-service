@@ -10,7 +10,7 @@
         "glesys/butler-auth": "^7.0",
         "glesys/butler-graphql": "^11.0",
         "glesys/butler-health": "^0.6",
-        "graylog2/gelf-php": "^1.6",
+        "graylog2/gelf-php": "^1.6 || ^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^11.0",
         "laravel/octane": "^1.0 || ^2.0",
