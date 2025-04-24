@@ -8,7 +8,7 @@
         "bugsnag/bugsnag-laravel": "^2.18",
         "glesys/butler-audit": "^0.8",
         "glesys/butler-auth": "^7.0",
-        "glesys/butler-graphql": "^11.0",
+        "glesys/butler-graphql": "^11.0 || ^12.0",
         "glesys/butler-health": "^0.6",
         "graylog2/gelf-php": "^1.6",
         "guzzlehttp/guzzle": "^7.2",
