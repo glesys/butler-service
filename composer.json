@@ -6,14 +6,14 @@
     "require": {
         "php": "^8.2",
         "bugsnag/bugsnag-laravel": "^2.18",
-        "glesys/butler-audit": "^0.8",
-        "glesys/butler-auth": "^7.0",
-        "glesys/butler-graphql": "^11.0",
-        "glesys/butler-health": "^0.6",
+        "glesys/butler-audit": "^0.8.1",
+        "glesys/butler-auth": "^7.1",
+        "glesys/butler-graphql": "^12.0",
+        "glesys/butler-health": "^0.6.3",
         "graylog2/gelf-php": "^1.6",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^11.0",
-        "laravel/octane": "^1.0 || ^2.0",
+        "laravel/framework": "^12.0",
+        "laravel/octane": "^2.0",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.9"
     },
@@ -22,7 +22,7 @@
         "laravel/pint": "^1.14",
         "mockery/mockery": "^1.6.9",
         "nunomaduro/collision": "^8.1.1",
-        "phpunit/phpunit": "^10.5.13",
+        "phpunit/phpunit": "^11.0",
         "spatie/laravel-ignition": "^2.4.2"
     },
     "config": {

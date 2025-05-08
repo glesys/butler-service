@@ -6,16 +6,19 @@ namespace Butler\Service\Graphql\Exceptions;
 
 use Exception;
 use GraphQL\Error\ClientAware;
+use GraphQL\Error\ProvidesExtensions;
 
-class BackendValidation extends Exception implements ClientAware
+class BackendValidation extends Exception implements ClientAware, ProvidesExtensions
 {
-    public function isClientSafe()
+    public function isClientSafe(): bool
     {
         return true;
     }
 
-    public function getCategory()
+    public function getExtensions(): array
     {
-        return 'backend-validation';
+        return [
+            'category' => 'backend-validation',
+        ];
     }
 }

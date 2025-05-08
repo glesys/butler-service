@@ -1,4 +1,5 @@
 type Query {
+    backendValidation: Boolean!
     ping: String!
 }
 
