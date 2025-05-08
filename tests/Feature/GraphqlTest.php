@@ -83,6 +83,15 @@ class GraphqlTest extends TestCase
         ];
     }
 
+    public function test_BackendValidation_exception()
+    {
+        $this->actingAsConsumer(abilities: ['*'])
+            ->graphql('query { backendValidation }')
+            ->assertOk()
+            ->assertJsonPath('errors.0.message', 'validation-exception')
+            ->assertJsonPath('errors.0.extensions.category', 'backend-validation');
+    }
+
     public function test_introspection_is_allowed_without_abilities()
     {
         $this->actingAsConsumer(abilities: [])
