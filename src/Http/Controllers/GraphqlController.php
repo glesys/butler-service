@@ -26,6 +26,11 @@ class GraphqlController implements HasMiddleware
         ];
     }
 
+    public function schemaCacheKey(): string
+    {
+        return gethostname() . ':' . config('butler.graphql.schema_cache_key');
+    }
+
     protected function beforeExecutionHook(Schema $schema, DocumentNode $source): void
     {
         $this->authorizeQuery($source);

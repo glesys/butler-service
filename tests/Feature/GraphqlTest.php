@@ -6,6 +6,7 @@ namespace Butler\Service\Tests\Feature;
 
 use Butler\Service\Testing\Concerns\InteractsWithAuthentication;
 use Butler\Service\Tests\TestCase;
+use Illuminate\Support\Facades\Cache;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 class GraphqlTest extends TestCase
@@ -117,6 +118,27 @@ class GraphqlTest extends TestCase
             ->assertJsonPath('data.__schema.types.0.name', 'Query')
             ->assertJsonPath('data.__type.name', 'Query')
             ->assertJsonPath('data.__typename', 'Query');
+    }
+
+    public function test_caching_disabled()
+    {
+        config()->set('butler.graphql.schema_cache_store', null);
+
+        Cache::shouldReceive('store')->never();
+
+        $this->actingAsConsumer(abilities: ['*'])->graphql('{ ping }')->assertJsonPath('data.ping', 'pong');
+    }
+
+    public function test_caching_enabled()
+    {
+        config()->set('butler.graphql.schema_cache_store', 'array');
+        config()->set('butler.graphql.schema_cache_key', 'cache_key');
+
+        $this->actingAsConsumer(abilities: ['*'])->graphql('{ ping }')->assertJsonPath('data.ping', 'pong');
+
+        $cached = Cache::store('array')->get(gethostname() . ':cache_key');
+
+        $this->assertIsArray($cached, 'cached value exists under the correct key');
     }
 
     private function graphql($query)
