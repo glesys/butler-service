@@ -14,4 +14,6 @@ class Consumer extends Model implements AuthenticatableContract, HasAccessTokens
 {
     use Authenticatable;
     use HasAccessTokens;
+
+    protected $table = 'consumers';
 }
