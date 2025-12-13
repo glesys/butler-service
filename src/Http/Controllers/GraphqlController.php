@@ -49,6 +49,13 @@ class GraphqlController implements HasMiddleware
             });
     }
 
+    public function compiledSchemaPath(): ?string
+    {
+        return app()->isProduction()
+            ? app()->bootstrapPath('cache/graphql-schema-compiled.php')
+            : null;
+    }
+
     protected function isIntrospectionType(string $operation, string $type): bool
     {
         return $operation === 'query' && in_array(strtolower($type), [
