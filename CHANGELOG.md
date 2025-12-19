@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.30.0] - 2025-12-19
+
 ### Changed
 - Add explicit table name to `Consumer` to prevent implicit lookup through pluralization.
 - Use compiled GraphQL schema by default (glesys/butler-graphql:^12.1 required).
