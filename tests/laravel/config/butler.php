@@ -1,11 +1,13 @@
 <?php
 
+use App\TestCheck;
+
 return [
 
     'health' => [
 
         'checks' => [
-            App\TestCheck::class,
+            TestCheck::class,
         ],
 
     ],

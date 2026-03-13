@@ -12,12 +12,15 @@ use Butler\Health\Checks as HealthChecks;
 use Butler\Health\Repository as HealthRepository;
 use Butler\Service\Auth\SessionUser;
 use Butler\Service\Auth\SessionUserProvider;
+use Butler\Service\Bugsnag\Middlewares\IgnoreEmailConsumer;
 use Butler\Service\Listeners\FlushBugsnag;
 use Butler\Service\Models\Consumer;
 use Butler\Service\Socialite\FakeProvider;
 use Butler\Service\Socialite\PassportProvider;
 use Composer\InstalledVersions;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
@@ -26,7 +29,7 @@ use Laravel\Socialite\Contracts\Factory as SocialiteFactory;
 use Symfony\Component\Finder\Finder;
 
 /**
- * @property \Illuminate\Foundation\Application $app
+ * @property Application $app
  */
 class ServiceProvider extends BaseServiceProvider
 {
@@ -208,8 +211,8 @@ class ServiceProvider extends BaseServiceProvider
 
     protected function registerMorphMap()
     {
-        \Illuminate\Database\Eloquent\Relations\Relation::morphMap([
-            'consumer' => \Butler\Service\Models\Consumer::class,
+        Relation::morphMap([
+            'consumer' => Consumer::class,
         ]);
     }
 
@@ -246,7 +249,7 @@ class ServiceProvider extends BaseServiceProvider
         }
 
         if (config('butler.service.ignore_bugsnag_for_email_consumer', true)) {
-            Bugsnag::registerCallback(new \Butler\Service\Bugsnag\Middlewares\IgnoreEmailConsumer());
+            Bugsnag::registerCallback(new IgnoreEmailConsumer());
         }
     }
 

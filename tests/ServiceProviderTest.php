@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace Butler\Service\Tests;
 
+use App\Providers\FoobarServiceProvider;
+use App\TestCheck;
+use Bugsnag\BugsnagLaravel\BugsnagServiceProvider;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Butler\Audit\Facades\Auditor;
 use Butler\Auth\AccessToken;
 use Butler\Auth\ButlerAuth;
 use Butler\Health\Checks as HealthChecks;
+use Butler\Service\Bugsnag\Middlewares\IgnoreEmailConsumer;
 use Butler\Service\Models\Consumer;
 use Butler\Service\ServiceProvider as ButlerServiceProvider;
 use Illuminate\Database\Eloquent\Model;
@@ -60,8 +64,8 @@ class ServiceProviderTest extends TestCase
     public function test_application_providers_are_registered()
     {
         $this->assertInstanceOf(
-            \App\Providers\FoobarServiceProvider::class,
-            app()->getProvider(\App\Providers\FoobarServiceProvider::class)
+            FoobarServiceProvider::class,
+            app()->getProvider(FoobarServiceProvider::class)
         );
     }
 
@@ -76,7 +80,7 @@ class ServiceProviderTest extends TestCase
     public function test_morph_map_is_registered()
     {
         $this->assertEquals([
-            'consumer' => \Butler\Service\Models\Consumer::class,
+            'consumer' => Consumer::class,
         ], Relation::morphMap());
     }
 
@@ -153,7 +157,7 @@ class ServiceProviderTest extends TestCase
                 HealthChecks\Database::class,
                 HealthChecks\Redis::class,
                 HealthChecks\FailedJobs::class,
-                \App\TestCheck::class,
+                TestCheck::class,
             ],
             config('butler.health.checks'),
             '"Core" checks should be merged with "application" checks.'
@@ -162,11 +166,11 @@ class ServiceProviderTest extends TestCase
 
     public function test_bugsnag_callbacks_is_registered_if_bugsnag_is_loaded()
     {
-        $this->app->register(\Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class);
+        $this->app->register(BugsnagServiceProvider::class);
 
         Bugsnag::shouldReceive('registerCallback')
             ->once()
-            ->with(Mockery::type(\Butler\Service\Bugsnag\Middlewares\IgnoreEmailConsumer::class));
+            ->with(Mockery::type(IgnoreEmailConsumer::class));
 
         app()->getProvider(ButlerServiceProvider::class)->registerBugsnagCallback();
     }
@@ -182,7 +186,7 @@ class ServiceProviderTest extends TestCase
     {
         config(['butler.service.ignore_bugsnag_for_email_consumer' => false]);
 
-        $this->app->register(\Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class);
+        $this->app->register(BugsnagServiceProvider::class);
 
         Bugsnag::shouldReceive('registerCallback')->never();
 
