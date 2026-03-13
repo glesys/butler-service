@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Butler\Service\Testing\Concerns;
 
+use Composer\Autoload\ClassLoader;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,7 @@ trait CreatesApplication
      */
     protected function bootstrapFilePath(): string
     {
-        $reflection = new \ReflectionClass(\Composer\Autoload\ClassLoader::class);
+        $reflection = new \ReflectionClass(ClassLoader::class);
 
         return dirname($reflection->getFileName(), 3) . '/bootstrap/app.php';
     }

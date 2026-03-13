@@ -1,5 +1,7 @@
 <?php
 
+use Butler\Service\Models\Consumer;
+
 return [
 
     /*
@@ -69,7 +71,7 @@ return [
         ],
         'consumers' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', Butler\Service\Models\Consumer::class),
+            'model' => env('AUTH_MODEL', Consumer::class),
         ],
     ],
 

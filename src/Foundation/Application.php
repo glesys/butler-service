@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Butler\Service\Foundation;
 
+use Butler\Service\Console\Commands\Assets;
 use Butler\Service\Graphql\Exceptions\BackendValidation;
 use Butler\Service\Http\Middleware\SetAcceptJson;
 use Butler\Service\ServiceProvider;
@@ -35,7 +36,7 @@ class Application extends BaseApplication
             ->withEvents()
             ->withProviders()
             ->withCommands([
-                \Butler\Service\Console\Commands\Assets::class,
+                Assets::class,
                 $app->path('Console/Commands'),
             ])
             ->withRouting(

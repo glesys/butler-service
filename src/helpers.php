@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+use GraphQL\Language\Parser;
 
 if (! function_exists('sqlite_database_path')) {
     function sqlite_database_path(?string $path, ?string $driver): ?string
@@ -17,7 +18,7 @@ if (! function_exists('is_graphql')) {
     function is_graphql(string $query): bool
     {
         try {
-            GraphQL\Language\Parser::parse($query);
+            Parser::parse($query);
         } catch (Exception) {
             return false;
         }

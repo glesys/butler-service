@@ -6,6 +6,7 @@ namespace Butler\Service\Tests\Graphql;
 
 use Butler\Service\Graphql\Client;
 use Butler\Service\Tests\TestCase;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 
 class ClientTest extends TestCase
@@ -57,7 +58,7 @@ class ClientTest extends TestCase
 
     public function test_request_throws_exception_on_server_error()
     {
-        $this->expectException(\Illuminate\Http\Client\RequestException::class);
+        $this->expectException(RequestException::class);
         $this->expectExceptionMessage('HTTP request returned status code 500');
 
         Http::fakeSequence()->push('error', 500);
