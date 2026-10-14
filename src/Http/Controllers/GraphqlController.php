@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Gate;
 class GraphqlController implements HasMiddleware
 {
     use AuthorizesRequests;
-    use HandlesGraphqlRequests;
+    use HandlesGraphqlRequests {
+        resolveScalar as resolveScalarByConvention;
+    }
 
     public static function middleware(): array
     {
@@ -29,6 +31,17 @@ class GraphqlController implements HasMiddleware
     protected function beforeExecutionHook(Schema $schema, DocumentNode $source): void
     {
         $this->authorizeQuery($source);
+    }
+
+    protected function resolveScalar(string $name): ?object
+    {
+        return $this->resolveScalarByConvention($name)
+            ?? $this->make($this->builtInScalarsNamespace() . $name);
+    }
+
+    protected function builtInScalarsNamespace(): string
+    {
+        return 'Butler\\Service\\Graphql\\Scalars\\';
     }
 
     protected function authorizeQuery(DocumentNode $source): void
