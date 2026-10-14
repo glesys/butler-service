@@ -1,8 +1,11 @@
 type Query {
     backendValidation: Boolean!
+    long(value: Long!): Long!
     ping: String!
 }
 
 type Mutation {
     start: String!
 }
+
+scalar Long
