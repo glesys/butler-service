@@ -28,4 +28,11 @@ class SessionUserTest extends TestCase
         $this->assertInstanceOf(SessionUser::class, $user);
         $this->assertEquals(20, $user->id);
     }
+
+    public function test_get_auth_password_returns_null()
+    {
+        $user = new SessionUser(['id' => 30]);
+
+        $this->assertNull($user->getAuthPassword());
+    }
 }
