@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **BREAKING**: Require PHP 8.3+, support Laravel 13 and PHP 8.5.
+
 ### Fixed
 - Fix "Undefined array key" error on OAuth login with Laravel 12.69.3+ and 13.33+, where `SessionGuard::login()` reads the user's password.
 
