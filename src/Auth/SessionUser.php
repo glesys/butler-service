@@ -23,4 +23,9 @@ class SessionUser extends GenericUser
 
         return null;
     }
+
+    public function getAuthPassword()
+    {
+        return null;
+    }
 }
