@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Redact secret config values (e.g. Slack webhooks, passwords and tokens) from Bugsnag error messages and metadata, configurable with `butler.service.redact_bugsnag_config`.
+
 
 ## [0.31.0] - 2026-10-15
 

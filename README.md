@@ -110,6 +110,20 @@ $consumer->createToken(['*'], 'my full-access token');
 $consumer->createToken(['query', 'mutation', 'subscription'], 'my graphql token');
 ```
 
+## Redacting secrets from Bugsnag
+
+Bugsnag only redacts metadata by key, never error messages. When Bugsnag is enabled, values of the config keys in `butler.service.redact_bugsnag_config` are therefore replaced with their config key in error messages (including previous errors) and metadata, e.g. `https://hooks.slack.com/[services.slack.webhook]`. Wildcards are supported, see `RedactSecrets::DEFAULT_CONFIG` for the defaults.
+
+Credentials in urls (`scheme://user:password@host`) and Slack webhook urls not found in config are always redacted. Use an empty array to disable.
+
+```php
+    // example
+    'redact_bugsnag_config' => [
+        ...\Butler\Service\Bugsnag\Middlewares\RedactSecrets::DEFAULT_CONFIG,
+        'services.netbox.key',
+    ],
+```
+
 ## GraphQL with butler-graphql
 
 See [butler-graphql](https://github.com/glesys/butler-graphql).
