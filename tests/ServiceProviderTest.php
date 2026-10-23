@@ -13,6 +13,7 @@ use Butler\Auth\AccessToken;
 use Butler\Auth\ButlerAuth;
 use Butler\Health\Checks as HealthChecks;
 use Butler\Service\Bugsnag\Middlewares\IgnoreEmailConsumer;
+use Butler\Service\Bugsnag\Middlewares\RedactSecrets;
 use Butler\Service\Models\Consumer;
 use Butler\Service\ServiceProvider as ButlerServiceProvider;
 use Illuminate\Database\Eloquent\Model;
@@ -172,6 +173,10 @@ class ServiceProviderTest extends TestCase
             ->once()
             ->with(Mockery::type(IgnoreEmailConsumer::class));
 
+        Bugsnag::shouldReceive('registerCallback')
+            ->once()
+            ->with(Mockery::type(RedactSecrets::class));
+
         app()->getProvider(ButlerServiceProvider::class)->registerBugsnagCallback();
     }
 
@@ -184,7 +189,10 @@ class ServiceProviderTest extends TestCase
 
     public function test_bugsnag_callbacks_is_not_registered_if_configured_not_to()
     {
-        config(['butler.service.ignore_bugsnag_for_email_consumer' => false]);
+        config([
+            'butler.service.ignore_bugsnag_for_email_consumer' => false,
+            'butler.service.redact_bugsnag_config' => [],
+        ]);
 
         $this->app->register(BugsnagServiceProvider::class);
 

@@ -1,5 +1,7 @@
 <?php
 
+use Butler\Service\Bugsnag\Middlewares\RedactSecrets;
+
 return [
 
     'audit' => [
@@ -36,6 +38,7 @@ return [
         'extra' => [
             'config' => [],
         ],
+        'redact_bugsnag_config' => RedactSecrets::DEFAULT_CONFIG,
 
     ],
 
