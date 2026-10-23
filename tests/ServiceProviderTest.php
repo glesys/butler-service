@@ -177,7 +177,7 @@ class ServiceProviderTest extends TestCase
 
     public function test_bugsnag_callbacks_is_not_registered_if_bugsnag_is_not_loaded()
     {
-        Bugsnag::shouldReceive('registerCallback')->never();
+        $this->mock('bugsnag', fn ($mock) => $mock->shouldNotReceive('registerCallback'));
 
         app()->getProvider(ButlerServiceProvider::class)->registerBugsnagCallback();
     }
