@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.31.1] - 2026-10-23
+
 ### Added
 - GraphQL `Long` scalar (signed 64-bit integer, [apollographql/long-v0.1](https://scalars.graphql.org/apollographql/long-v0.1.html)). Opt in by declaring `scalar Long` in the schema; its description and `@specifiedBy` come from the class.
 - Built-in scalars can be replaced by a class with the same name in the service's `Scalars` namespace (glesys/butler-graphql:^13.1 required).
