@@ -13,6 +13,7 @@ use Butler\Health\Repository as HealthRepository;
 use Butler\Service\Auth\SessionUser;
 use Butler\Service\Auth\SessionUserProvider;
 use Butler\Service\Bugsnag\Middlewares\IgnoreEmailConsumer;
+use Butler\Service\Bugsnag\Middlewares\RedactSecrets;
 use Butler\Service\Listeners\FlushBugsnag;
 use Butler\Service\Models\Consumer;
 use Butler\Service\Socialite\FakeProvider;
@@ -250,6 +251,10 @@ class ServiceProvider extends BaseServiceProvider
 
         if (config('butler.service.ignore_bugsnag_for_email_consumer', true)) {
             Bugsnag::registerCallback(new IgnoreEmailConsumer());
+        }
+
+        if (! empty(config('butler.service.redact_bugsnag_config', RedactSecrets::DEFAULT_CONFIG))) {
+            Bugsnag::registerCallback(new RedactSecrets());
         }
     }
 
