@@ -12,10 +12,10 @@
         "glesys/butler-health": "^0.7.0",
         "graylog2/gelf-php": "^1.6",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^12.0|^13.0",
+        "laravel/framework": "^13.0",
         "laravel/octane": "^2.0",
         "laravel/socialite": "^5.5",
-        "laravel/tinker": "^2.9|^3.0"
+        "laravel/tinker": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23.1",

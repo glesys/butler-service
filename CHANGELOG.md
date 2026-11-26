@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **BREAKING**: Drop support for Laravel 12.
+
 
 ## [0.31.2] - 2026-11-26
 
