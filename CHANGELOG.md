@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.32.0] - 2026-11-27
+
 ### Changed
 - **BREAKING**: Drop support for Laravel 12.
 - **BREAKING**: Require butler-audit v0.10, butler-auth v9.0, butler-graphql v14.0 and butler-health v0.8.
