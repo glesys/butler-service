@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Redact secret config values (e.g. Slack webhooks, passwords and tokens) from Bugsnag error messages and metadata, configurable with `butler.service.redact_bugsnag_config`.
+- Laravel's health route `/up`, for health checks. It answers outside the `web` and `api` middleware groups, so it does not depend on the session, the cache or the database.
 
 
 ## [0.31.1] - 2026-10-23
