@@ -136,6 +136,8 @@ See [butler-audit](https://github.com/glesys/butler-audit).
 
 See [butler-health](https://github.com/glesys/butler-health) for more information.
 
+`/health` checks the database, Redis and failed jobs, and is meant for monitoring. Container health checks use Laravel's `/up` instead: it answers 200 when the application boots, without using the session, the cache or the database. Don't add `DiagnosingHealth` listeners that check other services, or a container is replaced when a service it depends on is down.
+
 ## Testing
 
 ```shell

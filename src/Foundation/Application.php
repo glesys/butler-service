@@ -43,6 +43,7 @@ class Application extends BaseApplication
                 web: $routeFile($app->basePath('routes/web.php')),
                 api: $routeFile($app->basePath('routes/api.php')),
                 commands: $routeFile($app->basePath('routes/console.php')),
+                health: '/up',
                 apiPrefix: $apiPrefix,
                 then: fn () => require __DIR__ . '/../routes.php',
             )
