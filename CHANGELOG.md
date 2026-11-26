@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - **BREAKING**: Drop support for Laravel 12.
 - **BREAKING**: Require graylog2/gelf-php 2.
+- Support PHP 8.6.
 - Require bugsnag/bugsnag 3.32 or later, since earlier versions loop forever on PHP 8.6 when they report an error.
 
 
