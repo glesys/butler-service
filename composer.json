@@ -5,6 +5,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
+        "bugsnag/bugsnag": "^3.32",
         "bugsnag/bugsnag-laravel": "^2.18",
         "glesys/butler-audit": "^0.9.0",
         "glesys/butler-auth": "^8.0",
